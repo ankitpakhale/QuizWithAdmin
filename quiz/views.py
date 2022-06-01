@@ -3,13 +3,14 @@ from django.shortcuts import render,redirect
 from .models import Answer, registerform,question,Record,AdminForm,Testcategory
 from django.http import HttpResponse
 
-
 # Create your views here.
 def index(request):
     a=Record.objects.all()
     count=Record.objects.all().count()
     q=question.objects.all()
     return render(request,'index.html',{'data':a,'c':count,'q':len(q)})
+
+
 
 def create_test(request):
     return render(request,'createtest.html')
