@@ -1,0 +1,43 @@
+{% load static %}
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/demo.css' %}">
+    </head>
+    <style>
+        body{
+            background-color: white;
+        }
+    </style>
+    <title>Sign In</title>
+    <body>
+        <div class="loginmain">
+            
+            <div class="sign">
+                <img src="{% static 'login.png' %}" alt="" height="100%" width="100%">
+            </div>
+            
+            <div class="signinform">
+                <div class="form">
+                    <h1 class="formh1" style="color: blue;">Sign In</h1>
+                </br>
+                    <p class="para-2">
+                        Enter your Email ID and password to Sign In
+                    </p>
+                    </br>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <label>Enter Email:</label>
+                        <input type="email" placeholder="Enter Email" class="email"  name="email"/>
+                        <label>Password:</label>
+                        <input type="password" placeholder="Enter Password" class="password" id="password" name="password" />
+                        <br>
+                        <br>
+                        <input type="submit" value="Submit" />
+                    </form>
+                </div>
+            </div>
+          
+        </div>
+    </body>
+</html>

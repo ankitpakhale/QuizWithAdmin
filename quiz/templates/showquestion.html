@@ -1,0 +1,111 @@
+{% load static %}
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/demo.css' %}">
+    </head>
+    <title>All questions</title>
+    <body>
+        <div class="main">
+            
+            <div class="menu">
+            
+                <div class="card menu_item">
+                    <div class="logo"><img src="{% static 'logo.jpg' %}" height="80px" width="94%" style="margin:2%;" onclick="window.location.href='index.html';" ></div>
+                    <a class="button button1"  href={% url 'index1' %} ><img src="{% static 'icon/dashboard.png' %}" height="20px" width="20px"> &nbspDashboard</span></a>
+                    <a class="button button1 active"  href={% url 'studentreport1' %} ><img src="{% static 'icon/report.png' %}" height="20px" width="20px"> &nbspStudent Report</span></a>
+                    <a class="button button1"  href={% url 'addstudent' %} ><img src="{% static 'icon/create.png' %}" height="20px" width="20px"> &nbspAdd Student</span></a>
+
+                    <a class="button button1"  href={% url 'create1' %} ><img src="{% static 'icon/create.png' %}" height="20px" width="20px"> &nbspCreate Test</span></a>
+                    <a class="button button1"  href={% url 'addcategory' %} ><img src="{% static 'icon/view.png' %}" height="20px" width="20px">Add Test category</span></a>
+                    <a class="button button1"  href={% url 'correct_answer' %} ><img src="{% static 'icon/view.png' %}" height="20px" width="20px"> &nbspView Answer Report</span></a>
+                    <a class="button button1"  href={% url 'quistion1' %} ><img src="{% static 'icon/create.png' %}" height="20px" width="20px"> Question Add</span></a>
+                    <a class="button button1"  href={% url 'viewquestion' %} ><img src="{% static 'icon/view.png' %}" height="20px" width="20px">View Questions</span></a>
+                    <a class="button button1"  href={% url 'viewcategory' %} ><img src="{% static 'icon/view.png' %}" height="20px" width="20px">view category </span></a>
+                    <a class="button button1"  href={% url 'viewtest' %} ><img src="{% static 'icon/view.png' %}" height="20px" width="20px"> &nbspView Test</span></a>
+<br>
+                    <span class="account" style="margin: 50px; "></span>
+                    <span class="button button1" onclick="window.location.href='';" style="margin-top: 10px;"><img src="{% static 'icon/profile.png' %}" height="20px" width="20px"> &nbspProfile</span>
+                    
+                </div>
+            
+            </div>
+            
+            <div class="stdreportdrd">
+                <div class="hed">
+                    <h3 class="dbord"> All questions</h3>    
+                    <a href="{% url 'sign1' %}" class="button logout" img src="{% static 'icon/logout.png' %}" height="20px" width="20px"> &nbspLogout </a>
+                </div> 
+               
+                <div class="card table stdtbl">
+                    <div class="card studentreport">
+                        <h3 style="font-weight: bold;">&nbsp &nbsp &nbsp Questions</h3>
+                    </div>
+                    <table>
+                        <tr>
+                                <td>Category</td>
+                                <td>Question</td>
+                                <td>Option1</td>
+                                <td>Option2</td>
+                                <td>Option3</td>
+                                <td>Answer</td>
+                            
+                        </tr>
+                        
+                        {% for i in al %}
+                        <tr>
+                            <td>{{i.categoryName}}</td>
+                            <td>{{i.question}}</td>
+                            <td>{{i.option1}}</td>
+                            <td>{{i.option2}}</td>
+                            <td>{{i.option3}}</td>
+                            <td >{{i.correct}}</td>
+
+                            <td>
+                                <a href="{% url 'editquestions' i.id%}">edit</a>
+                                <!-- <img src="{% static 'icon/download.png' %}" height="30px" width="30px" style="margin:2%;" onclick="window.location.href='index.html';" > &nbsp;
+                                <img src="{% static 'icon/email.png' %}" height="30px" width="30px" style="margin:2%;" onclick="window.location.href='index.html';" > -->
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <!-- <tr>
+                            <td>Centro comercial Moctezuma</td>
+                            <td>Francisco Chang</td>
+                            <td>Mexico</td>
+                            <td>Germany</td>
+                            <td>
+                                <img src="{% static 'icon/download.png' %}" height="30px" width="30px" style="margin:2%;" onclick="window.location.href='index.html';" > &nbsp;
+                                <img src="{% static 'icon/email.png' %}" height="30px" width="30px" style="margin:2%;" onclick="window.location.href='index.html';" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ernst Handel</td>
+                            <td>Roland Mendel</td>
+                            <td>Austria</td>
+                            <td>Germany</td>
+                            <td>
+                                <img src="{% static 'icon/download.png' %}" height="30px" width="30px" style="margin:2%;" onclick="window.location.href='index.html';" > &nbsp;
+                                <img src="{% static 'icon/email.png' %}" height="30px" width="30px" style="margin:2%;" onclick="window.location.href='index.html';" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Island Trading</td>
+                            <td>Helen Bennett</td>
+                            <td>UK</td>
+                            <td>Germany</td>
+                            <td>
+                                <img src="{% static 'icon/download.png' %}" height="30px" width="30px" style="margin:2%;" onclick="window.location.href='index.html';" > &nbsp;
+                                <img src="{% static 'icon/email.png' %}" height="30px" width="30px" style="margin:2%;" onclick="window.location.href='index.html';" >
+                            </td>
+                        </tr> -->
+
+                        
+                    </table>
+
+                </div>
+           
+            </div>
+          
+        </div>
+    </body>
+</html>
