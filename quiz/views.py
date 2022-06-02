@@ -236,6 +236,7 @@ def student_login_view(request):
         try:
             get_enroll = registerform.objects.get(Enrollment_No=enroll_no)
             if get_enroll.password == password:
+                request.session['enroll_no'] = enroll_no
                 msg = "Student Successfully logged in"
                 print(msg)
                 return redirect('index1')
@@ -251,24 +252,21 @@ def student_login_view(request):
 
 def profileupdate(request):
     print("111")
-    if request.session['email']:
-        print("You will be updating your profile very soon")  
-        # data = registerform.objects.get(email = request.session['email'])
-        # db = registerform(
-        #     name = name,
-        #     email = email,
-        #     Enrollment_No = Enrollment_No,
-        #     Attendance = Attendance,
-        #     cgpa = cgpa,
-        #     gpa = gpa,
-        #     review = review,
-        #     score = score
-        # )
-        # db.save()
-        # msg = 'Your profile has been updated successfully'
-        # return render(request, 'Profile_update.html', {'msg': msg})
-    else:
-        print("000000")
-        return redirect('sign1')
+    if request.session['enroll_no']:
+        show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
+        if request.POST:
+            name = request.POST['name']
+            password = request.POST['password']
+
+            stu_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
+        
+            stu_data.name = name
+            stu_data.password = password
+            stu_data.save()
+            
+            msg = 'Your profile has been updated successfully'
+            return render(request, 'student_profile_update.html', {'msg': msg})
+        return render(request, 'student_profile_update.html', {'show_data': show_data})
+    return redirect('student_login_view')
     
 # ##################### Ankit's Work END ###############################
