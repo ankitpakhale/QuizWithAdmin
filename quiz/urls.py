@@ -1,7 +1,7 @@
 from operator import index
 from django.contrib import admin
 from django.urls import path
-from.views import index,view_option,edit_option,correct_answer,delete_testcategory,delete_question,add_option,show_question,edit_testcategory,view_category,edit_questions,create_test,question_add,LoginUserView,student_report,view_test,Add_student,testcategory_add
+from.views import index,view_option,edit_option,correct_answer,delete_testcategory,delete_question,add_option,show_question,edit_testcategory,view_category,edit_questions,create_test,question_add,LoginUserView,student_report,view_test,Add_student,testcategory_add, profileupdate, student_signup_view, student_login_view
 
 urlpatterns = [
     path('index/',index,name='index1'),
@@ -21,5 +21,12 @@ urlpatterns = [
     path('addcategory/',testcategory_add,name='addcategory'),
     path('addoption/',add_option,name='addoption'),
     path('correct_answer/',correct_answer,name='correct_answer'),
-    path('Add_student/',Add_student,name='addstudent')
+    path('Add_student/',Add_student,name='addstudent'),
+    
+    # ##################### Ankit's Work START ###############################
+    path('profileupdate/',profileupdate,name='profileupdate'),
+    path('student_signup/',student_signup_view,name='student_signup_view'),
+    path('student_login/',student_login_view,name='student_login_view'),
+    # ##################### Ankit's Work END ###############################
+
 ]
