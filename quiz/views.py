@@ -13,6 +13,7 @@ def index(request):
     q=question.objects.all()
     return render(request,'index.html',{'data':a,'c':count,'q':len(q)})
 
+
 def add_option(request):
     q=question.objects.all()
     if request.POST:
@@ -32,6 +33,10 @@ def add_option(request):
         except:
             pass
     return render(request,'option.html',{'question':q})
+
+def view_option(request):
+    obj=Option.objects.all()
+    return render(request,'viewoption.html',{'obj':obj})
 
 
 def create_test(request):
@@ -90,6 +95,15 @@ def delete_testcategory(request,id):
     obj.delete()  
     return redirect('viewcategory')
 
+def edit_option(request,id):
+    obj=Option.objects.get(id=id)    
+    if request.POST:
+        name=request.POST['']
+        obj.name=name
+        obj.save()
+        return redirect('index1')
+    return render(request,'edit_option.html',{'obj':obj})        
+
 def edit_testcategory(request,id):
     obj=Testcategory.objects.get(id=id)    
     if request.POST:
@@ -129,8 +143,6 @@ def edit_questions(request,id):
         
         obj1=Testcategory.objects.get(name=category)
 
-            
-        
         obj.categoryName=obj1
         obj.question=getquestion
         # obj.option1=option1
@@ -154,6 +166,7 @@ def show_question(request):
 def view_test(request):
     return render(request,'viewtest.html')
 
+
 def Add_student(request):
     if request.method=="POST":
         model=registerform()
@@ -166,6 +179,7 @@ def Add_student(request):
         return render(request,'Add_student.html',{'s':s})
 
     return render(request,'Add_student.html')
+
 
 def LoginUserView(request):
     if request.POST:
