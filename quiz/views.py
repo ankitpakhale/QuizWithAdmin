@@ -86,14 +86,14 @@ def question_add(request):
     return render(request,'questionadd.html',{'al':al})
 
 def testcategory_add(request):
-
     if request.POST:
         name=request.POST['name']
         q=Testcategory()
         q.name=name
         q.save()
         return redirect('index1')
-    return render(request,'category.html')    
+    return render(request,'category.html')   
+ 
 def delete_testcategory(request,id):
     obj=Testcategory.objects.get(id=id)  
     obj.delete()  
@@ -205,7 +205,6 @@ def show_question(request):
 def view_test(request):
     return render(request,'viewtest.html')
 
-
 def Add_student(request):
     if request.method=="POST":
         model=registerform()
@@ -216,9 +215,7 @@ def Add_student(request):
         model.save()
         s='student saved successfully'
         return render(request,'Add_student.html',{'s':s})
-
     return render(request,'Add_student.html')
-
 
 def LoginUserView(request):
     if request.POST:
@@ -233,3 +230,82 @@ def LoginUserView(request):
         except:
             return HttpResponse("<a href = ''>Incorrect details</a>")
     return render(request,'sign.html')
+
+# ##################### Ankit's Work START ###############################
+def student_signup_view(request):
+    msg = ''
+    prev_enroll_no = registerform.objects.last()
+    new_enroll_no = str(int(prev_enroll_no.Enrollment_No)+1)
+    if request.POST:
+        name = request.POST['name']
+        email = request.POST['email']
+        password = request.POST['password']
+        con_password = request.POST['con_password']
+        try:
+            get_email = registerform.objects.get(email=email)
+            msg = "This user already exist"
+            print(msg)
+            return render(request,'student_signup.html', {'msg': msg})
+        except:
+            if password == con_password:
+                db = registerform(
+                    name = name,
+                    email = email,
+                    Enrollment_No = new_enroll_no,
+                    password = password
+                )
+                db.save()
+                # msg = "Signup successfully done"
+                msg = f"Your Enrollment no is this, {new_enroll_no}"
+                print(msg)
+                return render(request,'student_signup.html', {'msg': msg})
+            else:
+                msg = "Both passwords are not matching"
+                print(msg)
+                return render(request,'student_signup.html', {'msg': msg})
+
+    return render(request,'student_signup.html')
+
+
+def student_login_view(request):
+    msg = ''
+    if request.POST:
+        enroll_no = request.POST['enroll_no']
+        password = request.POST['password']
+        try:
+            get_enroll = registerform.objects.get(Enrollment_No=enroll_no)
+            if get_enroll.password == password:
+                request.session['enroll_no'] = enroll_no
+                msg = "Student Successfully logged in"
+                print(msg)
+                return redirect('index1')
+            else:
+                msg = "Enter valid password"
+                print(msg)
+                return render(request,'student_login.html', {'msg': msg})
+        except:
+            msg = "Student does not exist"
+            print(msg)
+            return render(request,'student_login.html', {'msg': msg})
+    return render(request,'student_login.html')
+
+def profileupdate(request):
+    print("111")
+    if request.session['enroll_no']:
+        show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
+        if request.POST:
+            name = request.POST['name']
+            password = request.POST['password']
+
+            stu_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
+        
+            stu_data.name = name
+            stu_data.password = password
+            stu_data.save()
+            
+            msg = 'Your profile has been updated successfully'
+            return render(request, 'student_profile_update.html', {'msg': msg})
+        return render(request, 'student_profile_update.html', {'show_data': show_data})
+    return redirect('student_login_view')
+    
+# ##################### Ankit's Work END ###############################
