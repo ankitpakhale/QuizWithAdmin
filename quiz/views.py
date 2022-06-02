@@ -10,14 +10,15 @@ def index(request):
     q=question.objects.all()
     return render(request,'index.html',{'data':a,'c':count,'q':len(q)})
 
-
-
 def create_test(request):
     return render(request,'createtest.html')
 
 def correct_answer(request):
     ans=Answer.objects.all()
     return render(request,'viewanswer.html',{'ans':ans})
+
+
+
 
 def question_add(request):
     al=Testcategory.objects.all()
