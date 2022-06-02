@@ -6,10 +6,10 @@ class registerform(models.Model):
     Enrollment_No=models.CharField(max_length=100)
     password=models.CharField(max_length=20)
     Attendance=models.PositiveIntegerField(default=0)
-    cgpa=models.CharField("CGPA",default='',max_length=10,blank=True,null=True)
-    gpa=models.CharField("GPA",default='',max_length=10,blank=True,null=True)
-    review=models.TextField(default="",blank=True,null=True)
-    score=models.PositiveIntegerField(default=0,blank=True,null=True)
+    cgpa=models.CharField("CGPA",default='',max_length=10,blank=True)
+    gpa=models.CharField("GPA",default='',max_length=10,blank=True)
+    review=models.TextField(default="",blank=True)
+    score=models.PositiveIntegerField(default=0,blank=True,)
     def __str__(self):
         return self.name
 
@@ -63,6 +63,6 @@ class Record(models.Model):
 class Option(models.Model): 
     question=models.ForeignKey(question, on_delete=models.CASCADE, null=True, default="")
     option_title=models.CharField(max_length=10)
-    is_answer=models.BooleanField(default=False,)
+    is_answer=models.BooleanField(default=False)
 
 

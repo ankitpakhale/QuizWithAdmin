@@ -56,9 +56,11 @@
                             <td>{{i.question}}</td>
                             <td>{{i.option_title}}</td>
                             <td>{{i.is_answer}}</td>
-                            
-                            <a href="url '' i.id">Edit</a>
-                            <a href="url '' i.id">Delete</a>
+                            <td>
+                                <a href="{% url 'editoption' i.id %}">Edit</a>
+                                <a href="{% url 'deloption' i.id %}">Delete</a>
+                                
+                            </td>
                         </tr>
                         {% endfor %}
                         <!-- <tr>

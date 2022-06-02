@@ -1,3 +1,4 @@
+import email
 from unicodedata import category
 from click import option
 from django.shortcuts import render,redirect
@@ -6,13 +7,16 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
+    if 'email' in request.session:
+        
+        n=AdminForm.objects.get(id=request.session['email'])        
     # a=Record.objects.all()
-    a=registerform.objects.all()
-    # count=Record.objects.all().count()
-    count=registerform.objects.all().count()
-    q=question.objects.all()
-    return render(request,'index.html',{'data':a,'c':count,'q':len(q)})
-
+        a=registerform.objects.all()
+        # count=Record.objects.all().count()
+        count=registerform.objects.all().count()
+        q=question.objects.all()
+        return render(request,'index.html',{'data':a,'c':count,'q':len(q),'n':n})
+    return render('sign1')
 
 def add_option(request):
     q=question.objects.all()
@@ -95,14 +99,49 @@ def delete_testcategory(request,id):
     obj.delete()  
     return redirect('viewcategory')
 
+def delete_option(request,id):
+    obj=Option.objects.get(id=id)  
+    obj.delete()  
+    return redirect('viewoption')
+
 def edit_option(request,id):
-    obj=Option.objects.get(id=id)    
+    obj=Option.objects.get(id=id)
+    al=question.objects.all()    
     if request.POST:
-        name=request.POST['']
-        obj.name=name
+        q=request.POST['question']
+        q=question.objects.get(question=q)
+        o=request.POST['op']
+        a=request.POST.get('isans')
+
+        obj.question=q
+        obj.option_title=o
+        if a:
+            obj.is_answer=True
+        else:
+            obj.is_answer=False    
         obj.save()
+        return redirect('viewoption')
+    return render(request,'edit_option.html',{'obj':obj,'al':al})        
+
+def edit_student(request,id):
+    obj=registerform.objects.get(id=id)    
+    if request.POST:
+        attend=request.POST['attendance']
+        cgpa=request.POST['cgpa']
+        gpa=request.POST['gpa']
+        rev=request.POST['review']
+        sc=request.POST['score']
+
+        obj.Attendance=attend
+        obj.cgpa=cgpa
+        obj.gpa=gpa
+        obj.review=rev
+        obj.score=sc
+        obj.save()
+        
         return redirect('index1')
-    return render(request,'edit_option.html',{'obj':obj})        
+    return render(request,'editstudent.html',{'obj':obj})        
+
 
 def edit_testcategory(request,id):
     obj=Testcategory.objects.get(id=id)    
@@ -110,7 +149,7 @@ def edit_testcategory(request,id):
         name=request.POST['name']
         obj.name=name
         obj.save()
-        return redirect('index1')
+        return redirect('viewcategory')
     return render(request,'edit_category.html',{'obj':obj})        
 
 def view_category(request):
@@ -151,7 +190,7 @@ def edit_questions(request,id):
         # obj.time='00:20'
         # obj.correct=answer
         obj.save()
-        return redirect('index1')
+        return redirect('viewquestion')
 
     return render(request,'editquestion.html',{'obj':obj,'al':al,'name1':name1})    
 

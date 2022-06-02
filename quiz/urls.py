@@ -1,7 +1,7 @@
 from operator import index
 from django.contrib import admin
 from django.urls import path
-from.views import index,view_option,edit_option,correct_answer,delete_testcategory,delete_question,add_option,show_question,edit_testcategory,view_category,edit_questions,create_test,question_add,LoginUserView,student_report,view_test,Add_student,testcategory_add
+from.views import index,edit_student,view_option,delete_option,edit_option,correct_answer,delete_testcategory,delete_question,add_option,show_question,edit_testcategory,view_category,edit_questions,create_test,question_add,LoginUserView,student_report,view_test,Add_student,testcategory_add
 
 urlpatterns = [
     path('index/',index,name='index1'),
@@ -13,8 +13,10 @@ urlpatterns = [
     path('editquestions/<int:id>',edit_questions,name='editquestions'),
     path('editoption/<int:id>',edit_option,name='editoption'),
     path('editcategory/<int:id>',edit_testcategory,name='editcategory'),
+    path('edit_student/<int:id>',edit_student,name='edit_student'),
     path('delcategory/<int:id>',delete_testcategory,name='delcategory'),
     path('delete_question/<int:id>',delete_question,name='delquestion'),
+    path('delete_option/<int:id>',delete_option,name='deloption'),
     path('viewquestion/',show_question,name='viewquestion'),
     path('viewcategory/',view_category,name='viewcategory'),
     path('viewoption/',view_option,name='viewoption'),

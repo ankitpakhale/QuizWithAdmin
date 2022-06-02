@@ -31,7 +31,7 @@
                 </div>
             
             </div>
-            
+            WELCOME {{ n.name}}             
             <div class="dashboard">
                 <div class="hed">
                     <h3 class="dbord"> &nbsp Dashboard</h3>    
@@ -66,6 +66,7 @@
                             <th>CGPA</th>
                             <th>GPA</th>
                             <th>Review</th>
+                            <th>Score</th>
                             <th>Action</th>
                         </tr>
                         {% for i in data %}
@@ -75,7 +76,9 @@
                             <td>{{ i.cgpa }}</td>
                             <td>{{ i.gpa }}</td>
                             <td>{{ i.review }}</td>
+                            <td>{{ i.score }}</td>
                             <td>
+                                <a href="{% url 'edit_student' i.id %}">Edit</a>
                                 <img src="{% static 'icon/download.png' %}" height="30px" width="30px" style="margin:2%;" onclick="window.location.href='index.html';" > &nbsp;
                                 <img src="{% static 'icon/email.png' %}" height="30px" width="30px" style="margin:2%;" onclick="window.location.href='index.html';" >
                             </td>
