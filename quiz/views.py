@@ -1,15 +1,37 @@
 from unicodedata import category
+from click import option
 from django.shortcuts import render,redirect
-from .models import Answer, registerform,question,Record,AdminForm,Testcategory
+from .models import Answer, registerform,question,Record,AdminForm,Testcategory,Option
 from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    a=Record.objects.all()
-    count=Record.objects.all().count()
+    # a=Record.objects.all()
+    a=registerform.objects.all()
+    # count=Record.objects.all().count()
+    count=registerform.objects.all().count()
     q=question.objects.all()
     return render(request,'index.html',{'data':a,'c':count,'q':len(q)})
 
+def add_option(request):
+    q=question.objects.all()
+    if request.POST:
+        id=request.POST['quest']
+        title=request.POST['op']
+        try:
+            ans=request.POST.get('isans')
+            obj=question.objects.get(question=id)
+
+            s=Option()
+            s.question=obj
+            s.option_title=title
+            if ans:    
+                s.is_answer=True
+            s.save()
+            return redirect('index1')
+        except:
+            pass
+    return render(request,'option.html',{'question':q})
 
 
 def create_test(request):
@@ -25,29 +47,29 @@ def question_add(request):
         
         category=request.POST['category']
         getquestion=request.POST['question']
-        time=request.POST['time']
-        option1=request.POST['option1']
-        option2=request.POST['option2']
-        option3=request.POST['option3']
-        answer=request.POST['check']
+        # time=request.POST['time']
+        # option1=request.POST['option1']
+        # option2=request.POST['option2']
+        # option3=request.POST['option3']
+        # answer=request.POST['check']
 
-        if answer=='1':
-            answer=option1
-        elif answer=='2':
-            answer=option2    
-        else:
-            answer=option3
+        # if answer=='1':
+        #     answer=option1
+        # elif answer=='2':
+        #     answer=option2    
+        # else:
+        #     answer=option3
         
         obj=Testcategory.objects.get(name=category)
             
         q=question()
         q.categoryName=obj
         q.question=getquestion
-        q.time=time
-        q.option1=option1
-        q.option2=option2
-        q.option3=option3
-        q.correct=answer
+        # q.time=time
+        # q.option1=option1
+        # q.option2=option2
+        # q.option3=option3
+        # q.correct=answer
         q.save()
 
         return redirect('index1')
@@ -63,6 +85,10 @@ def testcategory_add(request):
         q.save()
         return redirect('index1')
     return render(request,'category.html')    
+def delete_testcategory(request,id):
+    obj=Testcategory.objects.get(id=id)  
+    obj.delete()  
+    return redirect('viewcategory')
 
 def edit_testcategory(request,id):
     obj=Testcategory.objects.get(id=id)    
@@ -77,6 +103,11 @@ def view_category(request):
     obj=Testcategory.objects.all()    
     return render(request,'view_category.html',{'obj':obj})        
 
+def delete_question(request,id):
+    obj=question.objects.get(id=id)
+    obj.delete()
+    return redirect('viewquestion')
+
 def edit_questions(request,id):
     obj=question.objects.get(id=id)
     name1=str(obj.categoryName)
@@ -84,17 +115,17 @@ def edit_questions(request,id):
     if request.POST:
         category=request.POST['category']
         getquestion=request.POST['question']
-        option1=request.POST['option1']
-        option2=request.POST['option2']
-        option3=request.POST['option3']
-        answer=request.POST['check']
+        # option1=request.POST['option1']
+        # option2=request.POST['option2']
+        # option3=request.POST['option3']
+        # answer=request.POST['check']
 
-        if answer=='1':
-            answer=option1
-        elif answer=='2':
-            answer=option2    
-        else:
-            answer=option3
+        # if answer=='1':
+        #     answer=option1
+        # elif answer=='2':
+        #     answer=option2    
+        # else:
+        #     answer=option3
         
         obj1=Testcategory.objects.get(name=category)
 
@@ -102,11 +133,11 @@ def edit_questions(request,id):
         
         obj.categoryName=obj1
         obj.question=getquestion
-        obj.option1=option1
-        obj.option2=option2
-        obj.option3=option3
-        obj.time='00:20'
-        obj.correct=answer
+        # obj.option1=option1
+        # obj.option2=option2
+        # obj.option3=option3
+        # obj.time='00:20'
+        # obj.correct=answer
         obj.save()
         return redirect('index1')
 
