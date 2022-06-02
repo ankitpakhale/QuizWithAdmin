@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.urls import path
 from.views import index,correct_answer,show_question,edit_testcategory,view_category,edit_questions,create_test,question_add,LoginUserView,student_report,view_test,Add_student,testcategory_add
 
+
 urlpatterns = [
     path('index/',index,name='index1'),
     path('createtest/',create_test,name='create1'),
@@ -17,5 +18,4 @@ urlpatterns = [
     path('addcategory/',testcategory_add,name='addcategory'),
     path('correct_answer/',correct_answer,name='correct_answer'),
     path('Add_student/',Add_student,name='addstudent')
-
 ]

@@ -17,9 +17,6 @@ def correct_answer(request):
     ans=Answer.objects.all()
     return render(request,'viewanswer.html',{'ans':ans})
 
-
-
-
 def question_add(request):
     al=Testcategory.objects.all()
     if request.POST:
@@ -99,8 +96,6 @@ def edit_questions(request,id):
         
         obj1=Testcategory.objects.get(name=category)
 
-            
-        
         obj.categoryName=obj1
         obj.question=getquestion
         obj.option1=option1
@@ -124,6 +119,7 @@ def show_question(request):
 def view_test(request):
     return render(request,'viewtest.html')
 
+
 def Add_student(request):
     if request.method=="POST":
         model=registerform()
@@ -136,6 +132,7 @@ def Add_student(request):
         return render(request,'Add_student.html',{'s':s})
 
     return render(request,'Add_student.html')
+
 
 def LoginUserView(request):
     if request.POST:
