@@ -7,8 +7,9 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    if 'email' in request.session:        
-        n=AdminForm.objects.get(id=request.session['email'])        
+    if 'email' in request.session:
+        print(request.session['email'])        
+        n=AdminForm.objects.get(email=request.session['email'])        
     # a=Record.objects.all()
         a=registerform.objects.all()
         # count=Record.objects.all().count()
@@ -19,6 +20,21 @@ def index(request):
 # ------------------------------------------------------------------------------------------------
     # return render(request,'index.html')
 
+def profile(request):
+    if 'email' in request.session:
+        n=AdminForm.objects.get(email=request.session['email'])
+        if request.POST:
+            name=request.POST['name']
+            email=request.POST['email']
+            password=request.POST['passowrd']
+
+            n.name=name
+            n.email=email
+            n.password=password
+            n.save()
+            return redirect('index1')    
+        return render(request,'adminprofile.html',{'n':n})    
+    return redirect('sign1')
 def add_option(request):
     q=question.objects.all()
     if request.POST:
@@ -100,6 +116,17 @@ def delete_testcategory(request,id):
     obj.delete()  
     return redirect('viewcategory')
 
+def delete_student(request,id):
+    obj=registerform.objects.get(id=id)  
+    obj.delete()  
+    return redirect('index1')
+
+def logout(request):
+    if 'email' in request.session:
+        # n=AdminForm.objects.get(email=request.session['email'])  
+        del request.session['email']  
+    return redirect('sign1')
+
 def delete_option(request,id):
     obj=Option.objects.get(id=id)  
     obj.delete()  
@@ -127,12 +154,20 @@ def edit_option(request,id):
 def edit_student(request,id):
     obj=registerform.objects.get(id=id)    
     if request.POST:
+        name=request.POST['name']
+        email=request.POST['email']
+        en=request.POST['en.no']
+        password=request.POST['password']
         attend=request.POST['attendance']
         cgpa=request.POST['cgpa']
         gpa=request.POST['gpa']
         rev=request.POST['review']
         sc=request.POST['score']
 
+        obj.name=name
+        obj.email=email
+        obj.Enrollment_No=en
+        obj.password=password
         obj.Attendance=attend
         obj.cgpa=cgpa
         obj.gpa=gpa
@@ -224,7 +259,7 @@ def LoginUserView(request):
             model = AdminForm.objects.get(
                 email=request.POST['email'])
             if model.password == request.POST['password']:
-                request.session['email'] = model.id
+                request.session['email'] = model.email
                 return redirect('index1')
             else:
                 return HttpResponse("<a href = ''>Incorrect details</a>")

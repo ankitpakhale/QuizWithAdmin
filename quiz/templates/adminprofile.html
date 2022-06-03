@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{% static 'css/demo.css' %}">
     </head>
-    <title>Edit student</title>
+    <title> Edit Your profile</title>
     <body>
         <div class="main">
             
@@ -38,47 +38,31 @@
             <div class="viewtabledrd">
                 <div class="viewtabledrd">
                     <div class="hed">
-                        <h3 class="dbord"> &nbsp Edit Student</h3>    
+                        <h3 class="dbord"> Edit profile</h3>    
                         <a href="{% url 'sign1' %}" class="button logout" img src="{% static 'icon/logout.png' %}" height="20px" width="20px"> &nbspLogout </a>
                     </div> 
                 <div class="card createtest">
                     <div class="card questionadd">
-                        <h3 class="questionaddtitle" style="font-weight: bold;">&nbsp &nbsp &nbsp Question Add</h3>
+                        <h3 class="questionaddtitle" style="font-weight: bold;">&nbsp &nbsp &nbsp Edit option</h3>
                     </div>
                     <div class="questionaddform">
                         <form  method="post">
-                            {% csrf_token%}
-                        
-                            <label>Student Name</label>
-                            <input type="text"  value="{{obj.name}}" placeholder="Enter name"  style="width: 500px; height: 30px;" class="questiontitle" id="questiontitle" name="name"/>
-                            <label>Student Email</label>
-                            <input type="email"   value="{{obj.email}}" placeholder="Enter email" required style="width: 500px; height: 30px;" class="questiontitle" id="questiontitle" name="email"/>
-                            <label>Student Enrollment</label>
-                            <input type="number"   value="{{obj.Enrollment_No}}" placeholder="Enter Enrollment number" required style="width: 500px; height: 30px;" class="questiontitle" id="questiontitle" name="en.no"/>
-                            <label>Student Password</label>
-                            <input type="password"  value="{{obj.password}}" placeholder="Enter password" required style="width: 500px; height: 30px;" class="questiontitle" id="questiontitle" name="password"/>
-                            <label>Student Attendance</label>
-                            <input type="number" max="12" min="0" value="{{obj.Attendance}}" placeholder="Enter Attendance" required style="width: 500px; height: 30px;" class="questiontitle" id="questiontitle" name="attendance"/>
-                            <label>Student CGPA</label>
-                            <input type="Number" max="7" min="0"  value="{{obj.cgpa}}" placeholder="Enter CGPA" required style="width: 500px; height: 30px;" class="questiontitle" id="questiontitle" name="cgpa"/>
-                            <label>Student Gpa</label>
-                            <input type="number"  max="7" min="0" value="{{obj.gpa}}" placeholder="Enter gpa" required style="width: 500px; height: 30px;" class="questiontitle" id="questiontitle" name="gpa"/>
-                            <label>Student Review</label>
-                            <input type="text"  value="{{obj.review}}" placeholder="Enter review" required style="width: 500px; height: 30px;" class="questiontitle" id="questiontitle" name="review"/>
-                            <label>Student Score</label>
-                            <input type="number"  value="{{obj.score}}" placeholder="Enter score" required style="width: 500px; height: 30px;" class="questiontitle" id="questiontitle" name="score"/>
                             
-                            <!-- <label>Time For Question</label>
-                            <input type="text" placeholder="Enter Time For Question" class="timeforquestion" id="timeforquestion" name="timeforquestion" /> -->
-
-                            <!-- <label>Select Correct Option</label>
-                            <select>
-                                <option value="">Select Correct Option</option>
-                                <option value="">Option1</option>
-                                <option value="">Option2</option>
-                                <option value="">Option3</option>
-                              </select> -->
-                            <br>
+                            {% csrf_token%}
+                            
+                            <label>Select question</label>
+                            
+                            
+                            <label>Enter name</label>
+                            <input type="text" placeholder="Enter name"   class="questiontitle" id="questiontitle" name="name" value="{{n.name}}" required>
+                            
+                            <label>Enter email</label>
+                            <input type="email" placeholder="Enter email"   class="questiontitle" id="questiontitle" name="email" value="{{n.email}}" required>
+                            
+                            <label>Enter password</label>
+                            <input type="text" placeholder="Enter password"   class="questiontitle" id="questiontitle" name="passowrd" value="{{n.password}}" required>
+                            
+                            
                             <br>
                             <input type="submit" value="submit" />
                             

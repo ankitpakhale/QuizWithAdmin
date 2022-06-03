@@ -55,8 +55,12 @@
                         <tr>
                             <td>{{i.question}}</td>
                             <td>{{i.option_title}}</td>
-                            <td>{{i.is_answer}}</td>
-                            <td>
+                            {% if i.is_answer %}
+                                <td style="color: green;">Correct</td>
+                            {% else%}
+                                <td style="color: red;">Incorrect</td>
+                            {% endif %}
+                                <td>
                                 <a href="{% url 'editoption' i.id %}">Edit</a>
                                 <a href="{% url 'deloption' i.id %}">Delete</a>
                                 
