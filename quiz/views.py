@@ -302,7 +302,6 @@ def student_signup_view(request):
 
     return render(request,'student_signup.html')
 
-
 def student_login_view(request):
     msg = ''
     if request.POST:
@@ -314,7 +313,7 @@ def student_login_view(request):
                 request.session['enroll_no'] = enroll_no
                 msg = "Student Successfully logged in"
                 print(msg)
-                return redirect('student_dashboard')
+                return redirect('stu_index')
             else:
                 msg = "Enter valid password"
                 print(msg)
@@ -322,26 +321,45 @@ def student_login_view(request):
         except:
             msg = "Student does not exist"
             print(msg)
-            return render(request,'student_login.html', {'msg': msg})
-    return render(request,'student_login.html')
+            return render(request,'stu_login.html', {'msg': msg})
+    return render(request,'stu_login.html')
 
-def profileupdate(request):
-    print("111")
+def student_logout_view(request):
+    del request.session['enroll_no']
+    print('Student logged out')
+    return redirect('student_login_view')
+
+def stu_index(request):
     if request.session['enroll_no']:
+        # show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
+        return render(request, 'stu_index.html')
+    return redirect('student_login_view')
+    
+def stu_result(request):
+    if request.session['enroll_no']:
+        # show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
+        return render(request, 'stu_result.html')
+    return redirect('student_login_view')
+    
+def stu_question(request):
+    if request.session['enroll_no']:
+        # show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
+        return render(request, 'stu_question.html')
+    return redirect('student_login_view')
+    
+def stu_profile(request):
+    if request.session['enroll_no']:
+        show_data = ''
+        msg = ''
         show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
         if request.POST:
-            name = request.POST['name']
             password = request.POST['password']
-
-            stu_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
-        
-            stu_data.name = name
-            stu_data.password = password
-            stu_data.save()
-            
-            msg = 'Your profile has been updated successfully'
-            return render(request, 'student_profile_update.html', {'msg': msg})
-        return render(request, 'student_profile_update.html', {'show_data': show_data})
+            show_data.password = password
+            show_data.save()
+            msg = 'Your Password has been updated successfully'
+            print(msg)
+            return render(request, 'stu_profile.html', {'msg': msg})
+        return render(request, 'stu_profile.html', {'show_data': show_data})
     return redirect('student_login_view')
     
 def student_dashboard(request):
