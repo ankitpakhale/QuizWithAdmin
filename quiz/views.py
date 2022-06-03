@@ -7,8 +7,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    if 'email' in request.session:
-        
+    if 'email' in request.session:        
         n=AdminForm.objects.get(id=request.session['email'])        
     # a=Record.objects.all()
         a=registerform.objects.all()
@@ -17,6 +16,8 @@ def index(request):
         q=question.objects.all()
         return render(request,'index.html',{'data':a,'c':count,'q':len(q),'n':n})
     return render('sign1')
+# ------------------------------------------------------------------------------------------------
+    # return render(request,'index.html')
 
 def add_option(request):
     q=question.objects.all()
@@ -278,7 +279,7 @@ def student_login_view(request):
                 request.session['enroll_no'] = enroll_no
                 msg = "Student Successfully logged in"
                 print(msg)
-                return redirect('index1')
+                return redirect('student_dashboard')
             else:
                 msg = "Enter valid password"
                 print(msg)
@@ -308,4 +309,10 @@ def profileupdate(request):
         return render(request, 'student_profile_update.html', {'show_data': show_data})
     return redirect('student_login_view')
     
+def student_dashboard(request):
+    if 'enroll_no' in request.session:     
+        n = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
+        return render(request,'stu_index.html', {'n': n})
+    return render('student_login_view')
+
 # ##################### Ankit's Work END ###############################
