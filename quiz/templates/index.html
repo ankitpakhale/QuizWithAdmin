@@ -11,8 +11,13 @@
     <div class="main">
 
         <div class="menu">
-
+            
             <div class="card menu_item">
+                <span class="button button1" onclick="window.location.href='';" style="margin-top: 10px;">
+                    <a href="#">
+                        <img src="{% static 'icon/profile.png' %}" height="20px" width="20px"> &nbspProfile
+                    </a>
+                </span>
                 <div class="logo"><img src="{% static 'logo.jpg' %}" height="80px" width="94%" style="margin:2%;"
                         onclick="window.location.href='index.html';"></div>
                 <a class="button button1" href={% url 'index1' %}><img src="{% static 'icon/dashboard.png' %}"
@@ -35,15 +40,12 @@
                         height="20px" width="20px">View Questions</span></a>
                 <a class="button button1" href={% url 'viewcategory' %}><img src="{% static 'icon/view.png' %}"
                         height="20px" width="20px">view category </span></a>
-                <!-- <a class="button button1"  href={% url 'viewtest' %} ><img src="{% static 'icon/view.png' %}" height="20px" width="20px"> &nbspView Test</span></a> -->
-                <br>
-                <span class="account" style="margin: 50px; "></span>
-                <span class="button button1" onclick="window.location.href='';" style="margin-top: 10px;">
-                    <a href="{% url 'profileupdate' %}">
-                        <img src="{% static 'icon/profile.png' %}" height="20px" width="20px"> &nbspProfile</span>
-                    </a>
-
+                        <!-- <a class="button button1"  href={% url 'viewtest' %} ><img src="{% static 'icon/view.png' %}" height="20px" width="20px"> &nbspView Test</span></a> -->
+                        <br>
+                <!-- <span class="account"></span> -->
+                    
             </div>
+        </div>
 
             WELCOME {{ n.name}}             
             <div class="dashboard">
@@ -82,7 +84,7 @@
                             <th>Review</th>
                             <th>Score</th>
                             <th>Action</th>
-                        </tr>
+                        </tr> 
                         {% for i in data %}
                         <tr>
                             <td>{{ i.name }}</td>
@@ -104,12 +106,11 @@
            
             </div>
           
-=======
+<!-- ======= -->
 
->>>>>>> c10b59cdb085766fc51a0d44263e32556d07efaa
-        </div>
+<!-- >>>>>>> c10b59cdb085766fc51a0d44263e32556d07efaa -->
 
-        <div class="dashboard">
+        <!-- <div class="dashboard">
             <div class="hed">
                 <h3 class="dbord"> &nbsp Dashboard</h3>
                 <a href="{% url 'sign1' %}" class="button logout" img src="{% static 'icon/logout.png' %}" height="20px"
@@ -167,7 +168,7 @@
 
             </div>
 
-        </div>
+        </div>---->
 
     </div>
 </body>
