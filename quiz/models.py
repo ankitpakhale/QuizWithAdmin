@@ -49,6 +49,9 @@ class Answer(models.Model):
     quiz1=models.ForeignKey(Quiz, on_delete=models.CASCADE, null=True, default="")
     question=models.ForeignKey(question, on_delete=models.CASCADE, null=True, default="")
     score=models.BooleanField()
+    
+    def __str__(self):
+        return str(self.question)
 
 class Record(models.Model):
     student=models.ForeignKey(registerform,on_delete=models.CASCADE,null=True,default="")
@@ -65,4 +68,5 @@ class Option(models.Model):
     option_title=models.CharField(max_length=10)
     is_answer=models.BooleanField(default=False)
 
-
+    def __str__(self):
+        return str(self.option_title)

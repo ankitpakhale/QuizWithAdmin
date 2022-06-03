@@ -1,11 +1,7 @@
 from operator import index
 from django.contrib import admin
 from django.urls import path
-
-from.views import index,edit_student,view_option,delete_option,edit_option,correct_answer,delete_testcategory,delete_question,add_option,show_question,edit_testcategory,view_category,edit_questions,create_test,question_add,LoginUserView,student_report,view_test,Add_student,testcategory_add
-
-from.views import index,view_option,edit_option,correct_answer,delete_testcategory,delete_question,add_option,show_question,edit_testcategory,view_category,edit_questions,create_test,question_add,LoginUserView,student_report,view_test,Add_student,testcategory_add, profileupdate, student_signup_view, student_login_view, student_dashboard
-
+from.views import index,view_option,edit_option,correct_answer,delete_testcategory,delete_question,add_option,show_question,edit_testcategory,view_category,edit_questions,create_test,question_add,LoginUserView,student_report,view_test,Add_student,testcategory_add, student_signup_view, student_login_view, stu_index, stu_result, stu_question, student_logout_view, stu_profile, edit_student, delete_option
 
 urlpatterns = [
     path('index/',index,name='index1'),
@@ -30,10 +26,13 @@ urlpatterns = [
     path('Add_student/',Add_student,name='addstudent'),
     
     # ##################### Ankit's Work START ###############################
-    path('profileupdate/',profileupdate,name='profileupdate'),
-    path('student_signup/',student_signup_view,name='student_signup_view'),
+    path('student_signup/',student_signup_view,name='student_signup_view'),    
     path('student_login/',student_login_view,name='student_login_view'),
-    path('student_dashboard/',student_dashboard,name='student_dashboard'),
+    path('student_logout/',student_logout_view,name='student_logout_view'),
+    
+    path('stu_index/',stu_index,name='stu_index'),
+    path('stu_result/',stu_result,name='stu_result'),
+    path('stu_question/',stu_question,name='stu_question'),
+    path('stu_profile/',stu_profile,name='stu_profile'),
     # ##################### Ankit's Work END ###############################
-
 ]
