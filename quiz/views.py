@@ -2,7 +2,7 @@ import email
 from unicodedata import category
 from click import option
 from django.shortcuts import render,redirect
-from .models import Answer, registerform,question,Record,AdminForm,Testcategory,Option
+from .models import Answer, registerform,question,Record,AdminForm,Testcategory,Option, contactForm
 from django.http import HttpResponse
 
 # Create your views here.
@@ -317,7 +317,7 @@ def student_login_view(request):
             else:
                 msg = "Enter valid password"
                 print(msg)
-                return render(request,'student_login.html', {'msg': msg})
+                return render(request,'stu_login.html', {'msg': msg})
         except:
             msg = "Student does not exist"
             print(msg)
@@ -329,12 +329,6 @@ def student_logout_view(request):
     print('Student logged out')
     return redirect('student_login_view')
 
-def stu_index(request):
-    if request.session['enroll_no']:
-        # show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
-        return render(request, 'stu_index.html')
-    return redirect('student_login_view')
-    
 def stu_result(request):
     if request.session['enroll_no']:
         # show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
@@ -368,6 +362,30 @@ def student_dashboard(request):
     if 'enroll_no' in request.session:     
         n = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
         return render(request,'stu_index.html', {'n': n})
-    return render('student_login_view')
+    return redirect('student_login_view')
+    
+def about(request):
+    if 'enroll_no' in request.session:     
+        n = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
+        return render(request,'stu_about.html', {'n': n})
+    return redirect('student_login_view')
+
+def contact(request):
+    if 'enroll_no' in request.session:     
+        if request.POST:
+            con = contactForm()
+            con.name = request.POST['name']
+            con.email = request.POST['email']
+            con.phone = request.POST['phone']
+            con.message = request.POST['message']
+            con.save()
+
+            msg = "Your response has been saved"
+            return render(request,'stu_contact.html', {'msg': msg})
+        return render(request,'stu_contact.html')
+    return redirect('student_login_view')
+
+def base(request):
+    return render(request,'stu_base.html')
 
 # ##################### Ankit's Work END ###############################

@@ -72,3 +72,11 @@ class Option(models.Model):
 
     def __str__(self):
         return str(self.option_title)
+    
+class contactForm(models.Model):
+    name = models.CharField(default="", max_length=30)
+    email = models.EmailField(default="")
+    phone = models.PositiveIntegerField(default="")
+    message = models.TextField(default="")
+    def __str__(self):
+        return self.name

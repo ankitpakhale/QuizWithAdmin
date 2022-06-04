@@ -1,134 +1,48 @@
+{% extends 'stu_base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employability.life | Dashboard </title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css">
-</head>
-
-<body>
-    <div class="layout has-sidebar fixed-sidebar fixed-header">
-        <aside id="sidebar" class="sidebar break-point-lg has-bg-image">
-            <div class="image-wrapper">
-                <img src="{% static 'images/sidebar_banner.jpg' %}" alt="sidebar background" />
-            </div>
-            <div class="sidebar-layout">
-                <div class="sidebar-header">
-                    <span style="
-                      text-transform: uppercase;
-                      font-size: 15px;
-                      letter-spacing: 3px;
-                      font-weight: bold;
-                    ">Student Dashboard</span>
-                </div>
-                <div class="sidebar-content">
-                    <nav class="menu open-current-submenu">
-                        <ul>
-
-                            <li class="menu-item">
-                                <a href="{% url 'stu_question' %}">
-                                    <span class="menu-icon">
-                                        <i class="ri-newspaper-fill"></i></span>
-                                    <span class="menu-title">View Test</span>
-                                </a>
-                            </li>
-                            
-                            <li class="menu-item">
-                                <a href="{% url 'stu_result' %}">
-                                    <span class="menu-icon">
-                                        <i class="ri-newspaper-fill"></i></span>
-                                    <span class="menu-title">View Result</span>
-                                </a>
-                            </li>
+{% block content %}
 
 
-                            <li class="menu-item">
-                                <a href="{% url 'stu_profile' %}">
-                                    <span class="menu-icon">
-                                        <i class="ri-user-fill"></i></span>
-                                    <span class="menu-title">Profile</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="sidebar-footer">
-                    <a href="{% url 'student_logout_view' %}" class="menu">
-                        <span class="menu-icon"><i class="ri-logout-box-line"></i></span>
-                        <span class="menu-title">Logout</span>
-                    </a>
-                </div>
-            </div>
-        </aside>
-        <div id="overlay" class="overlay"></div>
-        <div class="layout">
-            <header class="header">
-                <a id="btn-collapse" href="#">
-                    <i class="ri-menu-line ri-xl"></i>
-                </a>
-                <a id="btn-toggle" href="#" class="sidebar-toggler break-point-lg">
-                    <i class="ri-menu-line ri-xl"></i>
-                </a>
-                <a href="" class="logo">
-                    <img src="{% static 'images/logo.png' %}" width="250px" alt="">
-                </a>
-            </header>
-            <main class="content">
-                <div>
-                    <h1>View all Test</h1>
-                    <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore velit voluptate, blanditiis
-                        minus, magnam fuga enim illum sapiente incidunt molestiae officiis vero sed delectus sequi
-                        excepturi quo culpa asperiores corrupti? Ab, dolor esse natus possimus,
-                        maxime nisi praesentium sint odio officia, tempora molestias ea asperiores.
-                    </p>
-                </div>
-                <div class="table-div">
-                    <table class="content-table">
-                        <thead>
-                            <tr>
-                                <th>Test Name</th>
-                                <th>Status</th>
-                                <th>Completion Date</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Test 1</td>
-                                <td class="status-active"><strong>Completed</strong></td>
-                                <td>25/05/22</td>
-                                <td>
-                                    <a href="" class="btn">View Result</a>
-                                </td>
-                            </tr>
+<div>
+    <h1>View all Test</h1>
+    <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore velit voluptate, blanditiis
+        minus, magnam fuga enim illum sapiente incidunt molestiae officiis vero sed delectus sequi
+        excepturi quo culpa asperiores corrupti? Ab, dolor esse natus possimus,
+        maxime nisi praesentium sint odio officia, tempora molestias ea asperiores.
+    </p>
+</div>
+<div class="table-div">
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>Test Name</th>
+                <th>Status</th>
+                <th>Completion Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Test 1</td>
+                <td class="status-active"><strong>Completed</strong></td>
+                <td>25/05/22</td>
+                <td>
+                    <a href="" class="btn">View Result</a>
+                </td>
+            </tr>
 
-                            <tr>
-                                <td>Test 2</td>
-                                <td><strong>Pending</strong></td>
-                                <td>----</td>
-                                <td>
-                                    <a href="" class="btn">Start Test</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <footer class="footer">
-                    <small style="margin-bottom: 20px; display: inline-block">
-                        © 2022 made with
-                        by - Name </a>
-                    </small>
-                </footer>
-            </main>
-            <div class="overlay"></div>
-        </div>
-    </div>
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <script src="{% static 'js/main.js' %}"></script>
-</body>
+            <tr>
+                <td>Test 2</td>
+                <td><strong>Pending</strong></td>
+                <td>----</td>
+                <td>
+                    <a href="" class="btn">Start Test</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}
