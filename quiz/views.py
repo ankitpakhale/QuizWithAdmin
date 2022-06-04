@@ -341,11 +341,13 @@ def stu_result(request):
         return render(request, 'stu_result.html')
     return redirect('student_login_view')
     
+# ##################### Dharmendra's Work START ###############################
 def stu_question(request):
     if request.session['enroll_no']:
         # show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
         return render(request, 'stu_question.html')
     return redirect('student_login_view')
+    # ##################### Dharmendra's Work START ###############################
     
 def stu_profile(request):
     if request.session['enroll_no']:

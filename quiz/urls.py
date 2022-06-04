@@ -34,7 +34,7 @@ urlpatterns = [
     path('Add_student/',Add_student,name='addstudent'),
     
     # ##################### Ankit's Work START ###############################
-    path('stu_signup/',student_signup_view,name='student_signup_view'),    
+    # path('stu_signup/',student_signup_view,name='student_signup_view'),    
     path('stu_login/',student_login_view,name='student_login_view'),
     path('stu_logout/',student_logout_view,name='student_logout_view'),
     
