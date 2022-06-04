@@ -506,9 +506,13 @@ def stu_category_calculation(request,id):
 
 def stu_catWiseResult(request, id):
     if 'enroll_no' in request.session:     
+        show_data=registerform.objects.get(Enrollment_No = request.session['enroll_no'])
         all_cat_question = question.objects.filter(categoryName = id)
-        print(all_cat_question)
-        return render(request,'stu_catWiseResult.html')
+        
+        all_data = StudentReport.objects.filter(stu_name = show_data)
+        print(all_data)
+        
+        return render(request,'stu_catWiseResult.html', {'all_data': all_data})
     return redirect('student_login_view')
 
 # ##################### Ankit's Work END ###############################
