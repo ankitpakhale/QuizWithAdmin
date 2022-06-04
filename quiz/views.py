@@ -351,7 +351,7 @@ def stu_question(request, id):
         try:
             check=Testappear.objects.get(t_user=ow,t_category=t,isappear=True)
             return redirect('stu_allcat')
-        except:    
+        except:
             final_dict={}
             obj=question.objects.filter(categoryName_id=id)
             for i in obj:
@@ -362,7 +362,6 @@ def stu_question(request, id):
                     q=request.POST['question'+str(i)]
                     ans=request.POST[str(i)]
                     main_list=[]
-
                     c1=question.objects.get(question=q)
                     c2=Option.objects.filter(question=c1,is_answer=True)
                     for i in c2:
@@ -373,16 +372,13 @@ def stu_question(request, id):
                 change=Testappear.objects.get(t_user=ow,t_category=t)
                 change.isappear=True
                 change.save()
-                return redirect('stu_allcat') 
-
-                
-
+                return redirect('stu_allcat')             
         # show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
         return render(request, 'stu_question.html',{'final':final_dict})
         # print("Inside particular ID", id)
         # return render(request, 'stu_question.html')
     return redirect('student_login_view')
-# ##################### Dharmendra's Work START ###############################
+# ##################### Dharmendra's Work END ###############################
 
 def stu_profile(request):
     if request.session['enroll_no']:
@@ -405,7 +401,7 @@ def student_dashboard(request):
         obj=Testappear.objects.filter(t_user=n)
         return render(request,'stu_index.html', {'obj': obj})
     return redirect('student_login_view')
-    
+
 def about(request):
     if 'enroll_no' in request.session:     
         n = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
@@ -436,5 +432,12 @@ def stu_allcat(request):
 
 def base(request):
     return render(request,'stu_base.html')
+
+def stu_catWiseResult(request, id):
+    if 'enroll_no' in request.session:     
+        all_cat_question = question.objects.filter(categoryName = id)
+        print(all_cat_question)
+        return render(request,'stu_catWiseResult.html')
+    return redirect('student_login_view')
 
 # ##################### Ankit's Work END ###############################

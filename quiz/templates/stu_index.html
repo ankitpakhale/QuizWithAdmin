@@ -12,14 +12,6 @@
         maxime nisi praesentium sint odio officia, tempora molestias ea asperiores.
     </p>
 </div>
-{% for i in  obj %}
-    {{i.t_category}}
-    {% if i.isappear %}
-        complted
-    {% else %}
-        pending
-    {% endif %}
-{% endfor %}
 <div class="table-div">
     <table class="content-table">
         <thead>
@@ -31,23 +23,31 @@
             </tr>
         </thead>
         <tbody>
+            {% for i in obj %}
             <tr>
-                <td>Test 1</td>
-                <td class="status-active"><strong>Completed</strong></td>
-                <td>25/05/22</td>
+                <td>{{i.t_category}}</td>
+                <td><strong>
+                        {% if i.isappear %}
+                       <p class="status-active">Completed</p> 
+                        {% else %}
+                        Pending
+                        {% endif %}
+                    </strong></td>
+                <td>{{i.dat}}</td>
                 <td>
-                    <a href="" class="btn">View Result</a>
+                    {% if i.isappear %} 
+                    <!-- If Test is Completed -->
+                    <a href="{% url 'stu_catWiseResult' i.id %}" class="btn">View Result</a>
+                    {% else %}
+                    <!-- If Test is inCompleted -->
+                    <a href="{% url 'stu_allcat' %}" class="btn">Give Test</a>
+                   
+                    {% endif %}
                 </td>
             </tr>
+            {% endfor %}
 
-            <tr>
-                <td>Test 2</td>
-                <td><strong>Pending</strong></td>
-                <td>----</td>
-                <td>
-                    <a href="" class="btn">Start Test</a>
-                </td>
-            </tr>
+
         </tbody>
     </table>
 </div>
