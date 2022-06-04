@@ -10,7 +10,8 @@
                     </p>
                 </div>
                 <div class="question">
-                    <form>
+                    <form method="POST">
+                        {% csrf_token %}
                         <!-- <h1>Q1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, eum?</h1>
                         <div class="opt">
                             <input type="radio" name="radio" id="radio1" class="radio" checked/>
@@ -49,13 +50,13 @@
                         {% for i,j in final.items%}        
                         <div>
 
-                            <h3>Q{{forloop.counter}}.<br>{{i}}</h3>
+                            <input type="hidden" readonly name="question{{forloop.counter}}" value="{{i}}"><h3>Q{{forloop.counter}}.<br>{{i}}</h3></input>
                             {% for k in j %}
                             <label>
-                              <input type="checkbox" class="radio" value="" name="fooby[1][]" /></label>
-                            {{k}}
+                              <input type="radio" name="{{forloop.parentloop.counter}}" value="{{k}}" required>
+                              {{k}}
                               <br>
-                              {% endfor %}    
+                            {% endfor %}    
                         </div>
                         {% endfor %}
                           
@@ -74,31 +75,13 @@
                         <div class="opt">
                             <input type="radio" name="radio" id="radio4" class="radio" />
                             <label for="radio4">Fourth Option</label>
-                        </div>
+                        </div>--->
                         <div class="sbmt">
-                            <input type="submit" name="sbmt" />
-                        </div> -->
+                            <input type="submit" name="sbmit" />
+                        </div>
 
                     </form>
                 </div>
-<script>
-    // the selector will match all input controls of type :checkbox
-// and attach a click event handler 
-$("input:checkbox").on('click', function() {
-  // in the handler, 'this' refers to the box clicked on
-  var $box = $(this);
-  if ($box.is(":checked")) {
-    // the name of the box is retrieved using the .attr() method
-    // as it is assumed and expected to be immutable
-    var group = "input:checkbox[name='" + $box.attr("name") + "']";
-    // the checked state of the group/box on the other hand will change
-    // and the current value is retrieved using .prop() method
-    $(group).prop("checked", false);
-    $box.prop("checked", true);
-  } else {
-    $box.prop("checked", false);
-  }
-});
-</script>
+
               
 {% endblock %}

@@ -2,7 +2,7 @@ import email
 from unicodedata import category
 from click import option
 from django.shortcuts import render,redirect
-from .models import Answer, registerform,question,Record,AdminForm,Testcategory,Option, contactForm
+from .models import Answer, registerform,question,Testappear,Record,AdminForm,Testcategory,Option, contactForm
 from django.http import HttpResponse
 
 # Create your views here.
@@ -338,11 +338,35 @@ def stu_result(request):
 # ##################### Dharmendra's Work START ###############################
 def stu_question(request, id):
     if request.session['enroll_no']:
-        final_dict={}
-        obj=question.objects.filter(categoryName_id=1)
-        for i in obj:
-            o=Option.objects.filter(question=i)
-            final_dict[i]=o          
+        t=Testcategory.objects.get(id=id)
+        ow=registerform.objects.get(Enrollment_No=request.session['enroll_no'])
+        try:
+            check=Testappear.objects.get(t_user=ow,t_category=t)
+            return redirect('stu_allcat')
+        except:    
+            final_dict={}
+            obj=question.objects.filter(categoryName_id=id)
+            for i in obj:
+                o=Option.objects.filter(question=i)
+                final_dict[i]=o
+            if request.POST:
+                for i in range(1,len(obj)+1):
+                    q=request.POST['question'+str(i)]
+                    ans=request.POST[str(i)]
+                    main_list=[]
+
+                    c1=question.objects.get(question=q)
+                    c2=Option.objects.filter(question=c1,is_answer=True)
+                    for i in c2:
+                        main_list.append(i.option_title)
+                    print(main_list)    
+                    if ans in main_list:
+                        Answer.objects.create(owner=ow,quiz1=t,question=c1,score=True)
+                Testappear.objects.create(t_user=ow,t_category=t)
+                return redirect('stu_allcat') 
+
+                
+
         # show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
         return render(request, 'stu_question.html',{'final':final_dict})
         # print("Inside particular ID", id)

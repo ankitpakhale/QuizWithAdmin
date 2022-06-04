@@ -1,3 +1,4 @@
+from operator import mod
 from django.db import models
 
 class registerform(models.Model):
@@ -22,11 +23,21 @@ class AdminForm(models.Model):
 
 class Testcategory(models.Model):
     name=models.CharField(max_length=280,default="",blank=True,null=True)
+    
     def __str__(self):
         return self.name
-        
+
+class Testappear(models.Model):
+    t_category=models.ForeignKey(Testcategory,on_delete=models.CASCADE, null=True,)
+    t_user=models.ForeignKey(registerform,on_delete=models.CASCADE, null=True,)
+    dat=models.DateField(auto_now_add=True)
+    
+    # def __str__(self):
+    #     return self.t_user
+
+
 # kaam ka nhi hai --> Quiz
-class Quiz(models.Model):
+class Quiz123(models.Model):
     title=models.CharField(max_length=10)
     category=models.ForeignKey(Testcategory,on_delete=models.CASCADE, null=True, default="")
     time_stamp=models.DateField(auto_now=True)
@@ -47,7 +58,7 @@ class question(models.Model):
 
 class Answer(models.Model):
     owner=models.ForeignKey(registerform,on_delete=models.CASCADE, null=True, default="")
-    quiz1=models.ForeignKey(Quiz, on_delete=models.CASCADE, null=True, default="")
+    quiz1=models.ForeignKey(Testcategory, on_delete=models.CASCADE, null=True, default="")
     question=models.ForeignKey(question, on_delete=models.CASCADE, null=True, default="")
     score=models.BooleanField()
     
