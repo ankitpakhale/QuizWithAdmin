@@ -1,0 +1,29 @@
+{% extends 'stu_base.html' %}
+{% load static %}
+{% block content %}
+<div class="question">
+    <div>
+        <h3>Test Category</h3>
+    </div>
+
+
+    {% for i in allcat %}
+    <form method="POST">
+        {% csrf_token %}
+       
+            <a href="{% url 'stu_question' i.id %}">
+                <input type="hidden" name="categoryName" value="{{i.name}}">
+                <input type="submit" value="{{i.name}}" class="btn btn-primary">
+            </a>
+
+      </form>
+    {% endfor %}
+
+</div>
+
+
+{% if msg %}
+<script>alert('{{ msg }}')</script>
+{% endif %}
+
+{% endblock %}
