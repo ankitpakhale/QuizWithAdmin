@@ -338,8 +338,13 @@ def stu_result(request):
 # ##################### Dharmendra's Work START ###############################
 def stu_question(request):
     if request.session['enroll_no']:
+        final_dict={}
+        obj=question.objects.filter(categoryName_id=1)
+        for i in obj:
+            o=Option.objects.filter(question=i)
+            final_dict[i]=o          
         # show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
-        return render(request, 'stu_question.html')
+        return render(request, 'stu_question.html',{'final':final_dict})
     return redirect('student_login_view')
     # ##################### Dharmendra's Work START ###############################
     
