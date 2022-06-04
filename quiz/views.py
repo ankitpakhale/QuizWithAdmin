@@ -2,7 +2,7 @@ import email
 from unicodedata import category
 from click import option
 from django.shortcuts import render,redirect
-from .models import Answer, registerform,question,Testappear,Record,AdminForm,Testcategory,Option, contactForm
+from .models import Answer,StudentReport ,registerform,question,Testappear,Record,AdminForm,Testcategory,Option, contactForm
 from django.http import HttpResponse
 
 # Create your views here.
@@ -372,7 +372,8 @@ def stu_question(request, id):
                 change=Testappear.objects.get(t_user=ow,t_category=t)
                 change.isappear=True
                 change.save()
-                return redirect('stu_allcat')             
+                # return redirect('')
+                return redirect('stucalu',id)             
         # show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
         return render(request, 'stu_question.html',{'final':final_dict})
         # print("Inside particular ID", id)
@@ -432,6 +433,27 @@ def stu_allcat(request):
 
 def base(request):
     return render(request,'stu_base.html')
+
+def stu_category_calculation(request,id):
+    if 'enroll_no' in request.session:
+        u=registerform.objects.get(Enrollment_No = request.session['enroll_no'])
+        c=Testcategory.objects.get(id=id)
+        s=Answer.objects.filter(quiz1=c)
+        q=question.objects.filter(categoryName=c) 
+        ans=len(s)
+        total_quest=len(q)
+        final=(ans*100)/total_quest
+        print(ans)
+        print(total_quest)
+        print(final)
+        print('inside stujjjjjjjjjjjjjjjjj')
+
+        StudentReport.objects.create(stu_name=u,cat_name=c,percentage=final)
+        return redirect('stu_allcat')    
+    return redirect('student_login_view')
+    
+
+
 
 def stu_catWiseResult(request, id):
     if 'enroll_no' in request.session:     
