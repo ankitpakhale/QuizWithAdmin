@@ -4,6 +4,10 @@ from click import option
 from django.shortcuts import render,redirect
 from .models import Answer,StudentReport ,registerform,question,Testappear,Record,AdminForm,Testcategory,Option, contactForm
 from django.http import HttpResponse
+import plotly.graph_objects as go
+from io import BytesIO
+import plotly.express as px
+
 
 # Create your views here.
 def index(request):
@@ -339,8 +343,53 @@ def student_logout_view(request):
 
 def stu_result(request):
     if request.session['enroll_no']:
-        # show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
-        return render(request, 'stu_result.html')
+        show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
+        stu_data = StudentReport.objects.filter(stu_name = show_data)
+        
+        labels = []
+        all_per = []
+        # ind_values = []
+        # ind_lebels = []
+        for i in stu_data:
+            all_per.append(float(i.percentage))            
+            # labels.append(i.cat_name)
+            # ind_values.append(i.percentage)
+            # ind_lebels.append(i.cat_name)
+        
+        final_att = float(show_data.Attendance) * 100 / 12
+        final_cgpa = float(show_data.cgpa) * 100 / 7
+        final_gpa = float(show_data.gpa) * 100 / 7
+        final_review = float(show_data.review) * 100 / 10
+        
+        all_per.append(final_att)
+        all_per.append(final_cgpa)
+        all_per.append(final_gpa)
+        all_per.append(final_review)
+        
+        labels.append('Attendance')
+        labels.append('CGPA')
+        labels.append('GPA')
+        labels.append('Review Status')
+
+        final_percentage = sum(all_per) / len(all_per)
+        print(final_percentage)
+        
+        values = []
+        for i in all_per:
+            values.append(i)
+
+        # print(values)
+        # print(labels)
+        
+        # This graph is from registerform table
+        fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3)])
+        fig.show()
+        
+        # This graph is from StudentReport table
+        # fig = go.Figure(data=[go.Pie(labels=ind_lebels, values=ind_values, hole=.3)])
+        # fig.show()
+        
+        return render(request, 'stu_result.html', {'final_percentage': final_percentage})   
     return redirect('student_login_view')
 
 # ##################### Dharmendra's Work START ###############################

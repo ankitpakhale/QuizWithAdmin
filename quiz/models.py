@@ -68,7 +68,7 @@ class Answer(models.Model):
 class StudentReport(models.Model):
     stu_name=models.ForeignKey(registerform,on_delete=models.CASCADE, null=True, default="")
     cat_name=models.ForeignKey(Testcategory, on_delete=models.CASCADE, null=True, default="")
-    percentage=models.CharField(max_length=100)    
+    percentage=models.CharField(max_length=100) 
     def __str__(self):
         return str(self.percentage)
 
