@@ -30,6 +30,7 @@ class Testcategory(models.Model):
 class Testappear(models.Model):
     t_category=models.ForeignKey(Testcategory,on_delete=models.CASCADE, null=True,)
     t_user=models.ForeignKey(registerform,on_delete=models.CASCADE, null=True,)
+    isappear=models.BooleanField(default=False)
     dat=models.DateField(auto_now_add=True)
     
     # def __str__(self):

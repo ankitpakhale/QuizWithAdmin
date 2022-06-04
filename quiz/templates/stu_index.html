@@ -12,6 +12,14 @@
         maxime nisi praesentium sint odio officia, tempora molestias ea asperiores.
     </p>
 </div>
+{% for i in  obj %}
+    {{i.t_category}}
+    {% if i.isappear %}
+        complted
+    {% else %}
+        pending
+    {% endif %}
+{% endfor %}
 <div class="table-div">
     <table class="content-table">
         <thead>

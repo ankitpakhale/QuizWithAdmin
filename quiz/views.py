@@ -108,6 +108,10 @@ def testcategory_add(request):
         q=Testcategory()
         q.name=name
         q.save()
+        newly=Testcategory.objects.last()
+        allstudent=registerform.objects.all()
+        for i in allstudent:
+            Testappear.objects.create(t_category=newly,t_user=i,isappear=False)
         return redirect('index1')
     return render(request,'category.html')   
  
@@ -249,6 +253,10 @@ def Add_student(request):
         model.Enrollment_No=request.POST['enrollment']
         model.password=request.POST['password']
         model.save()
+        newly=registerform.objects.last()
+        allcat=Testcategory.objects.all()
+        for i in allcat:
+            Testappear.objects.create(t_category=i,t_user=newly,isappear=False)
         s='student saved successfully'
         return render(request,'Add_student.html',{'s':s})
     return render(request,'Add_student.html')
@@ -341,7 +349,7 @@ def stu_question(request, id):
         t=Testcategory.objects.get(id=id)
         ow=registerform.objects.get(Enrollment_No=request.session['enroll_no'])
         try:
-            check=Testappear.objects.get(t_user=ow,t_category=t)
+            check=Testappear.objects.get(t_user=ow,t_category=t,isappear=True)
             return redirect('stu_allcat')
         except:    
             final_dict={}
@@ -362,7 +370,9 @@ def stu_question(request, id):
                     print(main_list)    
                     if ans in main_list:
                         Answer.objects.create(owner=ow,quiz1=t,question=c1,score=True)
-                Testappear.objects.create(t_user=ow,t_category=t)
+                change=Testappear.objects.get(t_user=ow,t_category=t)
+                change.isappear=True
+                change.save()
                 return redirect('stu_allcat') 
 
                 
@@ -392,7 +402,8 @@ def stu_profile(request):
 def student_dashboard(request):
     if 'enroll_no' in request.session:     
         n = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
-        return render(request,'stu_index.html', {'n': n})
+        obj=Testappear.objects.filter(t_user=n)
+        return render(request,'stu_index.html', {'obj': obj})
     return redirect('student_login_view')
     
 def about(request):
