@@ -334,9 +334,9 @@ def stu_result(request):
         # show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
         return render(request, 'stu_result.html')
     return redirect('student_login_view')
-    
+
 # ##################### Dharmendra's Work START ###############################
-def stu_question(request):
+def stu_question(request, id):
     if request.session['enroll_no']:
         final_dict={}
         obj=question.objects.filter(categoryName_id=1)
@@ -345,9 +345,11 @@ def stu_question(request):
             final_dict[i]=o          
         # show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
         return render(request, 'stu_question.html',{'final':final_dict})
+        # print("Inside particular ID", id)
+        # return render(request, 'stu_question.html')
     return redirect('student_login_view')
-    # ##################### Dharmendra's Work START ###############################
-    
+# ##################### Dharmendra's Work START ###############################
+
 def stu_profile(request):
     if request.session['enroll_no']:
         show_data = ''
@@ -359,7 +361,7 @@ def stu_profile(request):
             show_data.save()
             msg = 'Your Password has been updated successfully'
             print(msg)
-            return render(request, 'stu_profile.html', {'msg': msg})
+            return render(request, 'stu_profile.html', {'msg': msg, 'show_data': show_data})
         return render(request, 'stu_profile.html', {'show_data': show_data})
     return redirect('student_login_view')
     
@@ -388,6 +390,13 @@ def contact(request):
             msg = "Your response has been saved"
             return render(request,'stu_contact.html', {'msg': msg})
         return render(request,'stu_contact.html')
+    return redirect('student_login_view')
+
+def stu_allcat(request):
+    if 'enroll_no' in request.session:     
+        allcat = Testcategory.objects.all()
+        return render(request,'stu_allcat.html', {'allcat': allcat})
+        # return render(request,'stu_allcat.html')
     return redirect('student_login_view')
 
 def base(request):

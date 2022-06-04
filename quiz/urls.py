@@ -6,7 +6,7 @@ from.views import index,logout,edit_student,view_option,delete_option,edit_optio
 
 from.views import index,profile,view_option,delete_student,edit_option,correct_answer,delete_testcategory,delete_question,add_option,show_question,edit_testcategory,view_category,edit_questions,create_test,question_add,LoginUserView,student_report,view_test,Add_student,testcategory_add, student_signup_view, student_login_view, student_dashboard
 
-from.views import index,view_option,edit_option,correct_answer,delete_testcategory,delete_question,add_option,show_question,edit_testcategory,view_category,edit_questions,create_test,question_add,LoginUserView,student_report,view_test,Add_student,testcategory_add, student_signup_view, student_login_view, stu_result, stu_question, student_logout_view, stu_profile, edit_student, delete_option, about, contact
+from.views import index,view_option,edit_option,correct_answer,delete_testcategory,delete_question,add_option,show_question,edit_testcategory,view_category,edit_questions,create_test,question_add,LoginUserView,student_report,view_test,Add_student,testcategory_add, student_signup_view, student_login_view, stu_result, stu_question, student_logout_view, stu_profile, edit_student, delete_option, about, contact, stu_allcat
 
 urlpatterns = [
     path('index/',index,name='index1'),
@@ -40,9 +40,10 @@ urlpatterns = [
     
     path('stu_index/',student_dashboard,name='stu_index'),
     path('stu_result/',stu_result,name='stu_result'),
-    path('stu_question/',stu_question,name='stu_question'),
+    path('stu_question/<int:id>',stu_question,name='stu_question'),
     path('stu_profile/',stu_profile,name='stu_profile'),
     path('about/',about,name='about'),
     path('contact/',contact,name='contact'),
+    path('stu_allcat/',stu_allcat,name='stu_allcat'),
     # ##################### Ankit's Work END ###############################
 ]
