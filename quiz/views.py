@@ -346,6 +346,13 @@ def stu_result(request):
         show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
         stu_data = StudentReport.objects.filter(stu_name = show_data)
         
+        cat_c=[]
+        cat_p=[]
+
+        for i in stu_data:
+            cat_c.append(i.cat_name.name)
+            cat_p.append(i.percentage)
+
         labels = []
         all_per = []
         # ind_values = []
@@ -372,17 +379,20 @@ def stu_result(request):
         labels.append('Review Status')
 
         final_percentage = sum(all_per) / len(all_per)
-        print(final_percentage)
+        show_data.score=final_percentage
+        show_data.save()
         
         values = []
         for i in all_per:
             values.append(i)
 
-        # print(values)
-        # print(labels)
+        
         
         # This graph is from registerform table
         fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3)])
+        fig.show()
+
+        fig=fig = go.Figure(data=[go.Pie(labels=cat_c, values=cat_p, hole=.3)])
         fig.show()
         
         # This graph is from StudentReport table
