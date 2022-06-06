@@ -416,6 +416,7 @@ def stu_question(request, id):
                     if ans in main_list:
                         Answer.objects.create(owner=ow,quiz1=t,question=c1,score=True)
                 change=Testappear.objects.get(t_user=ow,t_category=t)
+                print('inside except')
                 change.isappear=True
                 change.save()
                 # return redirect('')
@@ -490,7 +491,7 @@ def stu_category_calculation(request,id):
         print('inside stujjjjjjjjjjjjjjjjj')
 
         StudentReport.objects.create(stu_name=u,cat_name=c,percentage=final)
-        return redirect('stu_allcat')    
+        return redirect('stu_result')    
     return redirect('student_login_view')
     
 
