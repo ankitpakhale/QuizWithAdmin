@@ -6,7 +6,7 @@ from.views import index,logout,edit_student,view_option,delete_option,edit_optio
 
 from.views import index,profile,view_option,delete_student,edit_option,correct_answer,delete_testcategory,delete_question,add_option,show_question,edit_testcategory,view_category,edit_questions,create_test,question_add,LoginUserView,student_report,view_test,Add_student,testcategory_add, student_signup_view, student_login_view, student_dashboard
 
-from.views import index,view_option,stu_category_calculation,edit_option,correct_answer,delete_testcategory,delete_question,add_option,show_question,edit_testcategory,view_category,edit_questions,create_test,question_add,LoginUserView,student_report,view_test,Add_student,testcategory_add, student_signup_view, student_login_view, stu_result, stu_question, student_logout_view, stu_profile, edit_student, delete_option, about, contact, stu_allcat, stu_catWiseResult
+from.views import index,view_option,stu_category_calculation,edit_option,correct_answer,delete_testcategory,delete_question,add_option,show_question,edit_testcategory,view_category,edit_questions,create_test,question_add,LoginUserView,student_report,view_test,Add_student,testcategory_add, student_signup_view, student_login_view, stu_result, stu_question, student_logout_view, stu_profile, edit_student, delete_option, about, contact, stu_allcat, stu_catWiseResult, view_query
 
 urlpatterns = [
     path('index/',index,name='index1'),
@@ -31,16 +31,17 @@ urlpatterns = [
     path('addcategory/',testcategory_add,name='addcategory'),
     path('addoption/',add_option,name='addoption'),
     path('correct_answer/',correct_answer,name='correct_answer'),
+    path('viewquery/',view_query,name='view_query'),
     path('Add_student/',Add_student,name='addstudent'),
 
     # ##################### Ankit's Work START ###############################
     # path('stu_signup/',student_signup_view,name='student_signup_view'),    
-    path('',student_login_view,name='student_login_view'),
+    path('login/',student_login_view,name='student_login_view'),
     path('stu_logout/',student_logout_view,name='student_logout_view'),
     
     path('stu_index/',student_dashboard,name='stu_index'),
     path('stu_result/',stu_result,name='stu_result'),
-    path('stu_allcat/',stu_allcat,name='stu_allcat'),
+    path('',stu_allcat,name='stu_allcat'),
     path('stucalculation/<int:id>',stu_category_calculation,name='stucalu'),
     path('stu_question/<int:id>',stu_question,name='stu_question'),
     path('stu_profile/',stu_profile,name='stu_profile'),

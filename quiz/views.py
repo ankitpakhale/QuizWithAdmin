@@ -71,6 +71,10 @@ def correct_answer(request):
     ans=Answer.objects.all()
     return render(request,'viewanswer.html',{'ans':ans})
 
+def view_query(request):
+    c_form=contactForm.objects.all()
+    return render(request,'view_query.html',{'c_form':c_form})
+
 def question_add(request):
     al=Testcategory.objects.all()
     if request.POST:
@@ -337,12 +341,14 @@ def student_login_view(request):
     return render(request,'stu_login.html')
 
 def student_logout_view(request):
-    del request.session['enroll_no']
-    print('Student logged out')
+    if 'enroll_no' in request.session:
+        del request.session['enroll_no']  
+        print('Student logged out')
     return redirect('student_login_view')
 
+
 def stu_result(request):
-    if request.session['enroll_no']:
+    if 'enroll_no' in request.session:     
         show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
         stu_data = StudentReport.objects.filter(stu_name = show_data)
         
@@ -404,7 +410,7 @@ def stu_result(request):
 
 # ##################### Dharmendra's Work START ###############################
 def stu_question(request, id):
-    if request.session['enroll_no']:
+    if 'enroll_no' in request.session:     
         t=Testcategory.objects.get(id=id)
         ow=registerform.objects.get(Enrollment_No=request.session['enroll_no'])
         try:
@@ -437,11 +443,12 @@ def stu_question(request, id):
         return render(request, 'stu_question.html',{'final':final_dict})
         # print("Inside particular ID", id)
         # return render(request, 'stu_question.html')
+    # else:
     return redirect('student_login_view')
 # ##################### Dharmendra's Work END ###############################
 
 def stu_profile(request):
-    if request.session['enroll_no']:
+    if 'enroll_no' in request.session:     
         show_data = ''
         msg = ''
         show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
@@ -463,32 +470,26 @@ def student_dashboard(request):
     return redirect('student_login_view')
 
 def about(request):
-    if 'enroll_no' in request.session:     
-        n = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
-        return render(request,'stu_about.html', {'n': n})
-    return redirect('student_login_view')
+    return render(request,'stu_about.html')
 
 def contact(request):
-    if 'enroll_no' in request.session:     
-        if request.POST:
-            con = contactForm()
-            con.name = request.POST['name']
-            con.email = request.POST['email']
-            con.phone = request.POST['phone']
-            con.message = request.POST['message']
-            con.save()
-
-            msg = "Your response has been saved"
-            return render(request,'stu_contact.html', {'msg': msg})
-        return render(request,'stu_contact.html')
-    return redirect('student_login_view')
+    if request.POST:
+        con = contactForm()
+        con.name = request.POST['name']
+        con.email = request.POST['email']
+        con.phone = request.POST['phone']
+        con.message = request.POST['message']
+        con.save()
+        msg = "Your response has been saved"
+        return render(request,'stu_contact.html', {'msg': msg})
+    return render(request,'stu_contact.html')
 
 def stu_allcat(request):
-    if 'enroll_no' in request.session:     
-        allcat = Testcategory.objects.all()
-        return render(request,'stu_allcat.html', {'allcat': allcat})
-        # return render(request,'stu_allcat.html')
-    return redirect('student_login_view')
+    # if 'enroll_no' in request.session:     
+    allcat = Testcategory.objects.all()
+    return render(request,'stu_allcat.html', {'allcat': allcat})
+    # return render(request,'stu_allcat.html')
+    # return redirect('student_login_view')
 
 def base(request):
     return render(request,'stu_base.html')
