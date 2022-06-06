@@ -209,6 +209,16 @@ img{
     font-size: 18px;
     }
 
+    .custom_input{
+      width: 15%;
+      margin: 5px 0 5px 0;
+      padding: 7px;
+      border: none;
+      border: 1px solid gray;
+      border-radius: 6px;
+      outline: none;
+    }
+
     form input {
     width: 100%;
     margin: 5px 0 5px 0;

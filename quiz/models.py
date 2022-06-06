@@ -85,7 +85,7 @@ class Record(models.Model):
 
 class Option(models.Model): 
     question=models.ForeignKey(question, on_delete=models.CASCADE, null=True, default="")
-    option_title=models.CharField(max_length=10)
+    option_title=models.CharField(max_length=1000)
     is_answer=models.BooleanField(default=False)
 
     def __str__(self):

@@ -9,47 +9,56 @@
         {% csrf_token %}
 
         <div class="form-field">
+            <label>Name</label>
             <input name="name" id="login-email" value="{{ show_data.name }}" readonly type="text" class="form-input"
-                placeholder="Name" required>
+            placeholder="Name" required>
         </div>
-
+        
         <div class="form-field">
+            <label>Email</label>
             <input name="email" id="login-email" value="{{ show_data.email }}" readonly type="email" class="form-input"
-                placeholder="Email" required>
+            placeholder="Email" required>
         </div>
-
+        
         <div class="form-field">
+            <label>Number</label>
             <input name="enroll_no" id="login-email" value="{{ show_data.Enrollment_No }}" readonly type="number"
-                class="form-input" placeholder="Enrollment Number" required>
+            class="form-input" placeholder="Enrollment Number" required>
         </div>
-
+        
         <div class="form-field">
+            <label>New Password</label>
             <input name="password" id="login-email" type="password" class="form-input" placeholder="New Password"
-                required>
+            required>
         </div>
-
-
+        
+        
         <div class="form-field">
+            <label>Attendance</label>
             <input name="Attendance" id="login-email" value="{{ show_data.Attendance }}" readonly type="text"
-                class="form-input" placeholder="Attendance" required>
+            class="form-input" placeholder="Attendance" required>
         </div>
-
+        
         <div class="form-field">
+            <label>CGPA</label>
             <input name="cgpa" id="login-email" value="{{ show_data.cgpa }}" readonly type="text" class="form-input"
-                placeholder="GPA" required>
+            placeholder="GPA" required>
         </div>
-
+        
         <div class="form-field">
+            <label>GPA</label>
             <input name="gpa" id="login-email" value="{{ show_data.gpa }}" readonly type="text" class="form-input"
-                placeholder="CGPA" required>
+            placeholder="CGPA" required>
         </div>
-
+        
         <div class="form-field">
+            <label>Review</label>
             <input name="review" id="login-email" value="{{ show_data.review }}" readonly type="text" class="form-input"
-                placeholder="Review" required>
+            placeholder="Review" required>
         </div>
-
+        
         <div class="form-field">
+            <label>Score</label>
             <input name="score" id="login-email" value="{{ show_data.score }}" readonly type="text" class="form-input"
                 placeholder="Score" required>
         </div>
