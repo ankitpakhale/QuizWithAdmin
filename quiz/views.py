@@ -46,8 +46,9 @@ def add_option(request):
         title=request.POST['op']
         try:
             ans=request.POST.get('isans')
-            obj=question.objects.get(question=id)
-
+            print(id)
+            obj=question.objects.get(id=id)
+            print(obj)
             s=Option()
             s.question=obj
             s.option_title=title
@@ -149,7 +150,8 @@ def edit_option(request,id):
     al=question.objects.all()    
     if request.POST:
         q=request.POST['question']
-        q=question.objects.get(question=q)
+        print(q,'ggggggggggggg')
+        q=question.objects.get(id=q)
         o=request.POST['op']
         a=request.POST.get('isans')
 

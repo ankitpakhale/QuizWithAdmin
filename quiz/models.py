@@ -46,7 +46,7 @@ class Quiz123(models.Model):
 
 class question(models.Model):
     categoryName=models.ForeignKey(Testcategory, on_delete=models.CASCADE, null=True, default="")
-    question=models.TextField()
+    question=models.TextField(max_length=1000)
     # time=models.TimeField()
     # student=models.ForeignKey(registerform, on_delete=models.CASCADE, null=True, default="")
     # option1=models.CharField(max_length=280,default="",blank=True,null=True)

@@ -43,7 +43,10 @@
                         height="20px" width="20px">View Questions</span></a>
                 <a class="button button1" href={% url 'viewcategory' %}><img src="{% static 'icon/view.png' %}"
                         height="20px" width="20px">view category </span></a>
-                <!-- <a class="button button1"  href={% url 'viewtest' %} ><img src="{% static 'icon/view.png' %}" height="20px" width="20px"> &nbspView Test</span></a> -->
+                <a class="button button1" href={% url 'view_query' %}><img src="{% static 'icon/view.png' %}"
+                    height="20px" width="20px">Student Query</span></a>
+                
+                        <!-- <a class="button button1"  href={% url 'viewtest' %} ><img src="{% static 'icon/view.png' %}" height="20px" width="20px"> &nbspView Test</span></a> -->
                 <br>
                 <!-- <span class="account"></span> -->
             </div>
@@ -68,7 +71,7 @@
                             <label>Select Question</label>
                             <select required name="quest">
                                 {% for i in question %}
-                                <option>
+                                <option value="{{i.id}}">
                                     {{i}}
                                 </option>
                                 {% endfor %}
