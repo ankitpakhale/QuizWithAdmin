@@ -439,6 +439,7 @@ input {
 
 .layout.fixed-header.fixed-sidebar .header {
     width: calc(100% - 280px);
+    background: #fff;
 }
 
 .layout.fixed-header.fixed-sidebar .sidebar.collapsed~.layout .header {
