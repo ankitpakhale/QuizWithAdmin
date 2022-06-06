@@ -352,22 +352,11 @@ def stu_result(request):
         show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
         stu_data = StudentReport.objects.filter(stu_name = show_data)
         
-        cat_c=[]
-        cat_p=[]
-
-        for i in stu_data:
-            cat_c.append(i.cat_name.name)
-            cat_p.append(i.percentage)
-
         labels = []
         all_per = []
-        # ind_values = []
-        # ind_lebels = []
         for i in stu_data:
             all_per.append(float(i.percentage))            
-            # labels.append(i.cat_name)
-            # ind_values.append(i.percentage)
-            # ind_lebels.append(i.cat_name)
+            labels.append(i.cat_name.name)
         
         final_att = float(show_data.Attendance) * 100 / 12
         final_cgpa = float(show_data.cgpa) * 100 / 7
@@ -392,19 +381,9 @@ def stu_result(request):
         for i in all_per:
             values.append(i)
 
-        
-        
-        # This graph is from registerform table
         fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3)])
         fig.show()
 
-        fig=fig = go.Figure(data=[go.Pie(labels=cat_c, values=cat_p, hole=.3)])
-        fig.show()
-        
-        # This graph is from StudentReport table
-        # fig = go.Figure(data=[go.Pie(labels=ind_lebels, values=ind_values, hole=.3)])
-        # fig.show()
-        
         return render(request, 'stu_result.html', {'final_percentage': final_percentage})   
     return redirect('student_login_view')
 
