@@ -362,25 +362,25 @@ def stu_result(request):
         labels = []
         all_per = []
         for i in stu_data:
-            all_per.append(float(i.percentage))            
+            all_per.append((float(i.percentage)) * 1.5)            
             labels.append(i.cat_name.name)
-        cgpa=int(show_data.cgpa)
-        final_att = float(show_data.Attendance) * 100 / 12
-        final_cgpa = float(cgpa) * 100 / 7
-        final_gpa = float(show_data.gpa) * 100 / 7
-        final_review = float(show_data.review) * 100 / 10
+
+        final_cgpa = (float(int(show_data.cgpa)) * 100 / 7) * 0.50
+        final_att = (float(show_data.Attendance) * 100 / 12) * 0.25
+        final_rating = (float(show_data.review) * 100 / 10) * 0.25
+        # final_gpa = float(show_data.gpa) * 100 / 7
         
         all_per.append(final_att)
         all_per.append(final_cgpa)
-        all_per.append(final_gpa)
-        all_per.append(final_review)
+        all_per.append(final_rating)
+        # all_per.append(final_gpa)
         
         labels.append('Attendance')
         labels.append('CGPA')
-        labels.append('GPA')
         labels.append('Review Status')
+        # labels.append('GPA')
 
-        final_percentage = sum(all_per) / len(all_per)
+        final_percentage = round((sum(all_per) / len(all_per)), 2)
         show_data.score=final_percentage
         show_data.save()
         
@@ -426,7 +426,8 @@ def stu_question(request, id):
                 # return redirect('')
                 return redirect('stucalu',id)             
         # show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
-        return render(request, 'stu_question.html',{'final':final_dict})
+        total_size = len(final_dict)
+        return render(request, 'stu_question.html',{'final':final_dict, 'total_size':total_size})
         # print("Inside particular ID", id)
         # return render(request, 'stu_question.html')
     # else:

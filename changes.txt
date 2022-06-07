@@ -1,21 +1,5 @@
-Literacy 1.5
-Aptitude 1.5
-Numeracy 1.5
-CGPA 0.5
-Rating 0.25
-Attendance 0.25
-
-
-
-
-
-////////////////////////////
-Review --> rating
 gpa --> cat %
 remove test cat
 remove del cat
 edit symbol in view cat
 add question redirect on same page
-round off in Your Overall Result is 63.71428571428571
-Test One | 25 Question | 15 Minutes
-cat badi badi

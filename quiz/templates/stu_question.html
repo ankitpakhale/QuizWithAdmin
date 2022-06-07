@@ -2,51 +2,15 @@
 {% load static %}
 {% block content %}
 
+                {% if total_size %}
                 <div>
-                    <h3>Test One | 25 Question | 15 Minutes</h3>
-                    <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore velit voluptate, blanditiis minus, magnam fuga enim illum sapiente incidunt molestiae officiis vero sed delectus sequi excepturi quo culpa asperiores corrupti? Ab, dolor esse natus possimus,
-                        maxime nisi praesentium sint odio officia, tempora molestias ea asperiores.
-                    </p>
+                    <h3>{{total_size}} Question</h3>
                 </div>
+                {% endif %}
+
                 <div class="question">
                     <form method="POST">
                         {% csrf_token %}
-                        <!-- <h1>Q1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, eum?</h1>
-                        <div class="opt">
-                            <input type="radio" name="radio" id="radio1" class="radio" checked/>
-                            <label for="radio1">First Option</label>
-                        </div>
-
-                        <div class="opt">
-                            <input type="radio" name="radio" id="radio2" class="radio" />
-                            <label for="radio2">Second Option</label>
-                        </div>
-
-                        <div class="opt">
-                            <input type="radio" name="radio" id="radio3" class="radio" />
-                            <label for="radio3">Third Option</label>
-                        </div>
-
-                        <div class="opt">
-                            <input type="radio" name="radio" id="radio4" class="radio" />
-                            <label for="radio4">Fourth Option</label>
-                        </div>
-                        <div class="sbmt">
-                            <input type="submit" name="sbmt" />
-                        </div> -->
-                        
-                        <!-- {% for i,j in final.items%}
-                        <h1>Q{{forloop.counter}}.<br>{{i}}</h1>
-                            {% for k in j %}
-                                
-                                <br>
-                                <div class="opt">
-                                    <input type="checkbox" name="radio" id="radio1"  />
-                                    <label for="radio1">{{k}}</label>
-                                </div>
-                                {% endfor %}    
-                        {% endfor %}     -->
                         {% for i,j in final.items %}        
                         <div>
                             <input type="hidden" readonly name="question{{forloop.counter}}" value="{{i}}"><h3>Q{{forloop.counter}}. {{i}}</h3></input>
@@ -57,7 +21,6 @@
                               <br>
                             {% endfor %}    
                         </div>
-                        <hr>
                         {% endfor %}
 
                         <!-- <div class="opt">
