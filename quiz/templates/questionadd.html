@@ -8,38 +8,39 @@
             <div class="card questionadd">
                 <h3 class="questionaddtitle" style="font-weight: bold;">&nbsp &nbsp &nbsp Question Add</h3>
             </div>
-<<<<<<< HEAD
+
             {% if msg %}
           <script>
             alert('{{msg}}')
           </script>
           {% endif %}
-        {% endblock %}
-=======
-            <div class="questionaddform">
-                <form method="post">
-                    {% csrf_token%}
-                    <label>Select Category</label>
-                    <select required name="category">
+          
+          <div class="questionaddform">
+              <form method="post">
+                  {% csrf_token%}
+                  <label>Select Category</label>
+                  <select required name="category">
                         {% for i in al %}
                         <option>{{i}}</option>
                         {% endfor %}
                     </select>
                     <label>Write Question</label>
                     <input type="text" placeholder="Enter Question" required style="width: 300px; height: 30px;"
-                        class="questiontitle" id="questiontitle" name="question" />
-
-
+                    class="questiontitle" id="questiontitle" name="question" />
+                    
+                    
                     <br>
                     <br>
                     <input type="submit" value="submit" />
-
+                    
                 </form>
                 </br>
             </div>
-
+            
         </div>
     </div>
-
+    
     {% endblock %}
->>>>>>> 3d9c262261909b64b0ace546652843b61a9e1206
+    
+    
+    
