@@ -2,6 +2,7 @@ import email
 from unicodedata import category
 from click import option
 from django.shortcuts import render,redirect
+from zmq import Message
 from .models import Answer,StudentReport ,registerform,question,Testappear,Record,AdminForm,Testcategory,Option, contactForm
 from django.http import HttpResponse
 import plotly.graph_objects as go
@@ -261,7 +262,6 @@ def LoginUserView(request):
             return HttpResponse("<a href = ''>Incorrect details</a>")
     return render(request,'sign.html')
 
-# ##################### Ankit's Work START ###############################
 def student_signup_view(request):
     msg = ''
     prev_enroll_no = registerform.objects.last()
@@ -411,7 +411,6 @@ def stu_question(request, id):
         # return render(request, 'stu_question.html')
     # else:
     return redirect('student_login_view')
-# ##################### Dharmendra's Work END ###############################
 
 def stu_profile(request):
     if 'enroll_no' in request.session:     
