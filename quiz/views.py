@@ -55,7 +55,7 @@ def add_option(request):
             if ans:    
                 s.is_answer=True
             s.save()
-            return redirect('index1')
+            return redirect('addoption')
         except:
             pass
     return render(request,'option.html',{'question':q})
@@ -262,6 +262,11 @@ def Add_student(request):
         model.email=request.POST['email']
         model.Enrollment_No=request.POST['enrollment']
         model.password=request.POST['password']
+        model.Attendance=request.POST['attendence']
+        model.cgpa=request.POST['cgpa']
+        model.gpa=request.POST['gpa']
+        model.review=request.POST['review']
+        model.score=request.POST['score']
         model.save()
         newly=registerform.objects.last()
         allcat=Testcategory.objects.all()
@@ -359,9 +364,9 @@ def stu_result(request):
         for i in stu_data:
             all_per.append(float(i.percentage))            
             labels.append(i.cat_name.name)
-        
+        cgpa=int(show_data.cgpa)
         final_att = float(show_data.Attendance) * 100 / 12
-        final_cgpa = float(show_data.cgpa) * 100 / 7
+        final_cgpa = float(cgpa) * 100 / 7
         final_gpa = float(show_data.gpa) * 100 / 7
         final_review = float(show_data.review) * 100 / 10
         
@@ -389,7 +394,6 @@ def stu_result(request):
         return render(request, 'stu_result.html', {'final_percentage': final_percentage})   
     return redirect('student_login_view')
 
-# ##################### Dharmendra's Work START ###############################
 def stu_question(request, id):
     if 'enroll_no' in request.session:     
         t=Testcategory.objects.get(id=id)
@@ -508,4 +512,3 @@ def stu_catWiseResult(request, id):
         return render(request,'stu_catWiseResult.html', {'all_data': all_data})
     return redirect('student_login_view')
 
-# ##################### Ankit's Work END ###############################

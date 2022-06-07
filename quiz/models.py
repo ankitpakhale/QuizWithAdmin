@@ -7,9 +7,9 @@ class registerform(models.Model):
     Enrollment_No=models.CharField(max_length=100)
     password=models.CharField(max_length=20)
     Attendance=models.PositiveIntegerField(default=0)
-    cgpa=models.CharField("CGPA",default='',max_length=10,blank=True)
-    gpa=models.CharField("GPA",default='',max_length=10,blank=True)
-    review=models.TextField(default="",blank=True)
+    cgpa=models.IntegerField("CGPA",default='',blank=True)
+    gpa=models.IntegerField("GPA",default='',blank=True)
+    review=models.IntegerField(default="",blank=True)
     score=models.PositiveIntegerField(default=0,blank=True,)
     def __str__(self):
         return self.name

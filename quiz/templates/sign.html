@@ -1,45 +1,48 @@
 {% load static %}
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{% static 'css/demo.css' %}">
-    </head>
-    <style>
-        body{
-            background-color: white;
-        }
-    </style>
-    <title>Sign In</title>
-    <body>
-        <div class="loginmain">
-            
-            <div class="sign">
-                <img src="{% static 'login.png' %}" alt="" height="100%" width="100%">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body class="lgn-frm">
+
+
+    <div class="container">
+        <div class="login-item">
+            <div class="logo">
+                <img src="{% static 'images/logo.png' %}" width="250px" alt="">
             </div>
-            
-            <div class="signinform">
-                <div class="form">
-                    <h1 class="formh1" style="color: blue;">Admin Sign In</h1>
-                </br>
-                    <p class="para-2">
-                        Enter your Email ID and password to Sign In
-                    </p>
-                    </br>
-                    <form method="POST">
-                        {% csrf_token %}
-                        <label>Enter Email:</label>
-                        <input type="email" placeholder="Enter Email" class="email"  name="email"/>
-                        <label>Password:</label>
-                        <input type="password" placeholder="Enter Password" class="password" id="password" name="password" />
-                        <br>
-                        <br>
-                        <input type="submit" value="Submit" />
-                        <br>    
-                        <a href="{% url 'student_login_view' %}">Student Login</a>
-                    </form>
+
+            <form method="POST"  class="form form-login">
+                {% csrf_token %}
+                <div class="form-field">
+                    <input type="email" id="login-email" name="email" class="form-input"
+                        placeholder="Enter Email" required>
                 </div>
-            </div>
-          
+                <div class="form-field">
+                    <input type="password" id="login-email" name="password" class="form-input"
+                        placeholder="Enter password" required>
+                </div>
+                <br>
+                <div class="form-field">
+                    <input type="submit" value="Log in">
+                </div>
+                <br>    
+                <a href="{% url 'student_login_view' %}">Student Login</a>
+            </form>
         </div>
-    </body>
+    </div>
+
+
+    {% if msg %}
+	<script>alert('{{ msg }}')</script>
+	{% endif %}
+</body>
+
 </html>
