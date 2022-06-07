@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 
+<<<<<<< HEAD
             <div class="stdreportdrd">
                 <div class="dashboard">
                 <div class="hed">
@@ -45,9 +46,55 @@
                       
                         
                     </table>
+=======
+<div class="stdreportdrd">
+    <div class="dashboard">
+        
+        <!-- <div class="hed">
+            <h3 class="dbord"> &nbsp Dashboard</h3>
+        </div> -->
 
-                </div>
-           
+        
+>>>>>>> 3d9c262261909b64b0ace546652843b61a9e1206
+
+
+        <div class="card table stdtbl">
+            <div class="card studentreport">
+                <h3 style="font-weight: bold;">&nbsp &nbsp &nbsp Studen answer wise Report</h3>
             </div>
-          
-        {% endblock %}
+            <table>
+                <tr>
+                    <th>Question</th>
+                    <th>option</th>
+                    <th>is Answer</th>
+
+
+                </tr>
+
+                {% for i in obj %}
+                <tr>
+                    <td>{{i.question}}</td>
+                    <td>{{i.option_title}}</td>
+                    {% if i.is_answer %}
+                    <td style="color: green;">Correct</td>
+                    {% else%}
+                    <td style="color: red;">Incorrect</td>
+                    {% endif %}
+                    <td>
+
+
+                        <a href="{% url 'editoption' i.id %}">Edit</a>
+                        <a href="{% url 'deloption' i.id %}">Delete</a>
+
+                    </td>
+                </tr>
+                {% endfor %}
+
+
+            </table>
+
+        </div>
+
+    </div>
+
+    {% endblock %}

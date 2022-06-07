@@ -45,6 +45,11 @@ urlpatterns = [
     path('stu_profile/',stu_profile,name='stu_profile'),
     path('about/',about,name='about'),
     path('contact/',contact,name='contact'),
+<<<<<<< HEAD
     path('catWiseResult/<int:id>',stu_catWiseResult,name='stu_catWiseResult'),
    
+=======
+    path('catWiseResult/',stu_catWiseResult,name='stu_catWiseResult'),
+    # ##################### Ankit's Work END ###############################
+>>>>>>> 3d9c262261909b64b0ace546652843b61a9e1206
 ]

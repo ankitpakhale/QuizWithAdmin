@@ -403,7 +403,7 @@ def stu_question(request, id):
                 change.isappear=True
                 change.save()
                 # return redirect('')
-                return redirect('stucalu',id)             
+                return redirect('stu_catWiseResult')             
         # show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
         total_size = len(final_dict)
         return render(request, 'stu_question.html',{'final':final_dict, 'total_size':total_size})
@@ -478,16 +478,11 @@ def stu_category_calculation(request,id):
     return redirect('student_login_view')
     
 
-
-
-def stu_catWiseResult(request, id):
+def stu_catWiseResult(request):
     if 'enroll_no' in request.session:     
         show_data=registerform.objects.get(Enrollment_No = request.session['enroll_no'])
-        all_cat_question = question.objects.filter(categoryName = id)
-        
         all_data = StudentReport.objects.filter(stu_name = show_data)
         print(all_data)
-        
         return render(request,'stu_catWiseResult.html', {'all_data': all_data})
     return redirect('student_login_view')
 

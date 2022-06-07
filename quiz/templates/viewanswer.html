@@ -2,44 +2,34 @@
 {% load static %}
 {% block content %}
 
-            <div class="stdreportdrd">
-                <div class="dashboard">
-                <div class="hed">
-                    <h3 class="dbord"> &nbsp Dashboard</h3>
-                </div> 
-                
-                <a href="{% url 'admlogout' %}" class="button logout" style="text-decoration: none;color: red;font-size: larger;">Logout</span></a>
-             
-               
-                <div class="card table stdtbl">
-                    <div class="card studentreport">
-                        <h3 style="font-weight: bold;">&nbsp &nbsp &nbsp Student answer wise Report</h3>
-                    </div>
-                    <table>
-                        <tr>
-                                <th>Student Name</th>
-                                <th>Category</th>
-                                <th>Question</th>
-                                
-                            
-                        </tr>
-                        
-                        {% for i in ans %}
-                        <tr>
-                            <td>{{i.owner}}</td>
-                            <td>{{i.quiz1}}</td>
-                            <td>{{i.question}}</td>
-                            <td style="color: green;">Correct</td>
-                            
-                        </tr>
-                        {% endfor %}
-                        
-
-                        
-                    </table>
-
-                </div>
-           
+<div class="stdreportdrd">
+    <div class="dashboard">
+        <div class="card table stdtbl">
+            <div class="card studentreport">
+                <h3 style="font-weight: bold;">&nbsp &nbsp &nbsp Student answer wise Report</h3>
             </div>
-          
-       {% endblock %}
+            <table>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Category</th>
+                    <th>Question</th>
+                </tr>
+                {% for i in ans %}
+                <tr>
+                    <td>{{i.owner}}</td>
+                    <td>{{i.quiz1}}</td>
+                    <td>{{i.question}}</td>
+                    <td style="color: green;">Correct</td>
+
+                </tr>
+                {% endfor %}
+
+
+
+            </table>
+
+        </div>
+
+    </div>
+
+    {% endblock %}

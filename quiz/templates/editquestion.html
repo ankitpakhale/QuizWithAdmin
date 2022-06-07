@@ -1,46 +1,43 @@
 {% extends 'admin_base.html' %}
 {% load static %}
 {% block content %}
-            
-            <div class="viewtabledrd">
-                <div class="viewtabledrd">
-                    <div class="hed">
-                        <h3 class="dbord"> &nbsp Edit question</h3>    
-                        <a href="{% url 'admlogout' %}" class="button logout" style="text-decoration: none;color: red;font-size: larger;">Logout</span></a>
-                    </div> 
-                <div class="card createtest">
-                    <div class="card questionadd">
-                        <h3 class="questionaddtitle" style="font-weight: bold;">&nbsp &nbsp &nbsp Question Add</h3>
-                    </div>
-                    <div class="questionaddform">
-                        <form  method="post">
-                            {% csrf_token%}
-                        
-                            <label>Select Category</label>
-                            
-                            <select required name="category">
-                                {% for i in al %}
-                                    {% ifequal i name1 %}
-                                        <option selected>{{i}}</option>
-                                    {% else %}
-                                    <option >{{i}}</option>
-                                    {% endifequal %}        
-                                      
-                                {% endfor %}
-                            </select>
-                            <label>Write Question</label>
-                            <input type="text"  value="{{obj.question}}" placeholder="Enter Question" required style="width: 500px; height: 30px;" class="questiontitle" id="questiontitle" name="question"/>
-                            
-                            
-                            <br>
-                            <br>
-                            <input type="submit" value="submit" />
-                            
-                        </form>
-                    </br>
-                    </div>
 
-                </div>
+<div class="viewtabledrd">
+    <div class="viewtabledrd">
+        <div class="card createtest">
+            <div class="card questionadd">
+                <h3 class="questionaddtitle" style="font-weight: bold;">&nbsp &nbsp &nbsp Question Add</h3>
             </div>
-          
-        {% endblock %}
+            <div class="questionaddform">
+                <form method="post">
+                    {% csrf_token%}
+
+                    <label>Select Category</label>
+
+                    <select required name="category">
+                        {% for i in al %}
+                        {% ifequal i name1 %}
+                        <option selected>{{i}}</option>
+                        {% else %}
+                        <option>{{i}}</option>
+                        {% endifequal %}
+
+                        {% endfor %}
+                    </select>
+                    <label>Write Question</label>
+                    <input type="text" value="{{obj.question}}" placeholder="Enter Question" required
+                        style="width: 300px; height: 30px;" class="questiontitle" id="questiontitle" name="question" />
+
+
+                    <br>
+                    <br>
+                    <input type="submit" value="submit" />
+
+                </form>
+                </br>
+            </div>
+
+        </div>
+    </div>
+
+    {% endblock %}
