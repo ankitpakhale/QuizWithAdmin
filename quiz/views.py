@@ -174,7 +174,6 @@ def edit_student(request,id):
         password=request.POST['password']
         attend=request.POST['attendance']
         cgpa=request.POST['cgpa']
-        gpa=request.POST['gpa']
         rev=request.POST['review']
         sc=request.POST['score']
 
@@ -184,7 +183,6 @@ def edit_student(request,id):
         obj.password=password
         obj.Attendance=attend
         obj.cgpa=cgpa
-        obj.gpa=gpa
         obj.review=rev
         obj.score=sc
         obj.save()
@@ -264,9 +262,8 @@ def Add_student(request):
         model.password=request.POST['password']
         model.Attendance=request.POST['attendence']
         model.cgpa=request.POST['cgpa']
-        model.gpa=request.POST['gpa']
         model.review=request.POST['review']
-        model.score=request.POST['score']
+        # model.score=request.POST['score']
         model.save()
         newly=registerform.objects.last()
         allcat=Testcategory.objects.all()
