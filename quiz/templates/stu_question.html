@@ -2,47 +2,35 @@
 {% load static %}
 {% block content %}
 
-                {% if total_size %}
-                <div>
-                    <h3>{{total_size}} Question</h3>
-                </div>
-                {% endif %}
+{% if total_size %}
+<div>
+    <h3>Total {{total_size}} Question</h3>
+</div>
+{% endif %}
 
-                <div class="question">
-                    <form method="POST">
-                        {% csrf_token %}
-                        {% for i,j in final.items %}        
-                        <div>
-                            <input type="hidden" readonly name="question{{forloop.counter}}" value="{{i}}"><h3>Q{{forloop.counter}}. {{i}}</h3></input>
-                            {% for k in j %}
-                            <label>
-                              <input type="radio" name="{{forloop.parentloop.counter}}" value="{{k}}" required>
-                              {{k}}
-                              <br>
-                            {% endfor %}    
-                        </div>
-                        {% endfor %}
+<div class="question">
+    <form method="POST">
+        {% csrf_token %}
 
-                        <!-- <div class="opt">
-                            <input type="radio" name="radio" id="radio2" class="radio" />
-                            <label for="radio2">Second Option</label>
-                        </div>
+        {% for i,j in final.items %}
+        <div class="stu_ques_row">
+            <input type="hidden" readonly name="question{{forloop.counter}}" value="{{i}}">
+            <h3>Q{{forloop.counter}}. {{i}}</h3></input>
+            {% for k in j %}
+            <label>
+                <input type="radio" name="{{forloop.parentloop.counter}}" value="{{k}}" required>
+                {{k}}
+                <br>
+                {% endfor %}
+        </div>
+        {% endfor %}
 
-                        <div class="opt">
-                            <input type="radio" name="radio" id="radio3" class="radio" />
-                            <label for="radio3">Third Option</label>
-                        </div>
+        <div class="sbmt">
+            <input type="submit" name="sbmit" />
+        </div>
 
-                        <div class="opt">
-                            <input type="radio" name="radio" id="radio4" class="radio" />
-                            <label for="radio4">Fourth Option</label>
-                        </div> --->
-                        <div class="sbmt">
-                            <input type="submit" name="sbmit" />
-                        </div>
+    </form>
+</div>
 
-                    </form>
-                </div>
 
-              
 {% endblock %}

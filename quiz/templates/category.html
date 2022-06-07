@@ -4,10 +4,7 @@
 
             <div class="viewtabledrd">
                 <div class="viewtabledrd">
-                    <div class="hed">
-                        <h3 class="dbord"> Add category</h3>    
-                        <a href="{% url 'admlogout' %}" class="button logout" style="text-decoration: none;color: red;font-size: larger;">Logout</span></a>
-                    </div> 
+
                 <div class="card createtest">
                     <div class="card questionadd">
                         <h3 class="questionaddtitle" style="font-weight: bold;">&nbsp &nbsp &nbsp Question Add</h3>
@@ -18,25 +15,7 @@
                             {% csrf_token%}
                             <label>Enter category Name</label>
                             <input type="text" required placeholder="Enter category"   class="questiontitle" id="questiontitle" name="name"/>
-                            
-                            
                             <br>
-                            <!-- <label>Option 2</label>
-                            <input type="text" placeholder="Enter Option 2" class="option2" id="option2" name="option2" />
-                            <label>Option 3</label>
-                            <input type="text" placeholder="Enter Option 3" class="option3" id="option3" name="option3" />
-                            <label>Option 4</label>
-                            <input type="text" placeholder="Enter Option 4" class="option4" id="option4" name="option4" />
-                            <label>Time For Question</label>
-                            <input type="text" placeholder="Enter Time For Question" class="timeforquestion" id="timeforquestion" name="timeforquestion" />
-
-                            <label>Select Correct Option</label>
-                            <select>
-                                <option value="">Select Correct Option</option>
-                                <option value="">Option1</option>
-                                <option value="">Option2</option>
-                                <option value="">Option3</option>
-                              </select> -->
                             <br>
                             <input type="submit" value="submit" />
                             

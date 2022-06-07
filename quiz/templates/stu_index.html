@@ -37,7 +37,7 @@
                 <td>
                     {% if i.isappear %} 
                     <!-- If Test is Completed -->
-                    <a href="{% url 'stu_catWiseResult' i.id %}" class="btn">View Result</a>
+                    <a href="{% url 'stu_catWiseResult' %}" class="btn">View Result</a>
                     {% else %}
                     <!-- If Test is inCompleted -->
                     <a href="{% url 'stu_allcat' %}" class="btn">Give Test</a>

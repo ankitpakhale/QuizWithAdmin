@@ -1,37 +1,34 @@
 {% extends 'admin_base.html' %}
 {% load static %}
 {% block content %}
-            
-            <div class="viewtabledrd">
-                <div class="viewtabledrd">
-                    <div class="hed">
-                        <h3 class="dbord"> Edit category</h3>    
-                        <a href="{% url 'admlogout' %}" class="button logout" style="text-decoration: none;color: red;font-size: larger;">Logout</span></a>
-                    </div> 
-                <div class="card createtest">
-                    <div class="card questionadd">
-                        <h3 class="questionaddtitle" style="font-weight: bold;">&nbsp &nbsp &nbsp Edit category</h3>
-                    </div>
-                    <div class="questionaddform">
-                        <form  method="post">
-                            
-                            {% csrf_token%}
-                            
-                            <label>Enter category Name</label>
-                            
-                            <input type="text" placeholder="Enter category"   class="questiontitle" id="questiontitle" name="name" value="{{obj.name}}" required>
-                            
-                            
-                            <br>
-                            
-                            <br>
-                            <input type="submit" value="submit" />
-                            
-                        </form>
-                    </br>
-                    </div>
 
-                </div>
+<div class="viewtabledrd">
+    <div class="viewtabledrd">
+        <div class="card createtest">
+            <div class="card questionadd">
+                <h3 class="questionaddtitle" style="font-weight: bold;">&nbsp &nbsp &nbsp Edit category</h3>
             </div>
-          
-        {% endblock %}
+            <div class="questionaddform">
+                <form method="post">
+
+                    {% csrf_token%}
+
+                    <label>Enter category Name</label>
+
+                    <input type="text" placeholder="Enter category" class="questiontitle" id="questiontitle" name="name"
+                        value="{{obj.name}}" required>
+
+
+                    <br>
+
+                    <br>
+                    <input type="submit" value="submit" />
+
+                </form>
+                </br>
+            </div>
+
+        </div>
+    </div>
+
+    {% endblock %}

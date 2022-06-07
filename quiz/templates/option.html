@@ -2,42 +2,37 @@
 {% load static %}
 {% block content %}
 
-        <div class="viewtabledrd">
-            <div class="viewtabledrd">
-                <div class="hed">
-                    <h3 class="dbord"> Add Option</h3>
-                    <a href="{% url 'admlogout' %}" class="button logout"
-                        style="text-decoration: none;color: red;font-size: larger;">Logout</span></a>
-                </div>
-                <div class="card createtest">
-                    <div class="card questionadd">
-                        <h3 class="questionaddtitle" style="font-weight: bold;">&nbsp &nbsp &nbsp Add Option</h3>
-                    </div>
-                    <div class="questionaddform">
-                        <form method="post">
+<div class="viewtabledrd">
+    <div class="viewtabledrd">
+        <div class="card createtest">
+            <div class="card questionadd">
+                <h3 class="questionaddtitle" style="font-weight: bold;">&nbsp &nbsp &nbsp Add Option</h3>
+            </div>
+            <div class="questionaddform">
+                <form method="post">
 
-                            {% csrf_token%}
-                            <label>Select Question</label>
-                            <select required name="quest">
-                                {% for i in question %}
-                                <option value="{{i.id}}">
-                                    {{i}}
-                                </option>
-                                {% endfor %}
-                            </select>
-                            <label>Add Option</label>
-                            <input type="text" placeholder="Enter option" class="questiontitle" id="questiontitle"
-                                name="op" required>
-                            <label>Is Answer <input class="custom_input" type="checkbox" name="isans" value="True"></label>
-                            <br>
-                            </select>
-                            <br>
-                            <input type="submit" value="submit" />
-                        </form>
-                        </br>
-                    </div>
-
-                </div>
+                    {% csrf_token%}
+                    <label>Select Question</label>
+                    <select required name="quest">
+                        {% for i in question %}
+                        <option value="{{i.id}}">
+                            {{i}}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <label>Add Option</label>
+                    <input type="text" placeholder="Enter option" class="questiontitle" id="questiontitle" name="op"
+                        required>
+                    <label>Is Answer <input class="custom_input" type="checkbox" name="isans" value="True"></label>
+                    <br>
+                    </select>
+                    <br>
+                    <input type="submit" value="submit" />
+                </form>
+                </br>
             </div>
 
-        {% endblock %}
+        </div>
+    </div>
+
+    {% endblock %}

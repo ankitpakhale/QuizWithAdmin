@@ -2,33 +2,28 @@
 {% load static %}
 {% block content %}
 
-            <div class="viewtabledrd">
-                <div class="hed">
-                    <h3 class="dbord"> &nbsp View Test category</h3>    
-                    <a href="{% url 'admlogout' %}" class="button logout" style="text-decoration: none;color: red;font-size: larger;">Logout</span></a>
-                </div> 
-               
-                <div class="card table viewtbl">
-                    <div class="card viewtest">
-                        <h3 class="tableheading" style="font-weight: bold;">&nbsp &nbsp &nbsp View Test category</h3>
-                    </div>
-                    <table>
-                        <tr>
-                            <th>Category Name</th>
-                        </tr>
-                        {% for i in obj %}
-                        <tr>
-                            <td>{{i}}</td>
-                            
-                            <td><a href="{% url 'editcategory' i.id %}">edit</a></td>
-                            <!-- <td><a href="{% url 'delcategory' i.id %}">Delete</a></td> -->
-                        </tr>
-                        {% endfor %}
-                        
-                    </table>
+<div class="viewtabledrd">
+    <div class="card table viewtbl">
+        <div class="card viewtest">
+            <h3 class="tableheading" style="font-weight: bold;">&nbsp &nbsp &nbsp View Test category</h3>
+        </div>
+        <table>
+            <tr>
+                <th>Category Name</th>
+            </tr>
+            {% for i in obj %}
+            <tr>
+                <td>{{i}}</td>
 
-                </div>
-           
-            </div>
-          
-       {% endblock %}
+                <td><a href="{% url 'editcategory' i.id %}">edit</a></td>
+                <!-- <td><a href="{% url 'delcategory' i.id %}">Delete</a></td> -->
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

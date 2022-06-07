@@ -2,53 +2,50 @@
 {% load static %}
 {% block content %}
 
-            <div class="viewtabledrd">
-                <div class="viewtabledrd">
-                    <div class="hed">
-                        <h3 class="dbord"> Edit option</h3>    
-                        <a href="{% url 'admlogout' %}" class="button logout" style="text-decoration: none;color: red;font-size: larger;">Logout</span></a>
-                    </div> 
-                <div class="card createtest">
-                    <div class="card questionadd">
-                        <h3 class="questionaddtitle" style="font-weight: bold;">&nbsp &nbsp &nbsp Edit option</h3>
-                    </div>
-                    <div class="questionaddform">
-                        <form  method="post">
-                            
-                            {% csrf_token%}
-                            
-                            <label>Select question</label>
-                            
-                            <select required name="question">
-                                {% for i in al %}
-                                    {% ifequal i obj.question %}
-                                        <option selected value="{{i.id}}">{{i}}</option>
-                                    {% else %}
-                                    <option value="{{i.id}}">{{i}}</option>
-                                    {% endifequal %}        
-                                      
-                                {% endfor %}
-                            </select>
-                            
-                            <label>Enter Option</label>
-                            <input type="text" placeholder="Enter option"   class="questiontitle" id="questiontitle" name="op" value="{{obj.option_title}}" required>
-                            
-                            <label>is Answer</label>
-                            {% if obj.is_answer %}
-                            <input type="checkbox" name="isans"  value="True" checked> 
-                            {% else %}
-                            <input type="checkbox" name="isans"  value="True">
-                            {% endif %}
-                            <br>
-                            
-                            <br>
-                            <input type="submit" value="submit" />
-                            
-                        </form>
-                    </br>
-                    </div>
-
-                </div>
+<div class="viewtabledrd">
+    <div class="viewtabledrd">
+        <div class="card createtest">
+            <div class="card questionadd">
+                <h3 class="questionaddtitle" style="font-weight: bold;">&nbsp &nbsp &nbsp Edit option</h3>
             </div>
-          
-        {% endblock %}
+            <div class="questionaddform">
+                <form method="post">
+
+                    {% csrf_token%}
+
+                    <label>Select question</label>
+
+                    <select required name="question">
+                        {% for i in al %}
+                        {% ifequal i obj.question %}
+                        <option selected value="{{i.id}}">{{i}}</option>
+                        {% else %}
+                        <option value="{{i.id}}">{{i}}</option>
+                        {% endifequal %}
+
+                        {% endfor %}
+                    </select>
+
+                    <label>Enter Option</label>
+                    <input type="text" placeholder="Enter option" class="questiontitle" id="questiontitle" name="op"
+                        value="{{obj.option_title}}" required>
+
+                    <label>is Answer</label>
+                    {% if obj.is_answer %}
+                    <input type="checkbox" name="isans" value="True" checked>
+                    {% else %}
+                    <input type="checkbox" name="isans" value="True">
+                    {% endif %}
+                    <br>
+
+                    <br>
+                    <input type="submit" value="submit" />
+
+                </form>
+                </br>
+            </div>
+
+        </div>
+    </div>
+
+    {% endblock %}
