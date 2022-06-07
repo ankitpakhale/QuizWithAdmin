@@ -174,7 +174,6 @@ def edit_student(request,id):
         password=request.POST['password']
         attend=request.POST['attendance']
         cgpa=request.POST['cgpa']
-        gpa=request.POST['gpa']
         rev=request.POST['review']
         sc=request.POST['score']
 
@@ -184,7 +183,6 @@ def edit_student(request,id):
         obj.password=password
         obj.Attendance=attend
         obj.cgpa=cgpa
-        obj.gpa=gpa
         obj.review=rev
         obj.score=sc
         obj.save()
@@ -264,9 +262,8 @@ def Add_student(request):
         model.password=request.POST['password']
         model.Attendance=request.POST['attendence']
         model.cgpa=request.POST['cgpa']
-        model.gpa=request.POST['gpa']
         model.review=request.POST['review']
-        model.score=request.POST['score']
+        # model.score=request.POST['score']
         model.save()
         newly=registerform.objects.last()
         allcat=Testcategory.objects.all()
@@ -367,17 +364,17 @@ def stu_result(request):
         cgpa=int(show_data.cgpa)
         final_att = float(show_data.Attendance) * 100 / 12
         final_cgpa = float(cgpa) * 100 / 7
-        final_gpa = float(show_data.gpa) * 100 / 7
+        # final_gpa = float(show_data.gpa) * 100 / 7
         final_review = float(show_data.review) * 100 / 10
         
         all_per.append(final_att)
         all_per.append(final_cgpa)
-        all_per.append(final_gpa)
+        # all_per.append(final_gpa)
         all_per.append(final_review)
         
         labels.append('Attendance')
         labels.append('CGPA')
-        labels.append('GPA')
+        # labels.append('GPA')
         labels.append('Review Status')
 
         final_percentage = sum(all_per) / len(all_per)
