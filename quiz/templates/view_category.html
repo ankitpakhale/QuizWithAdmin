@@ -19,8 +19,11 @@
                         {% for i in obj %}
                         <tr>
                             <td>{{i}}</td>
-                            
-                            <td><a href="{% url 'editcategory' i.id %}">edit</a></td>
+                            <td>
+                                <a href="{% url 'editcategory' i.id %}"><img src="{% static 'icon/edit.png' %}" height="30px" width="30px"></a>
+                            </td>
+                                
+                            <!-- <td><a href="{% url 'editcategory' i.id %}">edit</a></td> -->
                             <!-- <td><a href="{% url 'delcategory' i.id %}">Delete</a></td> -->
                         </tr>
                         {% endfor %}

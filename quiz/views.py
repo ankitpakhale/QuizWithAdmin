@@ -20,7 +20,7 @@ def index(request):
         count=registerform.objects.all().count()
         q=question.objects.all()
         return render(request,'index.html',{'data':a,'c':count,'q':len(q),'n':n})
-    return render('sign1')
+    return redirect('sign1')
 # ------------------------------------------------------------------------------------------------
     # return render(request,'index.html')
 
@@ -41,6 +41,7 @@ def profile(request):
     return redirect('sign1')
 def add_option(request):
     q=question.objects.all()
+    msg=''
     if request.POST:
         id=request.POST['quest']
         title=request.POST['op']
@@ -55,10 +56,11 @@ def add_option(request):
             if ans:    
                 s.is_answer=True
             s.save()
-            return redirect('addoption')
+            msg='option added successfully'
+            
         except:
             pass
-    return render(request,'option.html',{'question':q})
+    return render(request,'option.html',{'question':q,'msg':msg})
 
 def view_option(request):
     obj=Option.objects.all()
@@ -78,38 +80,25 @@ def view_query(request):
 
 def question_add(request):
     al=Testcategory.objects.all()
+    msg=''
     if request.POST:
         
         category=request.POST['category']
         getquestion=request.POST['question']
-        # time=request.POST['time']
-        # option1=request.POST['option1']
-        # option2=request.POST['option2']
-        # option3=request.POST['option3']
-        # answer=request.POST['check']
-
-        # if answer=='1':
-        #     answer=option1
-        # elif answer=='2':
-        #     answer=option2    
-        # else:
-        #     answer=option3
         
         obj=Testcategory.objects.get(name=category)
             
         q=question()
         q.categoryName=obj
         q.question=getquestion
-        # q.time=time
-        # q.option1=option1
-        # q.option2=option2
-        # q.option3=option3
-        # q.correct=answer
+        
         q.save()
 
-        return redirect('index1')
+        msg='question added successfully'
 
-    return render(request,'questionadd.html',{'al':al})
+        
+
+    return render(request,'questionadd.html',{'al':al,'msg':msg})
 
 def testcategory_add(request):
     if request.POST:
@@ -175,7 +164,7 @@ def edit_student(request,id):
         attend=request.POST['attendance']
         cgpa=request.POST['cgpa']
         rev=request.POST['review']
-        sc=request.POST['score']
+        # sc=request.POST['score']
 
         obj.name=name
         obj.email=email
@@ -184,7 +173,7 @@ def edit_student(request,id):
         obj.Attendance=attend
         obj.cgpa=cgpa
         obj.review=rev
-        obj.score=sc
+        # obj.score=sc
         obj.save()
         
         return redirect('index1')
@@ -216,27 +205,12 @@ def edit_questions(request,id):
     if request.POST:
         category=request.POST['category']
         getquestion=request.POST['question']
-        # option1=request.POST['option1']
-        # option2=request.POST['option2']
-        # option3=request.POST['option3']
-        # answer=request.POST['check']
-
-        # if answer=='1':
-        #     answer=option1
-        # elif answer=='2':
-        #     answer=option2    
-        # else:
-        #     answer=option3
         
         obj1=Testcategory.objects.get(name=category)
 
         obj.categoryName=obj1
         obj.question=getquestion
-        # obj.option1=option1
-        # obj.option2=option2
-        # obj.option3=option3
-        # obj.time='00:20'
-        # obj.correct=answer
+        
         obj.save()
         return redirect('viewquestion')
 
@@ -352,8 +326,16 @@ def student_logout_view(request):
 
 
 def stu_result(request):
-    if 'enroll_no' in request.session:     
+    if 'enroll_no' in request.session:
+        
         show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
+        try:
+            c1=Testcategory.objects.all()
+            for i in c1:
+                Testappear.objects.get(t_user=show_data,t_category=i,isappear=True)
+        except:
+            msg='you have to complet all Test'
+            return render(request,'stu_result.html',{'msg':msg})
         stu_data = StudentReport.objects.filter(stu_name = show_data)
         
         labels = []

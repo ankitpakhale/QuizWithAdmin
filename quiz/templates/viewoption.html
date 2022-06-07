@@ -35,9 +35,9 @@
                             {% endif %}
                                 <td>
                                         
-
-                                <a href="{% url 'editoption' i.id %}">Edit</a>
-                                <a href="{% url 'deloption' i.id %}">Delete</a>
+                                <a href="{% url 'editoption' i.id %}"><img src="{% static 'icon/edit.png' %}" height="30px" width="30px"></a>   
+                                <!-- <a href="{% url 'editoption' i.id %}">Edit</a> -->
+                                <a style="color: red; text-decoration: none;" href="{% url 'deloption' i.id %}">Delete</a>
                                 
                             </td>
                         </tr>
