@@ -466,3 +466,4 @@ def stu_catWiseResult(request):
         return render(request,'stu_catWiseResult.html', {'all_data': all_data})
     return redirect('student_login_view')
 
+# ---------------------------THE END-------------------------------------
