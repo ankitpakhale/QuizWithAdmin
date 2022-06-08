@@ -31,13 +31,15 @@
                 </form>
                 </br>
             </div>
-            {% if msg %}
-            <script>
-                alert('{{msg}}')
-            </script>
-            {% endif %}
 
         </div>
     </div>
 
+
+    {% if msg %}
+    <script>
+        alert('{{msg}}')
+    </script>
+    {% endif %}
+    
     {% endblock %}

@@ -40,11 +40,8 @@
                     <a href="{% url 'stu_catWiseResult' %}" class="btn">View Result</a>
                     {% else %}
                     <!-- If Test is inCompleted -->
-                    <!-- <a href="{% url 'stu_allcat' %}" class="btn">Give Test</a> -->
-                    <a href="{% url 'stu_question' i.t_category.id %}" class="btn">Give Test</a>
+                    <a href="{% url 'stu_allcat' %}" class="btn">Give Test</a>
                    
-
-                    <!-- stu_question -->
                     {% endif %}
                 </td>
             </tr>

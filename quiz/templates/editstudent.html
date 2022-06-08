@@ -2,56 +2,11 @@
 {% load static %}
 {% block content %}
 
-<<<<<<< HEAD
-            <div class="viewtabledrd">
-                <div class="viewtabledrd">
-                    <div class="hed">
-                        <h3 class="dbord"> &nbsp Edit Student</h3>    
-                        <a href="{% url 'admlogout' %}" class="button logout" style="text-decoration: none;color: red;font-size: larger;">Logout</span></a>
-                    </div> 
-                <div class="card createtest">
-                    <div class="card questionadd">
-                        <h3 class="questionaddtitle" style="font-weight: bold;">&nbsp &nbsp &nbsp Question Add</h3>
-                    </div>
-                    <div class="questionaddform">
-                        <form  method="post">
-                            {% csrf_token%}
-                        
-                            <label>Student Name</label>
-                            <input type="text"  value="{{obj.name}}" placeholder="Enter name"  style="width: 500px; height: 30px;" class="questiontitle" id="questiontitle" name="name"/>
-                            <label>Student Email</label>
-                            <input type="email"   value="{{obj.email}}" placeholder="Enter email" required style="width: 500px; height: 30px;" class="questiontitle" id="questiontitle" name="email"/>
-                            <label>Student Enrollment</label>
-                            <input type="number"   value="{{obj.Enrollment_No}}" placeholder="Enter Enrollment number" required style="width: 500px; height: 30px;" class="questiontitle" id="questiontitle" name="en.no"/>
-                            <label>Student Password</label>
-                            <input type="password"  value="{{obj.password}}" placeholder="Enter password" required style="width: 500px; height: 30px;" class="questiontitle" id="questiontitle" name="password"/>
-                            <label>Student Attendance</label>
-                            <input type="number" max="12" min="0" value="{{obj.Attendance}}" placeholder="Enter Attendance"  style="width: 500px; height: 30px;" class="questiontitle" id="questiontitle" name="attendance"/>
-                            <label>Student CGPA</label>
-                            <input type="Number" max="7" min="0"  value="{{obj.cgpa}}" placeholder="Enter CGPA"  style="width: 500px; height: 30px;" class="questiontitle" id="questiontitle" name="cgpa"/>
-                            
-                            <label>Student Rating</label>
-                            <input type="number" max="10" min="0" value="{{obj.review}}" placeholder="Enter Rating" style="width: 500px; height: 30px;" class="questiontitle" id="questiontitle" name="review"/>
-                            <!-- <label>Student Score</label>
-                            <input type="number"  value="{{obj.score}}" placeholder="Enter score" required style="width: 500px; height: 30px;" class="questiontitle" id="questiontitle" name="score"/> -->
-                            
-                            
-                            <br>
-                            <br>
-                            <input type="submit" value="submit" />
-                            
-                        </form>
-                    </br>
-                    </div>
-
-                </div>
-=======
 <div class="viewtabledrd">
     <div class="viewtabledrd">
         <div class="card createtest">
             <div class="card questionadd">
                 <h3 class="questionaddtitle" style="font-weight: bold;">&nbsp &nbsp &nbsp Question Add</h3>
->>>>>>> 3d9c262261909b64b0ace546652843b61a9e1206
             </div>
             <div class="questionaddform">
                 <form method="post">

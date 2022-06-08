@@ -36,7 +36,7 @@ class Testappear(models.Model):
     # def __str__(self):
     #     return self.t_user
     
-
+# kaam ka nhi hai --> Quiz
 class Quiz123(models.Model):
     title=models.CharField(max_length=10)
     category=models.ForeignKey(Testcategory,on_delete=models.CASCADE, null=True, default="")

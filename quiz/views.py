@@ -2,7 +2,6 @@ import email
 from unicodedata import category
 from click import option
 from django.shortcuts import render,redirect
-from zmq import Message
 from .models import Answer,StudentReport ,registerform,question,Testappear,Record,AdminForm,Testcategory,Option, contactForm
 from django.http import HttpResponse
 import plotly.graph_objects as go
@@ -58,7 +57,6 @@ def add_option(request):
                 s.is_answer=True
             s.save()
             msg='option added successfully'
-            
         except:
             pass
     return render(request,'option.html',{'question':q,'msg':msg})
@@ -83,23 +81,16 @@ def question_add(request):
     al=Testcategory.objects.all()
     msg=''
     if request.POST:
-        
         category=request.POST['category']
-        getquestion=request.POST['question']
-        
+        getquestion=request.POST['question']        
         obj=Testcategory.objects.get(name=category)
-            
         q=question()
         q.categoryName=obj
         q.question=getquestion
-        
         q.save()
-
         msg='question added successfully'
-
-        
-
-    return render(request,'questionadd.html',{'al':al,'msg':msg})
+        return redirect('index1')
+    return render(request,'questionadd.html',{'al':al, 'msg':msg})
 
 def testcategory_add(request):
     if request.POST:
@@ -206,12 +197,10 @@ def edit_questions(request,id):
     if request.POST:
         category=request.POST['category']
         getquestion=request.POST['question']
-        
         obj1=Testcategory.objects.get(name=category)
 
         obj.categoryName=obj1
         obj.question=getquestion
-        
         obj.save()
         return redirect('viewquestion')
 
@@ -326,9 +315,9 @@ def student_logout_view(request):
 
 
 def stu_result(request):
-    if 'enroll_no' in request.session:
-        
+    if 'enroll_no' in request.session:     
         show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
+
         try:
             c1=Testcategory.objects.all()
             for i in c1:
@@ -336,6 +325,7 @@ def stu_result(request):
         except:
             msg='you have to complet all Test'
             return render(request,'stu_result.html',{'msg':msg})
+
         stu_data = StudentReport.objects.filter(stu_name = show_data)
         
         labels = []
@@ -450,11 +440,8 @@ def contact(request):
     return render(request,'stu_contact.html')
 
 def stu_allcat(request):
-    # if 'enroll_no' in request.session:     
     allcat = Testcategory.objects.all()
     return render(request,'stu_allcat.html', {'allcat': allcat})
-    # return render(request,'stu_allcat.html')
-    # return redirect('student_login_view')
 
 def base(request):
     return render(request,'stu_base.html')
@@ -477,7 +464,6 @@ def stu_category_calculation(request,id):
         return redirect('stu_result')    
     return redirect('student_login_view')
     
-
 def stu_catWiseResult(request):
     if 'enroll_no' in request.session:     
         show_data=registerform.objects.get(Enrollment_No = request.session['enroll_no'])

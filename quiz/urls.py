@@ -34,6 +34,8 @@ urlpatterns = [
     path('viewquery/',view_query,name='view_query'),
     path('Add_student/',Add_student,name='addstudent'),
 
+    # ##################### Ankit's Work START ###############################
+    # path('stu_signup/',student_signup_view,name='student_signup_view'),    
     path('login/',student_login_view,name='student_login_view'),
     path('stu_logout/',student_logout_view,name='student_logout_view'),
     
@@ -45,11 +47,6 @@ urlpatterns = [
     path('stu_profile/',stu_profile,name='stu_profile'),
     path('about/',about,name='about'),
     path('contact/',contact,name='contact'),
-
-    path('catWiseResult/<int:id>',stu_catWiseResult,name='stu_catWiseResult'),
-   
-
     path('catWiseResult/',stu_catWiseResult,name='stu_catWiseResult'),
     # ##################### Ankit's Work END ###############################
-
 ]

@@ -30,28 +30,31 @@
             <h3 class="questionaddtitle" style="font-weight: bold;">&nbsp &nbsp &nbsp Student Records Report</h3>
         </div>
 
+        <table>
 
-                            <tr>
-                            <th>STUDENT NAME</th>
-                            <th>Attendance</th>
-                            <th>CGPA</th>
-                            
-                            <th>Rating</th>
-                            <th>Score</th>
-                            <th>Action</th>
-                        </tr> 
-                        {% for i in data %}
-                        <tr>
-                            <td>{{ i.name }}</td>
-                            <td>{{ i.Attendance }}</td>
-                            <td>{{ i.cgpa }}</td>
-                            
-                            <td>{{ i.review }}</td>
-                            <td>{{ i.score }}</td>
-                            <td>
-                                <a href="{% url 'edit_student' i.id %}"><img src="{% static 'icon/edit.png' %}" height="30px" width="30px"></a>
-                                
-                                <a href="{% url 'delstudent' i.id %}" style="text-decoration: none;color: red;">Delete</a>
+            <tr>
+                <th>STUDENT NAME</th>
+                <th>Attendance</th>
+                <th>CGPA</th>
+
+                <th>Rating</th>
+                <th>Score</th>
+                <th>Action</th>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{ i.name }}</td>
+                <td>{{ i.Attendance }}</td>
+                <td>{{ i.cgpa }}</td>
+
+                <td>{{ i.review }}</td>
+                <td>{{ i.score }}</td>
+                <td>
+                    <a href="{% url 'edit_student' i.id %}"><img src="{% static 'icon/edit.png' %}" height="30px"
+                            width="30px"></a>
+
+                    <a href="{% url 'delstudent' i.id %}" style="text-decoration: none;color: red;">Delete</a>
+                    <!-- <img src="{% static 'icon/download.png' %}" height="30px" width="30px" style="margin:2%;" onclick="window.location.href='index.html';" > &nbsp;
                                 <img src="{% static 'icon/email.png' %}" height="30px" width="30px" style="margin:2%;" onclick="window.location.href='index.html';" > -->
                 </td>
             </tr>

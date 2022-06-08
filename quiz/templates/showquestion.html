@@ -1,39 +1,39 @@
-{% extends 'admin_base.html' %}
-{% load static %}
-{% block content %}
+    {% extends 'admin_base.html' %}
+    {% load static %}
+    {% block content %}
 
-<div class="stdreportdrd">
-    <div class="card table stdtbl">
-        <div class="card studentreport">
-            <h3 style="font-weight: bold;">&nbsp &nbsp &nbsp Questions</h3>
+    <div class="stdreportdrd">
+        <div class="card table stdtbl">
+            <div class="card studentreport">
+                <h3 style="font-weight: bold;">&nbsp &nbsp &nbsp Questions</h3>
+            </div>
+            <table>
+                <tr>
+                    <th>Category</th>
+                    <th>Question</th>
+
+                </tr>
+
+                {% for i in al %}
+                <tr>
+                    <td>{{i.categoryName}}</td>
+                    <td>{{i.question}}</td>
+
+                    <td>
+                        <a href="{% url 'editquestions' i.id %}"><img src="{% static 'icon/edit.png' %}" height="30px"
+                                width="30px"></a>
+
+                        <a href="{% url 'delquestion' i.id %}" style="text-decoration: none;color: red;">Delete</a>
+
+                    </td>
+                </tr>
+                {% endfor %}
+
+
+            </table>
+
         </div>
-        <table>
-            <tr>
-                <th>Category</th>
-                <th>Question</th>
-
-            </tr>
-
-            {% for i in al %}
-            <tr>
-                <td>{{i.categoryName}}</td>
-                <td>{{i.question}}</td>
-
-                <td>
-                    <a href="{% url 'editquestions' i.id %}"><img src="{% static 'icon/edit.png' %}" height="30px"
-                            width="30px"></a>
-
-                    <a href="{% url 'delquestion' i.id %}" style="text-decoration: none;color: red;">Delete</a>
-
-                </td>
-            </tr>
-            {% endfor %}
-
-
-        </table>
 
     </div>
 
-</div>
-
-{% endblock %}
+    {% endblock %}
