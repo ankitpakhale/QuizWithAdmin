@@ -89,7 +89,7 @@ def question_add(request):
         q.question=getquestion
         q.save()
         msg='question added successfully'
-        return redirect('index1')
+        # return redirect('quistion1')
     return render(request,'questionadd.html',{'al':al, 'msg':msg})
 
 def testcategory_add(request):
