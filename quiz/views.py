@@ -19,7 +19,8 @@ def index(request):
         # count=Record.objects.all().count()
         count=registerform.objects.all().count()
         q=question.objects.all()
-        return render(request,'index.html',{'data':a,'c':count,'q':len(q),'n':n})
+        r=StudentReport.objects.all()
+        return render(request,'index.html',{'data':a,'c':count,'q':len(q),'n':n,'r':r})
     return redirect('sign1')
 # ------------------------------------------------------------------------------------------------
     # return render(request,'index.html')
@@ -31,7 +32,6 @@ def profile(request):
             name=request.POST['name']
             email=request.POST['email']
             password=request.POST['passowrd']
-
             n.name=name
             n.email=email
             n.password=password
@@ -381,8 +381,8 @@ def stu_question(request, id):
                     main_list=[]
                     c1=question.objects.get(question=q)
                     c2=Option.objects.filter(question=c1,is_answer=True)
-                    for i in c2:
-                        main_list.append(i.option_title)
+                    for j in c2:
+                        main_list.append(j.option_title)
                     print(main_list)    
                     if ans in main_list:
                         Answer.objects.create(owner=ow,quiz1=t,question=c1,score=True)
@@ -390,8 +390,8 @@ def stu_question(request, id):
                 print('inside except')
                 change.isappear=True
                 change.save()
-                # return redirect('')
-                return redirect('stu_catWiseResult')             
+                return redirect('stucalu',id)
+                # return redirect('stu_catWiseResult')             
         # show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
         total_size = len(final_dict)
         return render(request, 'stu_question.html',{'final':final_dict, 'total_size':total_size})
@@ -455,7 +455,8 @@ def stu_category_calculation(request,id):
         final=(ans*100)/total_quest
 
         StudentReport.objects.create(stu_name=u,cat_name=c,percentage=final)
-        return redirect('stu_result')    
+        # return redirect('stu_result')
+        return redirect('stu_catWiseResult')    
     return redirect('student_login_view')
     
 def stu_catWiseResult(request):
