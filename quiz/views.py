@@ -317,7 +317,6 @@ def student_logout_view(request):
 def stu_result(request):
     if 'enroll_no' in request.session:     
         show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
-
         try:
             c1=Testcategory.objects.all()
             for i in c1:
@@ -325,36 +324,27 @@ def stu_result(request):
         except:
             msg='Please complete all the tests first'
             return render(request,'stu_result.html',{'msg':msg})
-
         stu_data = StudentReport.objects.filter(stu_name = show_data)
-        
-        print(stu_data)
         labels = []
         all_per = []
         for i in stu_data:
             all_per.append((float(i.percentage)) * 1.5)      
             labels.append(i.cat_name.name)
-
         labels.append('Attendance')
         labels.append('CGPA')
-        labels.append('Rating')
-        
+        labels.append('Rating')        
         final_cgpa = (float(int(show_data.cgpa)) * 100 / 7) * 0.50
         final_att = (float(show_data.Attendance) * 100 / 12) * 0.25
         final_rating = (float(show_data.review) * 100 / 10) * 0.75
-        
         all_per.append(final_att)
         all_per.append(final_cgpa)
-        all_per.append(final_rating)
-        
+        all_per.append(final_rating)        
         final_percentage = round((sum(all_per) / len(all_per)), 2)
         show_data.score=final_percentage
-        show_data.save()
-        
+        show_data.save()        
         values = []
         for i in all_per:
             values.append(i)
-
         fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3)])
         fig.show()
 
@@ -463,10 +453,6 @@ def stu_category_calculation(request,id):
         ans=len(s)
         total_quest=len(q)
         final=(ans*100)/total_quest
-        print(ans)
-        print(total_quest)
-        print(final)
-        print('inside stujjjjjjjjjjjjjjjjj')
 
         StudentReport.objects.create(stu_name=u,cat_name=c,percentage=final)
         return redirect('stu_result')    

@@ -214,15 +214,19 @@ input {
         top: 0;
         z-index: 100;
     }
+
     .layout .sidebar.break-point-xs.collapsed {
         left: -80px;
     }
+
     .layout .sidebar.break-point-xs.toggled {
         left: 0;
     }
+
     .layout .sidebar.break-point-xs.toggled~.overlay {
         display: block;
     }
+
     .layout .sidebar.break-point-xs~.layout .header {
         width: 100% !important;
         -webkit-transition: none;
@@ -238,15 +242,19 @@ input {
         top: 0;
         z-index: 100;
     }
+
     .layout .sidebar.break-point-sm.collapsed {
         left: -80px;
     }
+
     .layout .sidebar.break-point-sm.toggled {
         left: 0;
     }
+
     .layout .sidebar.break-point-sm.toggled~.overlay {
         display: block;
     }
+
     .layout .sidebar.break-point-sm~.layout .header {
         width: 100% !important;
         -webkit-transition: none;
@@ -262,15 +270,19 @@ input {
         top: 0;
         z-index: 100;
     }
+
     .layout .sidebar.break-point-md.collapsed {
         left: -80px;
     }
+
     .layout .sidebar.break-point-md.toggled {
         left: 0;
     }
+
     .layout .sidebar.break-point-md.toggled~.overlay {
         display: block;
     }
+
     .layout .sidebar.break-point-md~.layout .header {
         width: 100% !important;
         -webkit-transition: none;
@@ -286,15 +298,19 @@ input {
         top: 0;
         z-index: 100;
     }
+
     .layout .sidebar.break-point-lg.collapsed {
         left: -80px;
     }
+
     .layout .sidebar.break-point-lg.toggled {
         left: 0;
     }
+
     .layout .sidebar.break-point-lg.toggled~.overlay {
         display: block;
     }
+
     .layout .sidebar.break-point-lg~.layout .header {
         width: 100% !important;
         -webkit-transition: none;
@@ -310,15 +326,19 @@ input {
         top: 0;
         z-index: 100;
     }
+
     .layout .sidebar.break-point-xl.collapsed {
         left: -80px;
     }
+
     .layout .sidebar.break-point-xl.toggled {
         left: 0;
     }
+
     .layout .sidebar.break-point-xl.toggled~.overlay {
         display: block;
     }
+
     .layout .sidebar.break-point-xl~.layout .header {
         width: 100% !important;
         -webkit-transition: none;
@@ -334,15 +354,19 @@ input {
         top: 0;
         z-index: 100;
     }
+
     .layout .sidebar.break-point-xxl.collapsed {
         left: -80px;
     }
+
     .layout .sidebar.break-point-xxl.toggled {
         left: 0;
     }
+
     .layout .sidebar.break-point-xxl.toggled~.overlay {
         display: block;
     }
+
     .layout .sidebar.break-point-xxl~.layout .header {
         width: 100% !important;
         -webkit-transition: none;
@@ -455,10 +479,12 @@ input {
         left: auto;
         right: -280px;
     }
+
     .layout.rtl .sidebar.break-point-xs.collapsed {
         left: auto;
         right: -80px;
     }
+
     .layout.rtl .sidebar.break-point-xs.toggled {
         left: auto;
         right: 0;
@@ -470,10 +496,12 @@ input {
         left: auto;
         right: -280px;
     }
+
     .layout.rtl .sidebar.break-point-sm.collapsed {
         left: auto;
         right: -80px;
     }
+
     .layout.rtl .sidebar.break-point-sm.toggled {
         left: auto;
         right: 0;
@@ -485,10 +513,12 @@ input {
         left: auto;
         right: -280px;
     }
+
     .layout.rtl .sidebar.break-point-md.collapsed {
         left: auto;
         right: -80px;
     }
+
     .layout.rtl .sidebar.break-point-md.toggled {
         left: auto;
         right: 0;
@@ -500,10 +530,12 @@ input {
         left: auto;
         right: -280px;
     }
+
     .layout.rtl .sidebar.break-point-lg.collapsed {
         left: auto;
         right: -80px;
     }
+
     .layout.rtl .sidebar.break-point-lg.toggled {
         left: auto;
         right: 0;
@@ -515,10 +547,12 @@ input {
         left: auto;
         right: -280px;
     }
+
     .layout.rtl .sidebar.break-point-xl.collapsed {
         left: auto;
         right: -80px;
     }
+
     .layout.rtl .sidebar.break-point-xl.toggled {
         left: auto;
         right: 0;
@@ -530,10 +564,12 @@ input {
         left: auto;
         right: -280px;
     }
+
     .layout.rtl .sidebar.break-point-xxl.collapsed {
         left: auto;
         right: -80px;
     }
+
     .layout.rtl .sidebar.break-point-xxl.toggled {
         left: auto;
         right: 0;
@@ -806,6 +842,7 @@ input.radio:focus~label:before {
 /* form question end*/
 
 @keyframes swing {
+
     0%,
     30%,
     50%,
@@ -813,15 +850,19 @@ input.radio:focus~label:before {
     100% {
         transform: rotate(0deg);
     }
+
     10% {
         transform: rotate(10deg);
     }
+
     40% {
         transform: rotate(-10deg);
     }
+
     60% {
         transform: rotate(5deg);
     }
+
     80% {
         transform: rotate(-5deg);
     }
@@ -1031,21 +1072,48 @@ input.radio:focus~label:before {
 }
 
 /* ------------------------------All category Start-------------------------------------- */
-.allcat_row{
+.stu_row {
     display: flex;
+    flex-direction: row !important;
+    /* border: 2px solid #0000ff; */
+    justify-content: center;
+}
+
+.allcat_row {
+    display: flex;
+    justify-content: space-between;
     /* border: 2px solid #ff00ff; */
-    padding: 30px 0 30px 50px;
-    margin: 40px 0 40px 0;
+    padding: 30px;
+    margin: 20px;
     /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
 }
+
+.allcat_row1 {
+    /* border: 2px solid #ff00ff; */
+    padding: 30px;
+    text-align: justify;
+    margin: 20px;
+    width: 33%;
+    /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 /* ------------------------------All category End-------------------------------------- */
 /* ------------------------------All Ques Start-------------------------------------- */
-.stu_ques_row{
+.stu_ques_row {
     padding: 30px 0 30px 50px;
     margin: 30px 0 30px 0;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
 }
+
 /* ------------------------------All Ques End-------------------------------------- */
+
+/* ----------------------other------------------------ */
+.special {
+    font-size: 30px;
+    background: -webkit-linear-gradient(rgba(255, 165, 0, 1), rgb(230, 0, 230) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
