@@ -323,32 +323,30 @@ def stu_result(request):
             for i in c1:
                 Testappear.objects.get(t_user=show_data,t_category=i,isappear=True)
         except:
-            msg='you have to complet all Test'
+            msg='Please complete all the tests first'
             return render(request,'stu_result.html',{'msg':msg})
 
         stu_data = StudentReport.objects.filter(stu_name = show_data)
         
+        print(stu_data)
         labels = []
         all_per = []
         for i in stu_data:
-            all_per.append((float(i.percentage)) * 1.5)            
+            all_per.append((float(i.percentage)) * 1.5)      
             labels.append(i.cat_name.name)
 
+        labels.append('Attendance')
+        labels.append('CGPA')
+        labels.append('Rating')
+        
         final_cgpa = (float(int(show_data.cgpa)) * 100 / 7) * 0.50
         final_att = (float(show_data.Attendance) * 100 / 12) * 0.25
-        final_rating = (float(show_data.review) * 100 / 10) * 0.25
-        # final_gpa = float(show_data.gpa) * 100 / 7
+        final_rating = (float(show_data.review) * 100 / 10) * 0.75
         
         all_per.append(final_att)
         all_per.append(final_cgpa)
         all_per.append(final_rating)
-        # all_per.append(final_gpa)
         
-        labels.append('Attendance')
-        labels.append('CGPA')
-        labels.append('Review Status')
-        # labels.append('GPA')
-
         final_percentage = round((sum(all_per) / len(all_per)), 2)
         show_data.score=final_percentage
         show_data.save()
@@ -360,7 +358,17 @@ def stu_result(request):
         fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3)])
         fig.show()
 
-        return render(request, 'stu_result.html', {'final_percentage': final_percentage})   
+        # all_data = StudentReport.objects.filter(stu_name = show_data)
+        # print(all_data)
+
+        res = {}
+        for key in labels:
+            for value in values:
+                res[key] = round(value, 2)
+                values.remove(value)
+                break
+        
+        return render(request, 'stu_result.html', {'final_percentage': final_percentage, 'res': res})   
     return redirect('student_login_view')
 
 def stu_question(request, id):

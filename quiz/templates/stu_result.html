@@ -2,12 +2,26 @@
 {% load static %}
 {% block content %}
 
+<div class="table-div">
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>Test Name</th>
+                <th>Percentage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for l, v in res.items %}
+            <tr>
+                <td>{{l}}</td>
+                <td>{{v}}%</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 <div>
     <h3>Your Overall Result is {{ final_percentage }}</h3>
-    <p>
-    </p>
-</div>
-<div class="test-result">
-    <!-- <canvas id="myChart" style="width:100%;max-width:700px"></canvas> -->
 </div>
 {% endblock %}
