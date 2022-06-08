@@ -1,13 +1,13 @@
 {% extends 'admin_base.html' %}
 {% load static %}
 {% block content %}
-
+<div class="bgimg">
 <div class="stdreportdrd">
     <div class="dashboard">
 
 
-        <div class="card table stdtbl">
-            <div class="card studentreport">
+        <div class="card table viewoptiontbl">
+            <div class="card viewoption">
                 <h3 style="font-weight: bold;">&nbsp &nbsp &nbsp Studen answer wise Report</h3>
             </div>
             <table>
@@ -28,11 +28,14 @@
                     {% else%}
                     <td style="color: red;">Incorrect</td>
                     {% endif %}
-                    <td>
+                    <!-- <td>
+                        <a href="{% url 'editquestions' i.id %}"><img src="{% static 'icon/edit.png' %}" height="30px"
+                            width="30px"></a>
+                         <a href="{% url 'delquestion' i.id %}"><img src="{% static 'icon/delete.png' %}" height="30px"
+                        width="30px"></a> -->
 
-
-                        <a href="{% url 'editoption' i.id %}">Edit</a>
-                        <a href="{% url 'deloption' i.id %}">Delete</a>
+                        <!-- <a href="{% url 'editoption' i.id %}">Edit</a>
+                        <a href="{% url 'deloption' i.id %}">Delete</a> -->
 
                     </td>
                 </tr>
@@ -42,6 +45,6 @@
             </table>
 
         </div>
-
+    </div>
 
         {% endblock %}

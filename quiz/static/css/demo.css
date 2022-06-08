@@ -138,11 +138,11 @@ button {
 }
 
 .active {
-  background-color: #b9c0b9;
+  background-color: rgba(255, 165, 0, 1);
 }
 
 .button1:hover {
-  background-color: #b9c0b9;
+  background-color: rgba(255, 165, 0, 1);
   color: black;
 }
 
@@ -164,6 +164,38 @@ img {
 }
 
 .stdtbl {
+  position: relative;
+}
+
+/* question*/
+
+.question {
+  position: absolute;
+  left: 3%;
+  bottom: 99%;
+  height: 60px;
+  width: 94%;
+  background: linear-gradient(90deg, rgba(255, 165, 0, 1) 0%, rgb(230, 0, 230) 100%);
+  color: rgba(0, 0, 0, 0.934);
+}
+
+.questiontbl {
+  position: relative;
+}
+
+/* view option */
+
+.viewoption{
+  position: absolute;
+  left: 3%;
+  bottom: 100%;
+  height: 60px;
+  width: 94%;
+  background: linear-gradient(90deg, rgba(255, 165, 0, 1) 0%, rgb(230, 0, 230) 100%);
+  color: rgba(0, 0, 0, 0.934);
+}
+
+.viewoptiontbl {
   position: relative;
 }
 
@@ -346,4 +378,33 @@ input[type="button"] {
   text-align: center;
   margin: 20px auto;
   font-family: 'Courier New', Courier, monospace;
+}
+.sidebar {
+  color: #b3b8d4;
+  overflow-x: hidden !important;
+  position: relative;
+  background-color: #0c1e35;
+}
+
+.sidebar .image-wrapper {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0.02;
+  z-index: 1;
+  display: none;
+}
+
+.sidebar .image-wrapper>img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.sidebar.has-bg-image .image-wrapper {
+  display: block;
 }
