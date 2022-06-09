@@ -246,9 +246,13 @@ def LoginUserView(request):
                 request.session['email'] = model.email
                 return redirect('index1')
             else:
-                return HttpResponse("<a href = ''>Incorrect details</a>")
+                msg = "Enter valid password"
+                print(msg)
+                return render(request,'sign.html', {'msg': msg})
         except:
-            return HttpResponse("<a href = ''>Incorrect details</a>")
+            msg = "Admin Does not exists"
+            print(msg)
+            return render(request,'sign.html', {'msg': msg})
     return render(request,'sign.html')
 
 def student_signup_view(request):
@@ -291,7 +295,9 @@ def student_login_view(request):
         enroll_no = request.POST['enroll_no']
         password = request.POST['password']
         try:
+            print('get_enroll')
             get_enroll = registerform.objects.get(Enrollment_No=enroll_no)
+            print(get_enroll)
             if get_enroll.password == password:
                 request.session['enroll_no'] = enroll_no
                 msg = "Student Successfully logged in"

@@ -33,12 +33,8 @@ urlpatterns = [
     path('correct_answer/',correct_answer,name='correct_answer'),
     path('viewquery/',view_query,name='view_query'),
     path('Add_student/',Add_student,name='addstudent'),
-
-    # ##################### Ankit's Work START ###############################
-    # path('stu_signup/',student_signup_view,name='student_signup_view'),    
     path('login/',student_login_view,name='student_login_view'),
     path('stu_logout/',student_logout_view,name='student_logout_view'),
-    
     path('stu_index/',student_dashboard,name='stu_index'),
     path('stu_result/',stu_result,name='stu_result'),
     path('',stu_allcat,name='stu_allcat'),
@@ -48,5 +44,4 @@ urlpatterns = [
     path('about/',about,name='about'),
     path('contact/',contact,name='contact'),
     path('catWiseResult/',stu_catWiseResult,name='stu_catWiseResult'),
-    # ##################### Ankit's Work END ###############################
 ]
