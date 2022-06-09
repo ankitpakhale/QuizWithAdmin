@@ -38,11 +38,7 @@ class Testappear(models.Model):
     t_user=models.ForeignKey(registerform,on_delete=models.CASCADE, null=True,)
     isappear=models.BooleanField(default=False)
     dat=models.DateField(auto_now_add=True)
-
-    # def __str__(self):
-    #     return self.t_user
     
-# kaam ka nhi hai --> Quiz
 class Quiz123(models.Model):
     title=models.CharField(max_length=10)
     category=models.ForeignKey(Testcategory,on_delete=models.CASCADE, null=True, default="")
@@ -65,7 +61,6 @@ class Answer(models.Model):
     def __str__(self):
         return str(self.question)
 
-# kaam ka nhi hai --> Records
 class Record(models.Model):
     student=models.ForeignKey(registerform,on_delete=models.CASCADE,null=True,default="")
 

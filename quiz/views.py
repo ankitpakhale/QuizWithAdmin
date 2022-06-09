@@ -14,16 +14,12 @@ def index(request):
     if 'email' in request.session:
         print(request.session['email'])        
         n=AdminForm.objects.get(email=request.session['email'])        
-    # a=Record.objects.all()
         a=registerform.objects.all()
-        # count=Record.objects.all().count()
         count=registerform.objects.all().count()
         q=question.objects.all()
         r=StudentReport.objects.all()
         return render(request,'index.html',{'data':a,'c':count,'q':len(q),'n':n,'r':r})
     return redirect('sign1')
-# ------------------------------------------------------------------------------------------------
-    # return render(request,'index.html')
 
 def profile(request):
     if 'email' in request.session:
@@ -117,7 +113,6 @@ def delete_student(request,id):
 
 def logout(request):
     if 'email' in request.session:
-        # n=AdminForm.objects.get(email=request.session['email'])  
         del request.session['email']  
     return redirect('sign1')
 
@@ -156,7 +151,6 @@ def edit_student(request,id):
         attend=request.POST['attendance']
         cgpa=request.POST['cgpa']
         rev=request.POST['review']
-        # sc=request.POST['score']
 
         obj.name=name
         obj.email=email
@@ -165,7 +159,6 @@ def edit_student(request,id):
         obj.Attendance=attend
         obj.cgpa=cgpa
         obj.review=rev
-        # obj.score=sc
         obj.save()
         
         return redirect('index1')
@@ -227,7 +220,6 @@ def Add_student(request):
         model.Attendance=request.POST['attendence']
         model.cgpa=request.POST['cgpa']
         model.review=request.POST['review']
-        # model.score=request.POST['score']
         model.save()
         newly=registerform.objects.last()
         allcat=Testcategory.objects.all()
@@ -278,7 +270,6 @@ def student_signup_view(request):
                     password = password
                 )
                 db.save()
-                # msg = "Signup successfully done"
                 msg = f"Your Enrollment no is this, {new_enroll_no}"
                 print(msg)
                 return render(request,'student_signup.html', {'msg': msg})
@@ -295,9 +286,7 @@ def student_login_view(request):
         enroll_no = request.POST['enroll_no']
         password = request.POST['password']
         try:
-            print('get_enroll')
             get_enroll = registerform.objects.get(Enrollment_No=enroll_no)
-            print(get_enroll)
             if get_enroll.password == password:
                 request.session['enroll_no'] = enroll_no
                 msg = "Student Successfully logged in"
@@ -353,10 +342,6 @@ def stu_result(request):
             values.append(i)
         fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3)])
         fig.show()
-
-        # all_data = StudentReport.objects.filter(stu_name = show_data)
-        # print(all_data)
-
         res = {}
         for key in labels:
             for value in values:
@@ -397,13 +382,8 @@ def stu_question(request, id):
                 change.isappear=True
                 change.save()
                 return redirect('stucalu',id)
-                # return redirect('stu_catWiseResult')             
-        # show_data = registerform.objects.get(Enrollment_No = request.session['enroll_no'])
         total_size = len(final_dict)
         return render(request, 'stu_question.html',{'final':final_dict, 'total_size':total_size})
-        # print("Inside particular ID", id)
-        # return render(request, 'stu_question.html')
-    # else:
     return redirect('student_login_view')
 
 def stu_profile(request):
@@ -459,9 +439,7 @@ def stu_category_calculation(request,id):
         ans=len(s)
         total_quest=len(q)
         final=(ans*100)/total_quest
-
         StudentReport.objects.create(stu_name=u,cat_name=c,percentage=final)
-        # return redirect('stu_result')
         return redirect('stu_catWiseResult')    
     return redirect('student_login_view')
     

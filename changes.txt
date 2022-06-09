@@ -1,5 +1,0 @@
-gpa --> cat %
-remove test cat
-remove del cat
-edit symbol in view cat
-add question redirect on same page

@@ -80,11 +80,12 @@ input {
 .form input[type="email"],
 .form input[type="password"],
 .form input[type="text"],
-.form input[type="number"],
-.form input[type="submit"] {
+.form input[type="number"]{
     width: 100%;
 }
-
+.form input[type="submit"] {
+    width: 30%;
+}
 .form-login label,
 .form-login input[type="number"],
 .form-login input[type="password"],
@@ -205,7 +206,12 @@ input {
     width: 80px;
     min-width: 80px;
 }
-
+/* footer {
+    clear: both;
+    position: relative;
+    height: 10%;
+    margin-top: -1px;
+} */
 @media (max-width: 480px) {
     .layout .sidebar.break-point-xs {
         position: fixed;
@@ -596,7 +602,7 @@ input {
 .layout .footer {
     text-align: center;
     margin-top: auto;
-    margin-bottom: 20px;
+    margin-bottom: 1px;
     padding: 20px;
 }
 
@@ -1090,11 +1096,13 @@ input.radio:focus~label:before {
 }
 
 .allcat_row1 {
+    background-color: rgb(247, 183, 158);
     /* border: 2px solid #ff00ff; */
     padding: 30px;
     text-align: justify;
     margin: 20px;
     width: 33%;
+    font-weight: 500;
     /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
