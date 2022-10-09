@@ -202,6 +202,33 @@ def view_category(request):
         return render(request,'view_category.html',{'obj':obj})        
     return redirect('sign1')
 
+def add_category(request):
+    if 'email' in request.session:
+        if request.POST:
+            name=request.POST['name']
+            q=Testcategory()
+            q.name=name
+            q.save()
+            return redirect('viewcategory')
+        return render(request,'categoryadd.html')   
+    return redirect('sign1')
+
+def category_report(request):
+    if 'email' in request.session:
+        cat=Testcategory.objects.all()
+        data=''
+        if request.POST:
+            category=request.POST['category']
+            type=request.POST['type']
+            obj=Testcategory.objects.get(name=category)
+            data=StudentReport.objects.filter(cat_name=obj,percentage__range=(50.0,100.0))
+            if type=='below':
+                data=StudentReport.objects.filter(cat_name=obj,percentage__range=(0.0,50.0))
+            
+        return render(request,'CategoryWiseReport.html',{'cat':cat,'data':data})   
+    return redirect('sign1')
+    
+
 def delete_question(request,id):
     if 'email' in request.session:
         obj=question.objects.get(id=id)
