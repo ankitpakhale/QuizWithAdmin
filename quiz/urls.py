@@ -6,7 +6,7 @@ from.views import index,logout,edit_student,view_option,delete_option,edit_optio
 
 from.views import index,profile,view_option,delete_student,edit_option,correct_answer,delete_testcategory,delete_question,add_option,show_question,edit_testcategory,view_category,edit_questions,create_test,question_add,LoginUserView,student_report,view_test,Add_student,testcategory_add, student_signup_view, student_login_view, student_dashboard
 
-from.views import index,view_option,stu_category_calculation,edit_option,correct_answer,delete_testcategory,delete_question,add_option,show_question,edit_testcategory,view_category,edit_questions,create_test,question_add,LoginUserView,student_report,view_test,Add_student,testcategory_add, student_signup_view, student_login_view, stu_result, stu_question, student_logout_view, stu_profile, edit_student, delete_option, about, contact, stu_allcat, stu_catWiseResult, view_query
+from.views import category_report,add_category,index,view_option,stu_category_calculation,edit_option,correct_answer,delete_testcategory,delete_question,add_option,show_question,edit_testcategory,view_category,edit_questions,create_test,question_add,LoginUserView,student_report,view_test,Add_student,testcategory_add, student_signup_view, student_login_view, stu_result, stu_question, student_logout_view, stu_profile, edit_student, delete_option, about, contact, stu_allcat, stu_catWiseResult, view_query
 
 urlpatterns = [
     path('index/',index,name='index1'),
@@ -15,6 +15,8 @@ urlpatterns = [
     path('questionadd/',question_add,name='quistion1'),
     path('admin_login/',LoginUserView,name='sign1'),
     path('studentreport/',student_report,name='studentreport1'),
+    path('category_wisereport/',category_report,name='category_wisereport'),
+
     path('viewtest/',view_test,name='viewtest'),
     path('adminprofile/',profile,name='adprofile'),
     path('editquestions/<int:id>',edit_questions,name='editquestions'),
@@ -27,6 +29,7 @@ urlpatterns = [
     path('delete_option/<int:id>',delete_option,name='deloption'),
     path('viewquestion/',show_question,name='viewquestion'),
     path('viewcategory/',view_category,name='viewcategory'),
+    path('add_category/',add_category,name='add_category'),
     path('viewoption/',view_option,name='viewoption'),
     path('addcategory/',testcategory_add,name='addcategory'),
     path('addoption/',add_option,name='addoption'),

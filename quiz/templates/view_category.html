@@ -4,11 +4,12 @@
 
 
             <div class="viewtabledrd">
-                <div class="hed">
+                <div style="width:200px;">
+                    <a class="button button1 " href={% url 'add_category' %}><img
+                        src="{% static 'icon/create.png' %}" height="20px" width="20px">Add category</a>
+                </div>
+                <div class="card table viewtbtn">
                     
-                </div> 
-               
-                <div class="card table viewtbl">
                     <div class="card viewtest">
                         <h3 class="tableheading" style="font-weight: bold;">&nbsp &nbsp &nbsp View Test category</h3>
                     </div>
@@ -29,5 +30,6 @@
                         {% endfor %}
                         
                     </table>
-
+            </div>
+            </div>
 {% endblock %}

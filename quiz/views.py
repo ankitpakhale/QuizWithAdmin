@@ -1,6 +1,11 @@
+import email
+from unicodedata import category
+from click import option
 from django.shortcuts import render,redirect
 from .models import Answer,StudentReport ,registerform,question,Testappear,Record,AdminForm,Testcategory,Option, contactForm
+from django.http import HttpResponse
 # import plotly.graph_objects as go
+from io import BytesIO
 # import plotly.express as px
 
 
@@ -31,199 +36,260 @@ def profile(request):
         return render(request,'adminprofile.html',{'n':n})    
     return redirect('sign1')
 def add_option(request):
-    q=question.objects.all()
-    msg=''
-    if request.POST:
-        id=request.POST['quest']
-        title=request.POST['op']
-        try:
-            ans=request.POST.get('isans')
-            print(id)
-            obj=question.objects.get(id=id)
-            print(obj)
-            s=Option()
-            s.question=obj
-            s.option_title=title
-            if ans:    
-                s.is_answer=True
-            s.save()
-            msg='option added successfully'
-        except:
-            pass
-    return render(request,'option.html',{'question':q,'msg':msg})
+    if 'email' in request.session:
+            
+        q=question.objects.all()
+        msg=''
+        if request.POST:
+            id=request.POST['quest']
+            title=request.POST['op']
+            try:
+                ans=request.POST.get('isans')
+                print(id)
+                obj=question.objects.get(id=id)
+                print(obj)
+                s=Option()
+                s.question=obj
+                s.option_title=title
+                if ans:    
+                    s.is_answer=True
+                s.save()
+                msg='option added successfully'
+            except:
+                pass
+        return render(request,'option.html',{'question':q,'msg':msg})
+    return redirect('sign1')
 
 def view_option(request):
-    obj=Option.objects.all()
-    return render(request,'viewoption.html',{'obj':obj})
-
+    if 'email' in request.session:
+        obj=Option.objects.all()
+        return render(request,'viewoption.html',{'obj':obj})
+    return redirect('sign1')
 
 def create_test(request):
-    return render(request,'createtest.html')
-
+    if 'email' in request.session:
+        return render(request,'createtest.html')
+    return redirect('sign1')
 def correct_answer(request):
-    ans=Answer.objects.all()
-    return render(request,'viewanswer.html',{'ans':ans})
-
+    if 'email' in request.session:
+        ans=Answer.objects.all()
+        return render(request,'viewanswer.html',{'ans':ans})
+    return redirect('sign1')
 def view_query(request):
-    c_form=contactForm.objects.all()
-    return render(request,'view_query.html',{'c_form':c_form})
+    if 'email' in request.session:
+        c_form=contactForm.objects.all()
+        return render(request,'view_query.html',{'c_form':c_form})
+    return redirect('sign1')
 
 def question_add(request):
-    al=Testcategory.objects.all()
-    msg=''
-    if request.POST:
-        category=request.POST['category']
-        getquestion=request.POST['question']        
-        obj=Testcategory.objects.get(name=category)
-        q=question()
-        q.categoryName=obj
-        q.question=getquestion
-        q.save()
-        msg='question added successfully'
-        # return redirect('quistion1')
-    return render(request,'questionadd.html',{'al':al, 'msg':msg})
-
-def testcategory_add(request):
-    if request.POST:
-        name=request.POST['name']
-        q=Testcategory()
-        q.name=name
-        q.save()
-        newly=Testcategory.objects.last()
-        allstudent=registerform.objects.all()
-        for i in allstudent:
-            Testappear.objects.create(t_category=newly,t_user=i,isappear=False)
-        return redirect('index1')
-    return render(request,'category.html')   
- 
-def delete_testcategory(request,id):
-    obj=Testcategory.objects.get(id=id)  
-    obj.delete()  
-    return redirect('viewcategory')
-
-def delete_student(request,id):
-    obj=registerform.objects.get(id=id)  
-    obj.delete()  
-    return redirect('index1')
-
-def logout(request):
     if 'email' in request.session:
-        del request.session['email']  
+            
+        al=Testcategory.objects.all()
+        msg=''
+        if request.POST:
+            category=request.POST['category']
+            getquestion=request.POST['question']        
+            obj=Testcategory.objects.get(name=category)
+            q=question()
+            q.categoryName=obj
+            q.question=getquestion
+            q.save()
+            msg='question added successfully'
+            # return redirect('quistion1')
+        return render(request,'questionadd.html',{'al':al, 'msg':msg})
+    return redirect('sign1')
+def testcategory_add(request):
+    if 'email' in request.session:
+        if request.POST:
+            name=request.POST['name']
+            q=Testcategory()
+            q.name=name
+            q.save()
+            newly=Testcategory.objects.last()
+            allstudent=registerform.objects.all()
+            for i in allstudent:
+                Testappear.objects.create(t_category=newly,t_user=i,isappear=False)
+            return redirect('index1')
+        return render(request,'category.html')   
+    return redirect('sign1')
+
+def delete_testcategory(request,id):
+    if 'email' in request.session:
+        obj=Testcategory.objects.get(id=id)  
+        obj.delete()  
+        return redirect('viewcategory')
+    return redirect('sign1')
+def delete_student(request,id):
+    if 'email' in request.session:
+        obj=registerform.objects.get(id=id)  
+        obj.delete()  
+        return redirect('index1')
+    return redirect('sign1')
+def logout(request):
+    del request.session['email']
+    print('inside logout')  
+    
     return redirect('sign1')
 
 def delete_option(request,id):
-    obj=Option.objects.get(id=id)  
-    obj.delete()  
-    return redirect('viewoption')
+    if 'email' in request.session:
+        obj=Option.objects.get(id=id)  
+        obj.delete()  
+        return redirect('viewoption')
+    return redirect('sign1')
 
 def edit_option(request,id):
-    obj=Option.objects.get(id=id)
-    al=question.objects.all()    
-    if request.POST:
-        q=request.POST['question']
-        print(q,'ggggggggggggg')
-        q=question.objects.get(id=q)
-        o=request.POST['op']
-        a=request.POST.get('isans')
+    if 'email' in request.session:
+        obj=Option.objects.get(id=id)
+        al=question.objects.all()    
+        if request.POST:
+            q=request.POST['question']
+            print(q,'ggggggggggggg')
+            q=question.objects.get(id=q)
+            o=request.POST['op']
+            a=request.POST.get('isans')
 
-        obj.question=q
-        obj.option_title=o
-        if a:
-            obj.is_answer=True
-        else:
-            obj.is_answer=False    
-        obj.save()
-        return redirect('viewoption')
-    return render(request,'edit_option.html',{'obj':obj,'al':al})        
+            obj.question=q
+            obj.option_title=o
+            if a:
+                obj.is_answer=True
+            else:
+                obj.is_answer=False    
+            obj.save()
+            return redirect('viewoption')
+        return render(request,'edit_option.html',{'obj':obj,'al':al})        
+    return redirect('sign1')
 
 def edit_student(request,id):
-    obj=registerform.objects.get(id=id)    
-    if request.POST:
-        name=request.POST['name']
-        email=request.POST['email']
-        en=request.POST['en.no']
-        password=request.POST['password']
-        attend=request.POST['attendance']
-        cgpa=request.POST['cgpa']
-        rev=request.POST['review']
+    if 'email' in request.session:
+        obj=registerform.objects.get(id=id)    
+        if request.POST:
+            name=request.POST['name']
+            email=request.POST['email']
+            en=request.POST['en.no']
+            password=request.POST['password']
+            attend=request.POST['attendance']
+            cgpa=request.POST['cgpa']
+            rev=request.POST['review']
 
-        obj.name=name
-        obj.email=email
-        obj.Enrollment_No=en
-        obj.password=password
-        obj.Attendance=attend
-        obj.cgpa=cgpa
-        obj.review=rev
-        obj.save()
-        
-        return redirect('index1')
-    return render(request,'editstudent.html',{'obj':obj})        
-
+            obj.name=name
+            obj.email=email
+            obj.Enrollment_No=en
+            obj.password=password
+            obj.Attendance=attend
+            obj.cgpa=cgpa
+            obj.review=rev
+            obj.save()
+            
+            return redirect('index1')
+        return render(request,'editstudent.html',{'obj':obj})        
+    return redirect('sign1')
 
 def edit_testcategory(request,id):
-    obj=Testcategory.objects.get(id=id)    
-    if request.POST:
-        name=request.POST['name']
-        obj.name=name
-        obj.save()
-        return redirect('viewcategory')
-    return render(request,'edit_category.html',{'obj':obj})        
+    if 'email' in request.session:
+        obj=Testcategory.objects.get(id=id)    
+        if request.POST:
+            name=request.POST['name']
+            obj.name=name
+            obj.save()
+            return redirect('viewcategory')
+        return render(request,'edit_category.html',{'obj':obj})        
+    return redirect('sign1')
 
 def view_category(request):
-    obj=Testcategory.objects.all()    
-    return render(request,'view_category.html',{'obj':obj})        
+    if 'email' in request.session:
+        obj=Testcategory.objects.all()    
+        return render(request,'view_category.html',{'obj':obj})        
+    return redirect('sign1')
+
+def add_category(request):
+    if 'email' in request.session:
+        if request.POST:
+            name=request.POST['name']
+            q=Testcategory()
+            q.name=name
+            q.save()
+            return redirect('viewcategory')
+        return render(request,'categoryadd.html')   
+    return redirect('sign1')
+
+def category_report(request):
+    if 'email' in request.session:
+        cat=Testcategory.objects.all()
+        data=''
+        if request.POST:
+            category=request.POST['category']
+            type=request.POST['type']
+            obj=Testcategory.objects.get(name=category)
+            data=StudentReport.objects.filter(cat_name=obj,percentage__range=(50.0,100.0))
+            if type=='below':
+                data=StudentReport.objects.filter(cat_name=obj,percentage__range=(0.0,50.0))
+            
+        return render(request,'CategoryWiseReport.html',{'cat':cat,'data':data})   
+    return redirect('sign1')
+    
 
 def delete_question(request,id):
-    obj=question.objects.get(id=id)
-    obj.delete()
-    return redirect('viewquestion')
+    if 'email' in request.session:
+        obj=question.objects.get(id=id)
+        obj.delete()
+        return redirect('viewquestion')
+    return redirect('sign1')
 
 def edit_questions(request,id):
-    obj=question.objects.get(id=id)
-    name1=str(obj.categoryName)
-    al=Testcategory.objects.all()
-    if request.POST:
-        category=request.POST['category']
-        getquestion=request.POST['question']
-        obj1=Testcategory.objects.get(name=category)
+    if 'email' in request.session:
+        obj=question.objects.get(id=id)
+        name1=str(obj.categoryName)
+        al=Testcategory.objects.all()
+        if request.POST:
+            category=request.POST['category']
+            getquestion=request.POST['question']
+            obj1=Testcategory.objects.get(name=category)
 
-        obj.categoryName=obj1
-        obj.question=getquestion
-        obj.save()
-        return redirect('viewquestion')
+            obj.categoryName=obj1
+            obj.question=getquestion
+            obj.save()
+            return redirect('viewquestion')
 
-    return render(request,'editquestion.html',{'obj':obj,'al':al,'name1':name1})    
+        return render(request,'editquestion.html',{'obj':obj,'al':al,'name1':name1})    
 
-
+    return redirect('sign1')
 def student_report(request):
-    return render(request,'studentreport.html')
+    
+    if 'email' in request.session:
+        return render(request,'studentreport.html')
+    return redirect('sign1')
 
 def show_question(request):
-    al=question.objects.all()
-    return render(request,'showquestion.html',{'al':al})
+    if 'email' in request.session:
+        al=question.objects.all()
+        return render(request,'showquestion.html',{'al':al})
+    return redirect('sign1')
 
 def view_test(request):
-    return render(request,'viewtest.html')
-
+    if 'email' in request.session:
+        return render(request,'viewtest.html')
+    return redirect('sign1')
 def Add_student(request):
-    if request.method=="POST":
-        model=registerform()
-        model.name=request.POST['name']
-        model.email=request.POST['email']
-        model.Enrollment_No=request.POST['enrollment']
-        model.password=request.POST['password']
-        model.Attendance=request.POST['attendence']
-        model.cgpa=request.POST['cgpa']
-        model.review=request.POST['review']
-        model.save()
-        newly=registerform.objects.last()
-        allcat=Testcategory.objects.all()
-        for i in allcat:
-            Testappear.objects.create(t_category=i,t_user=newly,isappear=False)
-        s='student saved successfully'
-        return render(request,'Add_student.html',{'s':s})
-    return render(request,'Add_student.html')
-
+    if 'email' in request.session:
+        if request.method=="POST":
+            model=registerform()
+            model.name=request.POST['name']
+            model.email=request.POST['email']
+            model.Enrollment_No=request.POST['enrollment']
+            model.password=request.POST['password']
+            model.Attendance=request.POST['attendence']
+            model.cgpa=request.POST['cgpa']
+            model.review=request.POST['review']
+            model.save()
+            newly=registerform.objects.last()
+            allcat=Testcategory.objects.all()
+            for i in allcat:
+                Testappear.objects.create(t_category=i,t_user=newly,isappear=False)
+            s='student saved successfully'
+            return render(request,'Add_student.html',{'s':s})
+        return render(request,'Add_student.html')
+    return redirect('sign1')
 def LoginUserView(request):
     if request.POST:
         try:
@@ -352,7 +418,7 @@ def stu_question(request, id):
         t=Testcategory.objects.get(id=id)
         ow=registerform.objects.get(Enrollment_No=request.session['enroll_no'])
         try:
-            Testappear.objects.get(t_user=ow,t_category=t,isappear=True)
+            check=Testappear.objects.get(t_user=ow,t_category=t,isappear=True)
             return redirect('stu_allcat')
         except:
             final_dict={}
