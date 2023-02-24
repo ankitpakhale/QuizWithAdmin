@@ -470,41 +470,82 @@ def stu_result(request):
     return redirect('student_login_view')
 
 
-def stu_question(request, id):
+# def stu_question(request, id):
+#     if 'enroll_no' in request.session:
+#         t = Testcategory.objects.get(id=id)
+#         ow = registerform.objects.get(
+#             Enrollment_No=request.session['enroll_no'])
+#         try:
+#             check = Testappear.objects.get(
+#                 t_user=ow, t_category=t, isappear=True)
+#             return redirect('stu_allcat')
+#         except:
+#             final_dict = {}
+#             obj = question.objects.filter(categoryName_id=id)
+#             for i in obj:
+#                 o = Option.objects.filter(question=i)
+#                 final_dict[i] = o
+#             if request.POST:
+#                 for i in range(1, len(obj)+1):
+#                     q = request.POST['question'+str(i)]
+#                     ans = request.POST[str(i)]
+#                     main_list = []
+#                     c1 = question.objects.get(question=q)
+#                     c2 = Option.objects.filter(question=c1, is_answer=True)
+#                     for j in c2:
+#                         main_list.append(j.option_title)
+#                     print(main_list)
+#                     if ans in main_list:
+#                         Answer.objects.create(
+#                             owner=ow, quiz1=t, question=c1, score=True)
+#                 change = Testappear.objects.get(t_user=ow, t_category=t)
+#                 print('inside except')
+#                 change.isappear = True
+#                 change.save()
+#                 return redirect('stucalu', id)
+#         total_size = len(final_dict)
+#         return render(request, 'stu_question.html', {'final': final_dict, 'total_size': total_size})
+#     return redirect('student_login_view')
+def stu_question(request,test_category):
     if 'enroll_no' in request.session:
-        t = Testcategory.objects.get(id=id)
+        # t = Testcategory.objects.get(id=id)
         ow = registerform.objects.get(
             Enrollment_No=request.session['enroll_no'])
+        obj=''
+        total_size=''
         try:
-            check = Testappear.objects.get(
-                t_user=ow, t_category=t, isappear=True)
-            return redirect('stu_allcat')
+            ww
+            # check = Testappear.objects.get(
+            #     t_user=ow, t_category=t, isappear=True)
+            # return redirect('stu_allcat')
         except:
             final_dict = {}
-            obj = question.objects.filter(categoryName_id=id)
-            for i in obj:
-                o = Option.objects.filter(question=i)
-                final_dict[i] = o
+            obj = newQuestion.objects.filter(categoryName=test_category)
+            
+            # for i in obj:
+            #     o = Option.objects.filter(question=i)
+            #     final_dict[i] = o
             if request.POST:
-                for i in range(1, len(obj)+1):
-                    q = request.POST['question'+str(i)]
-                    ans = request.POST[str(i)]
-                    main_list = []
-                    c1 = question.objects.get(question=q)
-                    c2 = Option.objects.filter(question=c1, is_answer=True)
-                    for j in c2:
-                        main_list.append(j.option_title)
-                    print(main_list)
-                    if ans in main_list:
-                        Answer.objects.create(
-                            owner=ow, quiz1=t, question=c1, score=True)
-                change = Testappear.objects.get(t_user=ow, t_category=t)
-                print('inside except')
-                change.isappear = True
-                change.save()
-                return redirect('stucalu', id)
-        total_size = len(final_dict)
-        return render(request, 'stu_question.html', {'final': final_dict, 'total_size': total_size})
+                pass
+                # for i in range(1, len(obj)+1):
+                #     q = request.POST['question'+str(i)]
+                #     ans = request.POST[str(i)]
+                #     main_list = []
+                #     c1 = question.objects.get(question=q)
+                #     c2 = Option.objects.filter(question=c1, is_answer=True)
+                #     for j in c2:
+                #         main_list.append(j.option_title)
+                #     print(main_list)
+                #     if ans in main_list:
+                #         Answer.objects.create(
+                #             owner=ow, quiz1=t, question=c1, score=True)
+                # change = Testappear.objects.get(t_user=ow, t_category=t)
+                # print('inside except')
+                # change.isappear = True
+                # change.save()
+                # return redirect('stucalu', id)
+            total_size = len(obj)
+            return render(request, 'stu_question.html', {'final': obj, 'total_size': total_size})
     return redirect('student_login_view')
 
 
@@ -551,8 +592,12 @@ def contact(request):
     return render(request, 'stu_contact.html')
 
 
+# def stu_allcat(request):
+#     allcat = Testcategory.objects.all()
+#     return render(request, 'stu_allcat.html', {'allcat': allcat})
+
 def stu_allcat(request):
-    allcat = Testcategory.objects.all()
+    allcat = newQuestion.objects.values('categoryName').distinct()
     return render(request, 'stu_allcat.html', {'allcat': allcat})
 
 
