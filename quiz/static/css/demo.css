@@ -408,3 +408,12 @@ input[type="button"] {
 .sidebar.has-bg-image .image-wrapper {
   display: block;
 }
+
+/* Download file */
+.downloadFile{
+  margin-top: 10px;
+  margin-left: 10px;
+  text-decoration: none;
+  color: #000;
+
+}
