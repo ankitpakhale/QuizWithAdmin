@@ -1,0 +1,36 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="viewtabledrd">
+    <div class="viewtabledrd">
+        <div class="card createtest">
+            <div class="card questionadd">
+                <h3 class="questionaddtitle" style="font-weight: bold;">&nbsp &nbsp &nbsp Upload File</h3>
+            </div>
+            <div class="questionaddform">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token%}
+                    <label>Upload File</label>
+                    
+                    <input type="file" placeholder="Upload File" required style="width: 300px; height: 47px;"
+                        class="questiontitle" name="uploadFile" />
+                    <br>
+                    <br>
+                    <input type="submit" value="submit" />
+
+                </form>
+                </br>
+            </div>
+
+        </div>
+    </div>
+
+    	
+    {% if msg %}
+    <script>
+      alert('{{msg}}')
+    </script>
+    {% endif %}
+    
+    {% endblock %}
