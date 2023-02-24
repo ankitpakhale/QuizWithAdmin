@@ -6,7 +6,7 @@ from django.urls import path
 from .views import index, logout, edit_student, view_option, delete_option, edit_option, correct_answer, delete_testcategory, delete_question, add_option, show_question, edit_testcategory, view_category, edit_questions, create_test, question_add, LoginUserView, student_report, view_test, Add_student, testcategory_add
 
 
-from .views import category_report, add_category, index, view_option, stu_category_calculation, edit_option, correct_answer, delete_testcategory, delete_question, add_option, show_question, edit_testcategory, view_category, edit_questions, create_test, question_add, LoginUserView, student_report, view_test, Add_student, testcategory_add, student_signup_view, student_login_view, stu_result, stu_question, student_logout_view, stu_profile, edit_student, delete_option, about, contact, stu_allcat, stu_catWiseResult, view_query, addFile
+from .views import category_report, add_category, index, view_option, stu_category_calculation, edit_option, correct_answer, delete_testcategory, delete_question, add_option, show_question, edit_testcategory, view_category, edit_questions, create_test, question_add, LoginUserView, student_report, view_test, Add_student, testcategory_add, student_signup_view, student_login_view, stu_result, stu_question, student_logout_view, stu_profile, edit_student, delete_option, about, contact, stu_allcat, stu_catWiseResult, view_query, addFile, viewQuiz
 
 urlpatterns = [
     path('index/', index, name='index1'),
@@ -15,6 +15,7 @@ urlpatterns = [
     path('questionadd/', question_add, name='quistion1'),
 
     path('addfile/', addFile, name='addFile'),
+    path('viewquiz/', viewQuiz, name='viewquiz'),
 
     path('admin_login/', LoginUserView, name='sign1'),
     path('studentreport/', student_report, name='studentreport1'),

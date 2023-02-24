@@ -127,6 +127,13 @@ def addFile(request):
     return redirect('sign1')
 
 
+def viewQuiz(request):
+    if 'email' in request.session:
+        quiz = newQuestion.objects.all()
+        return render(request, 'view_quiz.html', {'quiz': quiz})
+    return redirect('sign1')
+
+
 def testcategory_add(request):
     if 'email' in request.session:
         if request.POST:

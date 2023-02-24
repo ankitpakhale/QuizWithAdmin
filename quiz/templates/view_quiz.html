@@ -1,0 +1,47 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block content %}
+
+
+            <div class="viewtabledrd">
+                <div style="width:200px;">
+                    <a class="button button1 " href={% url 'add_category' %}><img
+                        src="{% static 'icon/create.png' %}" height="20px" width="20px">Add category</a>
+                </div>
+                <div class="card table viewtbtn">
+                    
+                    <div class="card viewtest">
+                        <h3 class="tableheading" style="font-weight: bold;">&nbsp &nbsp &nbsp View Test category</h3>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Questions</th>
+                            <th>Option 1 </th>
+                            <th>Option 2 </th>
+                            <th>Option 3 </th>
+                            <th>Option 4 </th>
+                            <th>Answer</th>
+                            <th>Category</th>
+                        </tr>
+                        {% for i in quiz %}
+                        <tr>
+                            <td>{{i.question}}</td>
+                            <td>{{i.option1}}</td>
+                            <td>{{i.option2}}</td>
+                            <td>{{i.option3}}</td>
+                            <td>{{i.option4}}</td>
+                            <td>{{i.ans}}</td>
+                            <td>{{i.categoryName}}</td>
+                            <!-- <td>
+                                <a href="{% url 'editcategory' i.id %}"><img src="{% static 'icon/edit.png' %}" height="30px" width="30px"></a>
+                            </td> -->
+                                
+                            <!-- <td><a href="{% url 'editcategory' i.id %}">edit</a></td> -->
+                            <!-- <td><a href="{% url 'delcategory' i.id %}">Delete</a></td> -->
+                        </tr>
+                        {% endfor %}
+                        
+                    </table>
+            </div>
+            </div>
+{% endblock %}
