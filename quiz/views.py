@@ -1,6 +1,7 @@
+import contextlib
 import email
 from unicodedata import category
-from click import option
+# from click import option
 from django.shortcuts import render, redirect
 from .models import Answer, StudentReport, registerform, question, Testappear, Record, AdminForm, Testcategory, Option, contactForm, newQuestion, StudentMarks
 from django.http import HttpResponse
