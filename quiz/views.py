@@ -594,6 +594,11 @@ def contact(request):
 def stu_allcat(request):
     if 'enroll_no' in request.session:
         allcat = newQuestion.objects.values('categoryName').distinct()
+        studentData = registerform.objects.get(
+            Enrollment_No=request.session['enroll_no'])
+        
+        StudentMarks.objects.get(stu_name = studentData)
+
         return render(request, 'stu_allcat.html', {'allcat': allcat})
     return redirect('student_login_view')
 
