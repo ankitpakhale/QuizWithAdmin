@@ -10,7 +10,9 @@
     <div class="allcat_row">
         {% for i in allcat %}
         <div style="margin: 5px 30px 5px 0;">
+            {% if not i.categoryName in appeared  %}
             <a class="btn btn-primary" style="padding: 50px 100px 50px 100px;" href="{% url 'stu_question' i.categoryName %}"><strong>{{i.categoryName}}</strong></a>
+            {% endif %}
         </div> 
         {% endfor %}
     </div>

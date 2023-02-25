@@ -137,7 +137,7 @@ class StudentMarks(models.Model):
         registerform, on_delete=models.CASCADE, null=True, default="")
     cat_name = models.CharField(max_length=100)
     percentage = models.FloatField(max_length=100)
-
+    attempt=models.BooleanField(default=False)
     def __str__(self):
         return str(self.cat_name)
 

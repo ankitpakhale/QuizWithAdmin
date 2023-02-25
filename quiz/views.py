@@ -537,7 +537,8 @@ def stu_question(request, test_category):
 
             percentage = (count / len(obj))*100
             StudentMarks.objects.create(
-                stu_name=ow, cat_name=test_category, percentage=percentage)
+                stu_name=ow, cat_name=test_category, percentage=percentage,attempt=True)
+            return redirect('stu_allcat')
 
         total_size = len(obj)
         return render(request, 'stu_question.html', {'final': obj, 'total_size': total_size})
@@ -597,9 +598,9 @@ def stu_allcat(request):
         studentData = registerform.objects.get(
             Enrollment_No=request.session['enroll_no'])
         
-        StudentMarks.objects.get(stu_name = studentData)
-
-        return render(request, 'stu_allcat.html', {'allcat': allcat})
+        appeared=StudentMarks.objects.filter(stu_name = studentData,attempt=True)
+        apperaed_list=[i.cat_name for i in appeared]
+        return render(request, 'stu_allcat.html', {'allcat': allcat,'appeared':apperaed_list})
     return redirect('student_login_view')
 
 def base(request):
