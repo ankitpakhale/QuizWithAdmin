@@ -434,51 +434,63 @@ def student_logout_view(request):
     return redirect('student_login_view')
 
 
+# def stu_result(request):
+#     if 'enroll_no' in request.session:
+#         show_data = registerform.objects.get(
+#             Enrollment_No=request.session['enroll_no'])
+#         try:
+#             c1 = Testcategory.objects.all()
+#             for i in c1:
+#                 Testappear.objects.get(
+#                     t_user=show_data, t_category=i, isappear=True)
+#         except:
+#             msg = 'Please complete all the tests first'
+#             return render(request, 'stu_result.html', {'msg': msg})
+#         stu_data = StudentReport.objects.filter(stu_name=show_data)
+#         labels = []
+#         all_per = []
+#         for i in stu_data:
+#             all_per.append((float(i.percentage)) * 1.5)
+#             labels.append(i.cat_name.name)
+#         labels.append('Attendance')
+#         labels.append('CGPA')
+#         labels.append('Rating')
+#         final_cgpa = (float(int(show_data.cgpa)) * 100 / 7) * 0.50
+#         final_att = (float(show_data.Attendance) * 100 / 12) * 0.25
+#         final_rating = (float(show_data.review) * 100 / 10) * 0.75
+#         all_per.append(final_att)
+#         all_per.append(final_cgpa)
+#         all_per.append(final_rating)
+#         final_percentage = round((sum(all_per) / len(all_per)), 2)
+#         show_data.score = final_percentage
+#         show_data.save()
+#         values = []
+#         # for i in all_per:
+#         #     values.append(i)
+#         # fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3)])
+#         # fig.show()
+#         res = {}
+#         for key in labels:
+#             for value in values:
+#                 res[key] = round(value, 2)
+#                 values.remove(value)
+#                 break
+
+#         return render(request, 'stu_result.html', {'final_percentage': final_percentage, 'res': res})
+#     return redirect('student_login_view')
+
+
 def stu_result(request):
     if 'enroll_no' in request.session:
-        show_data = registerform.objects.get(
+        studentData = registerform.objects.get(
             Enrollment_No=request.session['enroll_no'])
-        try:
-            c1 = Testcategory.objects.all()
-            for i in c1:
-                Testappear.objects.get(
-                    t_user=show_data, t_category=i, isappear=True)
-        except:
-            msg = 'Please complete all the tests first'
-            return render(request, 'stu_result.html', {'msg': msg})
-        stu_data = StudentReport.objects.filter(stu_name=show_data)
-        labels = []
-        all_per = []
-        for i in stu_data:
-            all_per.append((float(i.percentage)) * 1.5)
-            labels.append(i.cat_name.name)
-        labels.append('Attendance')
-        labels.append('CGPA')
-        labels.append('Rating')
-        final_cgpa = (float(int(show_data.cgpa)) * 100 / 7) * 0.50
-        final_att = (float(show_data.Attendance) * 100 / 12) * 0.25
-        final_rating = (float(show_data.review) * 100 / 10) * 0.75
-        all_per.append(final_att)
-        all_per.append(final_cgpa)
-        all_per.append(final_rating)
-        final_percentage = round((sum(all_per) / len(all_per)), 2)
-        show_data.score = final_percentage
-        show_data.save()
-        values = []
-        # for i in all_per:
-        #     values.append(i)
-        # fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3)])
-        # fig.show()
-        res = {}
-        for key in labels:
-            for value in values:
-                res[key] = round(value, 2)
-                values.remove(value)
-                break
-
-        return render(request, 'stu_result.html', {'final_percentage': final_percentage, 'res': res})
+        totalMarks = StudentMarks.objects.filter(stu_name = studentData)
+        
+        marksCount = sum(mark.percentage for mark in totalMarks)
+        percentage = (marksCount / len(totalMarks))
+    
+        return render(request, 'stu_result.html',{"percentage": round(percentage, 2)})
     return redirect('student_login_view')
-
 
 # def stu_question(request, id):
 #     if 'enroll_no' in request.session:
@@ -631,3 +643,4 @@ def stu_catWiseResult(request):
         print(all_data)
         return render(request, 'stu_catWiseResult.html', {'all_data': all_data})
     return redirect('student_login_view')
+
