@@ -1,6 +1,7 @@
+import contextlib
 import email
 from unicodedata import category
-from click import option
+# from click import option
 from django.shortcuts import render, redirect
 from .models import Answer, StudentReport, registerform, question, Testappear, Record, AdminForm, Testcategory, Option, contactForm, newQuestion, StudentMarks
 from django.http import HttpResponse
@@ -596,9 +597,8 @@ def stu_allcat(request):
         allcat = newQuestion.objects.values('categoryName').distinct()
         studentData = registerform.objects.get(
             Enrollment_No=request.session['enroll_no'])
-        
-        StudentMarks.objects.get(stu_name = studentData)
-
+        with contextlib.suppress(Exception):
+            StudentMarks.objects.get(stu_name = studentData)
         return render(request, 'stu_allcat.html', {'allcat': allcat})
     return redirect('student_login_view')
 
