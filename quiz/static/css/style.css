@@ -1086,6 +1086,7 @@ input.radio:focus~label:before {
 }
 
 .allcat_row {
+    overflow: scroll;
     display: flex;
     justify-content: space-between;
     /* border: 2px solid #ff00ff; */

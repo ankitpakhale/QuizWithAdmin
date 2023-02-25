@@ -22,6 +22,7 @@
                             <th>Option 4 </th>
                             <th>Answer</th>
                             <th>Category</th>
+                            <th>Delete</th>
                         </tr>
                         {% for i in quiz %}
                         <tr>
@@ -37,7 +38,10 @@
                             </td> -->
                                 
                             <!-- <td><a href="{% url 'editcategory' i.id %}">edit</a></td> -->
-                            <!-- <td><a href="{% url 'delcategory' i.id %}">Delete</a></td> -->
+                            <td>                            
+                                <a href="{% url 'delquestion' i.id %}"><img src="{% static 'icon/delete.png' %}" height="30px"
+                                    width="30px"></a>
+                                </td>
                         </tr>
                         {% endfor %}
                         

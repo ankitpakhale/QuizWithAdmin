@@ -1,12 +1,7 @@
-from .views import index, profile, view_option, delete_student, edit_option, correct_answer, delete_testcategory, delete_question, add_option, show_question, edit_testcategory, view_category, edit_questions, create_test, question_add, LoginUserView, student_report, view_test, Add_student, testcategory_add, student_signup_view, student_login_view, student_dashboard
 from operator import index
 from django.contrib import admin
 from django.urls import path
-
-from .views import index, logout, edit_student, view_option, delete_option, edit_option, correct_answer, delete_testcategory, delete_question, add_option, show_question, edit_testcategory, view_category, edit_questions, create_test, question_add, LoginUserView, student_report, view_test, Add_student, testcategory_add
-
-
-from .views import category_report, add_category, index, view_option, stu_category_calculation, edit_option, correct_answer, delete_testcategory, delete_question, add_option, show_question, edit_testcategory, view_category, edit_questions, create_test, question_add, LoginUserView, student_report, view_test, Add_student, testcategory_add, student_signup_view, student_login_view, stu_result, stu_question, student_logout_view, stu_profile, edit_student, delete_option, about, contact, stu_allcat, stu_catWiseResult, view_query, addFile, viewQuiz
+from .views import *
 
 urlpatterns = [
     path('index/', index, name='index1'),
@@ -27,12 +22,18 @@ urlpatterns = [
     path('editoption/<int:id>', edit_option, name='editoption'),
     path('editcategory/<int:id>', edit_testcategory, name='editcategory'),
     path('edit_student/<int:id>', edit_student, name='edit_student'),
+
     path('delcategory/<int:id>', delete_testcategory, name='delcategory'),
+
     path('delstudent/<int:id>', delete_student, name='delstudent'),
+
     path('delete_question/<int:id>', delete_question, name='delquestion'),
+
     path('delete_option/<int:id>', delete_option, name='deloption'),
     path('viewquestion/', show_question, name='viewquestion'),
+
     path('viewcategory/', view_category, name='viewcategory'),
+
     path('add_category/', add_category, name='add_category'),
     path('viewoption/', view_option, name='viewoption'),
     path('addcategory/', testcategory_add, name='addcategory'),

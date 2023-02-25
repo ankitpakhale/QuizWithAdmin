@@ -34,6 +34,15 @@ class StudentReport(models.Model):
     def __str__(self):
         return str(self.percentage)
 
+class StudentMarks(models.Model):
+    stu_name = models.ForeignKey(
+        registerform, on_delete=models.CASCADE, null=True, default="")
+    cat_name = models.CharField(max_length=100)
+    percentage = models.FloatField(max_length=100)
+
+    def __str__(self):
+        return str(self.cat_name)
+
 
 class AdminForm(models.Model):
     name = models.CharField(max_length=100)

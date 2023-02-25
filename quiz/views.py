@@ -2,7 +2,7 @@ import email
 from unicodedata import category
 from click import option
 from django.shortcuts import render, redirect
-from .models import Answer, StudentReport, registerform, question, Testappear, Record, AdminForm, Testcategory, Option, contactForm, newQuestion
+from .models import Answer, StudentReport, registerform, question, Testappear, Record, AdminForm, Testcategory, Option, contactForm, newQuestion, StudentMarks
 from django.http import HttpResponse
 # import plotly.graph_objects as go
 from io import BytesIO
@@ -159,6 +159,15 @@ def delete_testcategory(request, id):
     return redirect('sign1')
 
 
+def delete_question(request, id):
+    if 'email' in request.session:
+        obj = newQuestion.objects.get(id=id)
+        print(obj)
+        obj.delete()
+        return redirect('viewcategory')
+    return redirect('sign1')
+
+
 def delete_student(request, id):
     if 'email' in request.session:
         obj = registerform.objects.get(id=id)
@@ -277,9 +286,9 @@ def category_report(request):
 
 def delete_question(request, id):
     if 'email' in request.session:
-        obj = question.objects.get(id=id)
+        obj = newQuestion.objects.get(id=id)
         obj.delete()
-        return redirect('viewquestion')
+        return redirect('viewquiz')
     return redirect('sign1')
 
 
@@ -506,46 +515,32 @@ def stu_result(request):
 #         total_size = len(final_dict)
 #         return render(request, 'stu_question.html', {'final': final_dict, 'total_size': total_size})
 #     return redirect('student_login_view')
-def stu_question(request,test_category):
+
+def stu_question(request, test_category):
     if 'enroll_no' in request.session:
         # t = Testcategory.objects.get(id=id)
         ow = registerform.objects.get(
             Enrollment_No=request.session['enroll_no'])
-        obj=''
-        total_size=''
-        try:
-            ww
-            # check = Testappear.objects.get(
-            #     t_user=ow, t_category=t, isappear=True)
-            # return redirect('stu_allcat')
-        except:
-            final_dict = {}
-            obj = newQuestion.objects.filter(categoryName=test_category)
-            
-            # for i in obj:
-            #     o = Option.objects.filter(question=i)
-            #     final_dict[i] = o
-            if request.POST:
-                pass
-                # for i in range(1, len(obj)+1):
-                #     q = request.POST['question'+str(i)]
-                #     ans = request.POST[str(i)]
-                #     main_list = []
-                #     c1 = question.objects.get(question=q)
-                #     c2 = Option.objects.filter(question=c1, is_answer=True)
-                #     for j in c2:
-                #         main_list.append(j.option_title)
-                #     print(main_list)
-                #     if ans in main_list:
-                #         Answer.objects.create(
-                #             owner=ow, quiz1=t, question=c1, score=True)
-                # change = Testappear.objects.get(t_user=ow, t_category=t)
-                # print('inside except')
-                # change.isappear = True
-                # change.save()
-                # return redirect('stucalu', id)
-            total_size = len(obj)
-            return render(request, 'stu_question.html', {'final': obj, 'total_size': total_size})
+        obj = ''
+        total_size = ''
+
+        obj = newQuestion.objects.filter(categoryName=test_category)
+        if request.POST:
+            count = 0
+            for i in range(1, len(obj)+1):
+                userQue = request.POST[f'question{i}']
+                userAns = request.POST[f'{i}']
+
+                userObj = newQuestion.objects.get(question=userQue)
+                if userObj.ans == userAns:
+                    count += 1
+
+            percentage = (count / len(obj))*100
+            StudentMarks.objects.create(
+                stu_name=ow, cat_name=test_category, percentage=percentage)
+
+        total_size = len(obj)
+        return render(request, 'stu_question.html', {'final': obj, 'total_size': total_size})
     return redirect('student_login_view')
 
 
@@ -597,9 +592,10 @@ def contact(request):
 #     return render(request, 'stu_allcat.html', {'allcat': allcat})
 
 def stu_allcat(request):
-    allcat = newQuestion.objects.values('categoryName').distinct()
-    return render(request, 'stu_allcat.html', {'allcat': allcat})
-
+    if 'enroll_no' in request.session:
+        allcat = newQuestion.objects.values('categoryName').distinct()
+        return render(request, 'stu_allcat.html', {'allcat': allcat})
+    return redirect('student_login_view')
 
 def base(request):
     return render(request, 'stu_base.html')
