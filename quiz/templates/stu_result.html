@@ -2,6 +2,27 @@
 {% load static %}
 {% block content %}
 
+{% if catDict %}
+<div class="table-div">
+  <table class="content-table">
+    <thead>
+      <tr>
+        <th>Test Name</th>
+        <th>Percentage</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for category, mark in catDict.items %}
+      <tr>
+        <td>{{category}}</td>
+        <td>{{mark}}%</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
 {% if percentage %}
 <div>
   <h3 class="special">Your Overall Result is {{ percentage }}%</h3>
@@ -16,4 +37,5 @@
   </h3>
 </div>
 {% endif %}
+
 {% endblock %}

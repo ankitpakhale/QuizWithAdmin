@@ -486,10 +486,15 @@ def stu_result(request):
             Enrollment_No=request.session['enroll_no'])
         totalMarks = StudentMarks.objects.filter(stu_name = studentData)
         
-        marksCount = sum(mark.percentage for mark in totalMarks)
+        catDict = {}
+        marksCount = 0
+        for mark in totalMarks:
+            catDict[mark.cat_name] = mark.percentage
+            marksCount += mark.percentage
+            
         percentage = (marksCount / len(totalMarks))
-    
-        return render(request, 'stu_result.html',{"percentage": round(percentage, 2)})
+        
+        return render(request, 'stu_result.html',{'percentage': round(percentage, 2), 'catDict': catDict})
     return redirect('student_login_view')
 
 # def stu_question(request, id):
