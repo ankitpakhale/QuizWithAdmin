@@ -4,7 +4,7 @@ how to pass data from first component to 5th component
 react project structure
 main difference between no sql and sql
 apache web services
-
+What is useMemo hook
 
 
 *	Abstract --> same action but different implementation, ex every car have speed but different different speed
