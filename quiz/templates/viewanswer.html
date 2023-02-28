@@ -11,16 +11,16 @@
             <table>
                 <tr>
                     <th>Student Name</th>
-                    <th>Category</th>
-                    <th>Question</th>
+                    <th>Subject</th>
+                    <th>Percentage</th>
+                    <th>Date</th>
                 </tr>
                 {% for i in ans %}
                 <tr>
-                    <td>{{i.owner}}</td>
-                    <td>{{i.quiz1}}</td>
-                    <td>{{i.question}}</td>
-                    <td style="color: green;">Correct</td>
-
+                    <td>{{i.stu_name}}</td>
+                    <td>{{i.cat_name}}</td>
+                    <td>{{i.percentage}}</td>
+                    <td>{{i.createdAt}}</td>
                 </tr>
                 {% endfor %}
 

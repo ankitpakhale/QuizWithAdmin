@@ -81,7 +81,7 @@ def create_test(request):
 
 def correct_answer(request):
     if 'email' in request.session:
-        ans = Answer.objects.all()
+        ans = StudentMarks.objects.all()
         return render(request, 'viewanswer.html', {'ans': ans})
     return redirect('sign1')
 
