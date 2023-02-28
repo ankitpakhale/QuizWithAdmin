@@ -484,16 +484,20 @@ def stu_result(request):
     if 'enroll_no' in request.session:
         studentData = registerform.objects.get(
             Enrollment_No=request.session['enroll_no'])
-        totalMarks = StudentMarks.objects.filter(stu_name = studentData)
-        
+        percentage = 0
         catDict = {}
-        marksCount = 0
-        for mark in totalMarks:
-            catDict[mark.cat_name] = mark.percentage
-            marksCount += mark.percentage
+        try:
+            totalMarks = StudentMarks.objects.filter(stu_name = studentData)
             
-        percentage = (marksCount / len(totalMarks))
-        
+            catDict = {}
+            marksCount = 0
+            for mark in totalMarks:
+                catDict[mark.cat_name] = mark.percentage
+                marksCount += mark.percentage
+                
+            percentage = (marksCount / len(totalMarks))
+        except:
+            pass
         return render(request, 'stu_result.html',{'percentage': round(percentage, 2), 'catDict': catDict})
     return redirect('student_login_view')
 
@@ -586,6 +590,15 @@ def student_dashboard(request):
             Enrollment_No=request.session['enroll_no'])
         obj = Testappear.objects.filter(t_user=n)
         return render(request, 'stu_index.html', {'obj': obj})
+    return redirect('student_login_view')
+
+def studentDashboardNew(request):
+    if 'enroll_no' in request.session:
+        stuData = registerform.objects.get(
+            Enrollment_No=request.session['enroll_no'])
+        obj = StudentMarks.objects.filter(stu_name=stuData)
+        print(obj, ': obj')
+        return render(request, 'stuIndexNew.html', {'obj': obj})
     return redirect('student_login_view')
 
 

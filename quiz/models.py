@@ -138,6 +138,7 @@ class StudentMarks(models.Model):
     cat_name = models.CharField(max_length=100)
     percentage = models.FloatField(max_length=100)
     attempt=models.BooleanField(default=False)
+    createdAt = models.DateField(auto_now_add=True)
     def __str__(self):
         return str(self.cat_name)
 

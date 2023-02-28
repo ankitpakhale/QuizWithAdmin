@@ -43,7 +43,7 @@ urlpatterns = [
     path('Add_student/', Add_student, name='addstudent'),
     path('login/', student_login_view, name='student_login_view'),
     path('stu_logout/', student_logout_view, name='student_logout_view'),
-    path('stu_index/', student_dashboard, name='stu_index'),
+    # path('stu_index/', student_dashboard, name='stu_index'),
     path('stu_result/', stu_result, name='stu_result'),
     path('', stu_allcat, name='stu_allcat'),
     path('stucalculation/<int:id>', stu_category_calculation, name='stucalu'),
@@ -53,4 +53,5 @@ urlpatterns = [
     path('about/', about, name='about'),
     path('contact/', contact, name='contact'),
     path('catWiseResult/', stu_catWiseResult, name='stu_catWiseResult'),
+    path('stuIndex/', studentDashboardNew, name='stuIndexNew'),
 ]
