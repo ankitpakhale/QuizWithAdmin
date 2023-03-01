@@ -179,7 +179,6 @@ def delete_student(request, id):
 
 def logout(request):
     del request.session['email']
-    print('inside logout')
     return redirect('sign1')
 
 
@@ -197,7 +196,6 @@ def edit_option(request, id):
         al = question.objects.all()
         if request.POST:
             q = request.POST['question']
-            print(q, 'ggggggggggggg')
             q = question.objects.get(id=q)
             o = request.POST['op']
             a = request.POST.get('isans')
@@ -362,11 +360,9 @@ def LoginUserView(request):
                 return redirect('index1')
             else:
                 msg = "Enter valid password"
-                print(msg)
                 return render(request, 'sign.html', {'msg': msg})
         except:
             msg = "Admin Does not exists"
-            print(msg)
             return render(request, 'sign.html', {'msg': msg})
     return render(request, 'sign.html')
 
@@ -383,7 +379,7 @@ def student_signup_view(request):
         try:
             get_email = registerform.objects.get(email=email)
             msg = "This user already exist"
-            print(msg)
+            
             return render(request, 'student_signup.html', {'msg': msg})
         except:
             if password == con_password:
@@ -395,11 +391,9 @@ def student_signup_view(request):
                 )
                 db.save()
                 msg = f"Your Enrollment no is this, {new_enroll_no}"
-                print(msg)
                 return render(request, 'student_signup.html', {'msg': msg})
             else:
                 msg = "Both passwords are not matching"
-                print(msg)
                 return render(request, 'student_signup.html', {'msg': msg})
     return render(request, 'student_signup.html')
 
@@ -414,15 +408,15 @@ def student_login_view(request):
             if get_enroll.password == password:
                 request.session['enroll_no'] = enroll_no
                 msg = "Student Successfully logged in"
-                print(msg)
+                
                 return redirect('stu_index')
             else:
                 msg = "Enter valid password"
-                print(msg)
+                
                 return render(request, 'stu_login.html', {'msg': msg})
         except:
             msg = "Student does not exist"
-            print(msg)
+            
             return render(request, 'stu_login.html', {'msg': msg})
     return render(request, 'stu_login.html')
 
@@ -430,7 +424,6 @@ def student_login_view(request):
 def student_logout_view(request):
     if 'enroll_no' in request.session:
         del request.session['enroll_no']
-        print('Student logged out')
     return redirect('student_login_view')
 
 
@@ -578,7 +571,7 @@ def stu_profile(request):
             show_data.password = password
             show_data.save()
             msg = 'Your Password has been updated successfully'
-            print(msg)
+            
             return render(request, 'stu_profile.html', {'msg': msg, 'show_data': show_data})
         return render(request, 'stu_profile.html', {'show_data': show_data})
     return redirect('student_login_view')
