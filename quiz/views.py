@@ -404,12 +404,13 @@ def student_login_view(request):
         enroll_no = request.POST['enroll_no']
         password = request.POST['password']
         try:
+
             get_enroll = registerform.objects.get(Enrollment_No=enroll_no)
             if get_enroll.password == password:
                 request.session['enroll_no'] = enroll_no
                 msg = "Student Successfully logged in"
                 
-                return redirect('stu_index')
+                return redirect('stuIndexNew')
             else:
                 msg = "Enter valid password"
                 
@@ -544,8 +545,10 @@ def stu_question(request, test_category):
             count = 0
             for i in range(1, len(obj)+1):
                 userQue = request.POST[f'question{i}']
-                userAns = request.POST[f'{i}']
-
+                try:
+                    userAns = request.POST[f'{i}']
+                except:
+                    userAns=''    
                 userObj = newQuestion.objects.get(question=userQue)
                 if userObj.ans == userAns:
                     count += 1
